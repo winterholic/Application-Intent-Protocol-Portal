@@ -1,0 +1,221 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { localizePath, type Locale } from "../i18n/locales";
+import { t } from "../i18n/ui";
+import Base from "../layouts/Base.astro";
+import { CORE_REPO } from "../lib/site";
+
+// 홈 문구는 src/i18n/ui.ts에 있고, 사실 근거는 /docs/status/ 등 sourced 문서와 같다.
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+const h = ui.home;
+const link = (p: string) => localizePath(locale, p);
+const chapters = [
+  ["why-now", h.ch1.nav],
+  ["endpoints-to-intent", h.ch2.nav],
+  ["strict-inside", h.ch3.nav],
+  ["built-for-ai", h.ch4.nav],
+  ["status", h.ch5.nav],
+] as const;
+const roles = ["frontend", "intent", "permission", "execution", "data"] as const;
+---
+
+<Base locale={locale} path="/" title={ui.meta.homeTitle} description={ui.meta.homeDescription}>
+  <Header locale={locale} path="/" />
+  <main class="aip-story" id="main" tabindex="-1">
+    <section class="aip-story-hero" aria-labelledby="hero-title">
+      <div class="aip-container aip-container--lg aip-story-hero__inner">
+        <div class="aip-story-hero__copy">
+          <p class="aip-mono-label aip-text-brand">{h.eyebrow}</p>
+          <h1 class="aip-display-xl" id="hero-title">{h.titleBefore}<mark class="home-mark">{h.titleMark}</mark>{h.titleAfter}</h1>
+          <p class="aip-lead aip-text-secondary">{h.lead}</p>
+          <div class="aip-cluster aip-gap-3">
+            <a class="aip-button aip-button--primary aip-button--lg" href={link("/docs/")}>{h.primary}</a>
+            <a class="aip-button aip-button--lg" href={link("/docs/why-aip/")}>{h.secondary}</a>
+          </div>
+        </div>
+        <figure class="aip-artwork">
+          <img src="/brand/intent-runtime-3d.webp" alt="" width="1672" height="941" loading="eager" decoding="async" fetchpriority="high" />
+          <figcaption>{h.artworkCaption}</figcaption>
+        </figure>
+        <dl class="aip-project-meta">
+          {h.meta.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        </dl>
+      </div>
+    </section>
+
+    <nav class="aip-chapter-nav" aria-label={h.chapters}>
+      <div class="aip-container aip-container--lg aip-chapter-nav__inner">
+        {chapters.map(([id, label], i) => <a href={`#${id}`}><span>{String(i + 1).padStart(2, "0")}</span>{label}</a>)}
+      </div>
+    </nav>
+
+    <section class="aip-chapter" id="why-now" aria-labelledby="why-now-title">
+      <div class="aip-container aip-container--lg aip-chapter__inner">
+        <header class="aip-chapter__intro">
+          <p class="aip-mono-label aip-text-brand">01</p>
+          <h2 class="aip-heading-1" id="why-now-title">{h.ch1.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.ch1.intro}</p>
+        </header>
+        <div class="aip-chapter__body aip-stack aip-gap-8">
+          <blockquote class="aip-statement"><p>{h.ch1.statement}</p><cite>{h.ch1.cite}</cite></blockquote>
+        </div>
+      </div>
+      <div class="aip-container aip-container--lg site-chapter-wide">
+          <div class="aip-grid aip-grid--3">
+            {
+              h.ch1.cards.map(([eyebrow, title, body]) => (
+                <div class="aip-card">
+                  <p class="aip-card__eyebrow">{eyebrow}</p>
+                  <p class="aip-card__title">{title}</p>
+                  <p class="aip-card__body">{body}</p>
+                </div>
+              ))
+            }
+          </div>
+      </div>
+    </section>
+
+    <section class="aip-chapter" id="endpoints-to-intent" aria-labelledby="e2i-title">
+      <div class="aip-container aip-container--lg aip-chapter__inner">
+        <header class="aip-chapter__intro">
+          <p class="aip-mono-label aip-text-brand">02</p>
+          <h2 class="aip-heading-1" id="e2i-title">{h.ch2.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.ch2.intro}</p>
+        </header>
+        <div class="aip-chapter__body aip-stack aip-gap-8">
+          <div class="aip-comparison">
+            <section class="aip-comparison__side" aria-labelledby="before-title">
+              <p class="aip-mono-label aip-text-secondary">{h.ch2.beforeLabel}</p>
+              <h3 class="aip-heading-2" id="before-title">{h.ch2.beforeTitle}</h3>
+              <ul class="aip-body-md">{h.ch2.before.map((x) => <li>{x}</li>)}</ul>
+            </section>
+            <section class="aip-comparison__side" aria-labelledby="after-title">
+              <p class="aip-mono-label aip-text-brand">{h.ch2.afterLabel}</p>
+              <h3 class="aip-heading-2" id="after-title">{h.ch2.afterTitle}</h3>
+              <ul class="aip-body-md">{h.ch2.after.map((x) => <li>{x}</li>)}</ul>
+            </section>
+          </div>
+          <figure class="aip-code">
+            <div class="aip-code__header"><span class="aip-code__lang">{h.ch2.codeLabel}</span></div>
+            <pre class="aip-code__pre" tabindex="0"><code><span class="token keyword">POST</span> /api/orders/:id/approve      <span class="token comment">{h.ch2.codeCommentBefore}</span>
+<span class="token function">approve</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span>                    <span class="token comment">{h.ch2.codeComment}</span></code></pre>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="aip-chapter" id="strict-inside" aria-labelledby="strict-title">
+      <div class="aip-container aip-container--lg aip-chapter__inner">
+        <header class="aip-chapter__intro">
+          <p class="aip-mono-label aip-text-brand">03</p>
+          <h2 class="aip-heading-1" id="strict-title">{h.ch3.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.ch3.intro}</p>
+        </header>
+        <div class="aip-chapter__body aip-stack aip-gap-8">
+          <div class="aip-stack aip-gap-3">
+            <h3 class="aip-heading-3">{h.ch3.responsibilitiesTitle}</h3>
+            <ul class="aip-body-md site-list">{h.ch3.responsibilities.map((x) => <li>{x}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+      <div class="aip-container aip-container--lg site-chapter-wide">
+          <figure class="aip-diagram">
+          <div class="aip-diagram__canvas">
+            <ol class="aip-flow" aria-label={h.ch3.flowLabel}>
+              {
+                roles.map((role, i) => (
+                  <li class="aip-node" data-role={role} data-edge={role === "permission" ? "emphasis" : role === "execution" ? "allow" : undefined}>
+                    <span class="aip-node__kind">{role}</span>
+                    {h.ch3.nodes[i]}
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+          <figcaption class="aip-diagram__caption">{h.ch3.caption}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="aip-chapter" id="built-for-ai" aria-labelledby="ai-title">
+      <div class="aip-container aip-container--lg aip-chapter__inner">
+        <header class="aip-chapter__intro">
+          <p class="aip-mono-label aip-text-brand">04</p>
+          <h2 class="aip-heading-1" id="ai-title">{h.ch4.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.ch4.intro}</p>
+        </header>
+        <div class="aip-chapter__body aip-stack aip-gap-8">
+          <ol class="aip-decision-list">
+            {
+              h.ch4.items.map(([title, body]) => (
+                <li>
+                  <h3 class="aip-heading-2">{title}</h3>
+                  <div class="aip-decision-list__reason"><p>{body}</p></div>
+                </li>
+              ))
+            }
+          </ol>
+          <figure class="aip-code">
+            <div class="aip-code__header"><span class="aip-code__lang">shell</span></div>
+            <pre class="aip-code__pre" tabindex="0"><code><span class="aip-code__prompt">$</span> curl https://aip-portal.vercel.app/llms.txt
+<span class="aip-code__prompt">$</span> curl https://aip-portal.vercel.app/docs/concepts.md</code></pre>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="aip-chapter" id="status" aria-labelledby="status-title">
+      <div class="aip-container aip-container--lg aip-chapter__inner">
+        <header class="aip-chapter__intro">
+          <p class="aip-mono-label aip-text-brand">05</p>
+          <h2 class="aip-heading-1" id="status-title">{h.ch5.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.ch5.intro}</p>
+        </header>
+        <div class="aip-chapter__body">
+          <p class="aip-body-md"><a class="aip-link" href={link("/docs/status/")}>{h.ch5.link}</a></p>
+        </div>
+      </div>
+      <div class="aip-container aip-container--lg site-chapter-wide">
+          <div class="aip-grid aip-grid--3">
+            <article class="aip-proof">
+              <p class="aip-mono-label aip-text-brand">{h.ch5.decidedLabel}</p>
+              <h3 class="aip-heading-3">{h.ch5.decidedTitle}</h3>
+              <p>{h.ch5.decided}</p>
+            </article>
+            <article class="aip-proof">
+              <p class="aip-mono-label aip-text-secondary">{h.ch5.openLabel}</p>
+              <h3 class="aip-heading-3">{h.ch5.openTitle}</h3>
+              <p>{h.ch5.open}</p>
+            </article>
+            <article class="aip-proof">
+              <p class="aip-mono-label aip-text-secondary">{h.ch5.prototypeLabel}</p>
+              <h3 class="aip-heading-3">{h.ch5.prototypeTitle}</h3>
+              <p>{h.ch5.prototype}</p>
+              <p class="aip-proof__scope">{h.ch5.prototypeScope}</p>
+            </article>
+          </div>
+      </div>
+    </section>
+
+    <section class="aip-story-next" aria-labelledby="next-title">
+      <div class="aip-container aip-container--lg aip-story-next__inner">
+        <div class="aip-story-next__copy">
+          <h2 class="aip-display-md" id="next-title">{h.next.title}</h2>
+          <p class="aip-body-md aip-text-secondary">{h.next.body}</p>
+        </div>
+        <div class="aip-cluster aip-gap-3">
+          <a class="aip-button aip-button--lg" href={link("/docs/concepts/")}>{h.next.cta}</a>
+          <a class="aip-button aip-button--lg aip-button--ghost" href={CORE_REPO}>
+            <svg class="aip-icon" aria-hidden="true"><use href="#i-github" /></svg>GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} path="/" />
+</Base>

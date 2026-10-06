@@ -1,0 +1,35 @@
+---
+import { LOCALE_META, LOCALES, localizePath, type Locale } from "../i18n/locales";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  path: string;
+}
+const { locale, path } = Astro.props;
+const id = "language-menu";
+---
+
+<div class="aip-dropdown">
+  <button class="aip-button aip-button--sm aip-button--ghost" type="button" aria-haspopup="menu" aria-controls={id}>
+    <span>{LOCALE_META[locale].label}</span>
+    <svg class="aip-icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+    <span class="aip-sr-only">{t(locale).chrome.language}</span>
+  </button>
+  <div class="aip-menu aip-menu--end" id={id} role="menu" aria-label={t(locale).chrome.language} hidden>
+    {
+      LOCALES.map((l) => (
+        <a
+          class="aip-menu__item"
+          role="menuitemradio"
+          aria-checked={l === locale ? "true" : "false"}
+          href={localizePath(l, path)}
+          hreflang={LOCALE_META[l].hreflang}
+          lang={LOCALE_META[l].htmlLang}
+        >
+          {LOCALE_META[l].label}
+        </a>
+      ))
+    }
+  </div>
+</div>

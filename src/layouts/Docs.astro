@@ -2,6 +2,8 @@
 import DocSidebar from "../components/DocSidebar.astro";
 import Header from "../components/Header.astro";
 import Search from "../components/Search.astro";
+import { DEFAULT_LOCALE, localizePath } from "../i18n/locales";
+import { t } from "../i18n/ui";
 import { getDocs, htmlPath, markdownPath, type Doc } from "../lib/docs";
 import { coreFile, PORTAL_REPO } from "../lib/site";
 import Base from "./Base.astro";
@@ -10,26 +12,33 @@ interface Props {
   doc: Doc;
 }
 const { doc } = Astro.props;
-const { title, description, status, source, checked } = doc.entry.data;
-const docs = await getDocs();
-const index = docs.indexOf(doc);
+const { locale } = doc;
+const ui = t(locale);
+const { title, description } = doc.entry.data;
+const { status, source, checked } = doc.meta;
+const docs = await getDocs(locale);
+const index = docs.findIndex((d) => d.key === doc.key);
 const prev = docs[index - 1];
 const next = docs[index + 1];
 const headings = doc.rendered.headings;
-const editUrl = `${PORTAL_REPO}/edit/main/src/content/docs/${doc.entry.filePath?.replace(/^src\/content\/docs\//, "")}`;
-const crumbs = doc.route === "docs" ? [] : [doc.group, title];
+const editUrl = `${PORTAL_REPO}/edit/main/${doc.entry.filePath}`;
+const docsHome = localizePath(locale, "/docs/");
+const crumbs = doc.key === "index" ? [] : [ui.nav[doc.group], title];
+const neutralPath = `/${doc.route}/`;
+const englishPath = `/${doc.route}/`;
 ---
 
-<Base title={`${title} · AIP Docs`} description={description} markdown={markdownPath(doc)}>
-  <Header product="Docs" current="docs" search full />
+<Base locale={locale} path={neutralPath} title={`${title} · AIP Docs`} description={description} markdown={markdownPath(doc)}>
+  <Header locale={locale} path={neutralPath} product={ui.chrome.docs} current="docs" search full />
 
   <div class="aip-docs__mobilebar">
     <button class="aip-button aip-button--sm aip-button--ghost" type="button" data-aip-dialog-open="docs-drawer">
-      <svg class="aip-icon" aria-hidden="true"><use href="#i-menu" /></svg> Menu
+      <svg class="aip-icon" aria-hidden="true"><use href="#i-menu" /></svg>
+      {ui.chrome.menu}
     </button>
-    <nav class="aip-breadcrumb" aria-label="Breadcrumb">
+    <nav class="aip-breadcrumb" aria-label={ui.chrome.breadcrumb}>
       <ol>
-        <li><a href="/docs/">Docs</a></li>
+        <li><a href={docsHome}>{ui.chrome.docs}</a></li>
         {crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c}</span> : <span>{c}</span>}</li>)}
       </ol>
     </nav>
@@ -41,9 +50,9 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
     <div class="aip-docs__body">
       <main class="aip-docs__main" id="main" tabindex="-1">
         <div class="aip-docs__head">
-          <nav class="aip-breadcrumb aip-hide-below-md" aria-label="Breadcrumb">
+          <nav class="aip-breadcrumb aip-hide-below-md" aria-label={ui.chrome.breadcrumb}>
             <ol>
-              <li>{crumbs.length ? <a href="/docs/">Docs</a> : <span aria-current="page">Docs</span>}</li>
+              <li>{crumbs.length ? <a href={docsHome}>{ui.chrome.docs}</a> : <span aria-current="page">{ui.chrome.docs}</span>}</li>
               {crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c}</span> : <span>{c}</span>}</li>)}
             </ol>
           </nav>
@@ -51,11 +60,11 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
           <p class="aip-doc-lead aip-text-secondary">{description}</p>
           <div class="aip-docs__meta">
             <span class="aip-badge" data-doc-status={status}>{status}</span>
-            {checked && <span>Checked against AIP Core {checked.toISOString().slice(0, 10)}</span>}
+            {checked && <span>{ui.chrome.checked} {checked.toISOString().slice(0, 10)}</span>}
             {
               source.length > 0 && (
                 <span>
-                  Source:{" "}
+                  {ui.chrome.source}:{" "}
                   {source.map((s, i) => (
                     <>
                       {i > 0 && ", "}
@@ -65,16 +74,29 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
                 </span>
               )
             }
-            <a class="aip-link" href={editUrl}>Edit this page</a>
-            <a class="aip-link" href={markdownPath(doc)}>View as Markdown</a>
+            <a class="aip-link" href={editUrl}>{ui.chrome.editPage}</a>
+            <a class="aip-link" href={markdownPath(doc)}>{ui.chrome.viewMarkdown}</a>
           </div>
         </div>
 
         {
+          locale !== DEFAULT_LOCALE && (
+            <aside class:list={["aip-callout", doc.translation?.upToDate ? "aip-callout--note" : "aip-callout--warning", "site-translation-note"]} role="note">
+              <div class="aip-callout__body">
+                <p>
+                  {doc.translation?.upToDate ? ui.chrome.translationNote : ui.chrome.translationBehind}{" "}
+                  <a class="aip-link" href={englishPath} hreflang="en" lang="en">{ui.chrome.readEnglish}</a>
+                </p>
+              </div>
+            </aside>
+          )
+        }
+
+        {
           headings.length > 0 && (
             <details class="aip-toc-disclosure">
-              <summary>On this page</summary>
-              <nav class="aip-toc" aria-label="On this page (collapsed)">
+              <summary>{ui.chrome.onThisPage}</summary>
+              <nav class="aip-toc" aria-label={ui.chrome.onThisPageCollapsed}>
                 <ol>
                   {headings.map((h) => (
                     <li><a class="aip-toc__link" href={`#${h.id}`} data-level={h.depth === 3 ? "3" : undefined}>{h.text}</a></li>
@@ -89,16 +111,16 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
 
         {
           (prev || next) && (
-            <nav class="aip-pager" aria-label="Previous and next page">
+            <nav class="aip-pager" aria-label={ui.chrome.pager}>
               {prev && (
                 <a class="aip-pager__link" href={htmlPath(prev)}>
-                  <span class="aip-pager__dir">← Previous</span>
+                  <span class="aip-pager__dir">{ui.chrome.previous}</span>
                   <span class="aip-pager__title">{prev.entry.data.title}</span>
                 </a>
               )}
               {next && (
                 <a class="aip-pager__link aip-pager__link--next" href={htmlPath(next)}>
-                  <span class="aip-pager__dir">Next →</span>
+                  <span class="aip-pager__dir">{ui.chrome.next}</span>
                   <span class="aip-pager__title">{next.entry.data.title}</span>
                 </a>
               )}
@@ -111,7 +133,7 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
         headings.length > 0 && (
           <aside class="aip-docs__toc">
             <nav class="aip-toc" aria-labelledby="toc-title">
-              <p class="aip-toc__title" id="toc-title">On this page</p>
+              <p class="aip-toc__title" id="toc-title">{ui.chrome.onThisPage}</p>
               <ol>
                 {headings.map((h) => (
                   <li><a class="aip-toc__link" href={`#${h.id}`} data-level={h.depth === 3 ? "3" : undefined}>{h.text}</a></li>
@@ -124,15 +146,15 @@ const crumbs = doc.route === "docs" ? [] : [doc.group, title];
     </div>
   </div>
 
-  <dialog class="aip-drawer" id="docs-drawer" aria-label="Documentation navigation">
+  <dialog class="aip-drawer" id="docs-drawer" aria-label={ui.chrome.documentation}>
     <div class="aip-drawer__header">
-      <span class="aip-label">Documentation</span>
-      <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-dialog-close aria-label="Close navigation">
+      <span class="aip-label">{ui.chrome.documentation}</span>
+      <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-dialog-close aria-label={ui.chrome.closeNav}>
         <svg class="aip-icon" aria-hidden="true"><use href="#i-x" /></svg>
       </button>
     </div>
     <div class="aip-drawer__body"><DocSidebar current={doc} instance="drawer" /></div>
   </dialog>
 
-  <Search />
+  <Search locale={locale} />
 </Base>

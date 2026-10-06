@@ -4,8 +4,8 @@ import Docs from "../../layouts/Docs.astro";
 import { getDocs, type Doc } from "../../lib/docs";
 
 export const getStaticPaths = (async () =>
-  (await getDocs()).map((doc) => ({
-    params: { slug: doc.route === "docs" ? undefined : doc.route.slice("docs/".length) },
+  (await getDocs("en")).map((doc) => ({
+    params: { slug: doc.key === "index" ? undefined : doc.key },
     props: { doc },
   }))) satisfies GetStaticPaths;
 

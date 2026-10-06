@@ -1,15 +1,25 @@
 ---
 import Header from "../components/Header.astro";
+import { LOCALE_META, TRANSLATED_LOCALES, localizePath } from "../i18n/locales";
+import { t } from "../i18n/ui";
 import Base from "../layouts/Base.astro";
+
+const ui = t("en").chrome;
 ---
 
-<Base title="Not found · AIP" description="페이지를 찾을 수 없다.">
-  <Header />
+<Base locale="en" path="/404/" title="Not found · AIP" description={ui.notFoundTitle} noAlternates>
+  <Header locale="en" path="/" />
   <main id="main" tabindex="-1">
     <div class="aip-container aip-container--sm aip-stack aip-gap-6 site-error">
       <p class="aip-eyebrow aip-text-brand">404</p>
-      <h1 class="aip-heading-1">페이지가 옮겨졌거나 없는 주소다</h1>
-      <p class="aip-cluster aip-gap-4"><a class="aip-link" href="/">Home</a><a class="aip-link" href="/docs/">Docs</a><a class="aip-link" href="/llms.txt">llms.txt</a></p>
+      <h1 class="aip-heading-1">{ui.notFoundTitle}</h1>
+      <p class="aip-body-md aip-text-secondary">{ui.notFoundBody}</p>
+      <p class="aip-cluster aip-gap-4">
+        <a class="aip-link" href="/">Home</a>
+        <a class="aip-link" href="/docs/">Docs</a>
+        <a class="aip-link" href="/llms.txt">llms.txt</a>
+        {TRANSLATED_LOCALES.map((l) => <a class="aip-link" href={localizePath(l, "/")} lang={LOCALE_META[l].htmlLang}>{LOCALE_META[l].label}</a>)}
+      </p>
     </div>
   </main>
 </Base>

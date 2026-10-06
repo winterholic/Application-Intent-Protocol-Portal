@@ -1,18 +1,38 @@
 ---
+import { LOCALE_META, LOCALES, localizePath, type Locale } from "../i18n/locales";
+import { t } from "../i18n/ui";
 import { CORE_REPO } from "../lib/site";
+
+interface Props {
+  locale: Locale;
+  path: string;
+}
+const { locale, path } = Astro.props;
+const ui = t(locale).chrome;
 ---
 
 <footer class="home-footer">
-  <div class="aip-container aip-container--lg aip-cluster aip-cluster--between">
-    <span class="aip-cluster aip-gap-2">
-      <img src="/brand/logo-mark-mono.svg" alt="" width="20" height="20" class="home-footer__mark" />
-      <span class="aip-caption aip-text-tertiary">AIP is open source.</span>
-    </span>
-    <nav class="aip-cluster aip-gap-4" aria-label="Footer">
-      <a class="aip-link" href="/docs/">Docs</a>
-      <a class="aip-link" href="/ecosystem/">Ecosystem</a>
-      <a class="aip-link" href="/llms.txt">llms.txt</a>
-      <a class="aip-link" href={CORE_REPO}>GitHub</a>
+  <div class="aip-container aip-container--lg aip-stack aip-gap-4">
+    <div class="aip-cluster aip-cluster--between">
+      <span class="aip-cluster aip-gap-2">
+        <img src="/brand/logo-mark-mono.svg" alt="" width="20" height="20" class="home-footer__mark" />
+        <span class="aip-caption aip-text-tertiary">{ui.footerNote}</span>
+      </span>
+      <nav class="aip-cluster aip-gap-4" aria-label={ui.footerNav}>
+        <a class="aip-link" href={localizePath(locale, "/docs/")}>{ui.docs}</a>
+        <a class="aip-link" href={localizePath(locale, "/ecosystem/")}>{ui.ecosystem}</a>
+        <a class="aip-link" href="/llms.txt">llms.txt</a>
+        <a class="aip-link" href={CORE_REPO}>{ui.github}</a>
+      </nav>
+    </div>
+    <nav class="aip-cluster aip-gap-4" aria-label={ui.language}>
+      {
+        LOCALES.map((l) => (
+          <a class="aip-link aip-caption" href={localizePath(l, path)} hreflang={LOCALE_META[l].hreflang} lang={LOCALE_META[l].htmlLang} aria-current={l === locale ? "true" : undefined}>
+            {LOCALE_META[l].label}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </footer>

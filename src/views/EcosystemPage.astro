@@ -1,0 +1,44 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { localizePath, type Locale } from "../i18n/locales";
+import { t } from "../i18n/ui";
+import Base from "../layouts/Base.astro";
+import { CORE_REPO, MAKEAIP_REPO } from "../lib/site";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+const e = ui.ecosystem;
+// NOTE: 공개 URL이 없는 도구는 링크를 만들지 않는다.
+const hrefs = { core: CORE_REPO, docs: localizePath(locale, "/docs/"), makeaip: MAKEAIP_REPO } as const;
+---
+
+<Base locale={locale} path="/ecosystem/" title={e.title} description={e.description}>
+  <Header locale={locale} path="/ecosystem/" current="ecosystem" />
+  <main id="main" tabindex="-1">
+    <section class="aip-section">
+      <div class="aip-container aip-container--lg aip-stack aip-gap-12">
+        <div class="site-head">
+          <p class="aip-eyebrow aip-text-brand">{e.eyebrow}</p>
+          <h1 class="aip-display-md">{e.heading}</h1>
+          <p class="aip-lead aip-text-secondary">{e.lead}</p>
+        </div>
+        <div class="aip-grid aip-grid--2">
+          {
+            e.projects.map((p) => (
+              <div class="aip-card aip-card--lg">
+                <p class="aip-card__eyebrow">{p.kind} · {p.state}</p>
+                <p class="aip-card__title">{p.href ? <a class="aip-link" href={hrefs[p.href]}>{p.name}</a> : p.name}</p>
+                <p class="aip-card__body">{p.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} path="/ecosystem/" />
+</Base>

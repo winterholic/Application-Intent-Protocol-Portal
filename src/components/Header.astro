@@ -1,27 +1,34 @@
 ---
+import { LOCALE_META, LOCALES, localizePath, type Locale } from "../i18n/locales";
+import { t } from "../i18n/ui";
 import { CORE_REPO } from "../lib/site";
+import LanguageMenu from "./LanguageMenu.astro";
 
 interface Props {
-  /** 헤더의 `AIP / <product>` 표기. 홈과 일반 페이지는 생략한다. */
+  locale: Locale;
+  /** 언어 중립 경로. 언어 전환 링크에 쓴다. */
+  path: string;
+  /** 헤더의 `AIP / <product>` 표기. */
   product?: string;
   current?: "docs" | "ecosystem";
   search?: boolean;
   full?: boolean;
 }
-const { product, current, search = false, full = false } = Astro.props;
+const { locale, path, product, current, search = false, full = false } = Astro.props;
+const ui = t(locale).chrome;
 const nav = [
-  { key: "docs", href: "/docs/", label: "Docs" },
-  { key: "ecosystem", href: "/ecosystem/", label: "Ecosystem" },
+  { key: "docs", href: localizePath(locale, "/docs/"), label: ui.docs },
+  { key: "ecosystem", href: localizePath(locale, "/ecosystem/"), label: ui.ecosystem },
 ] as const;
 ---
 
 <header class="aip-header">
   <div class:list={["aip-header__inner aip-container", full ? "aip-container--full" : "aip-container--lg"]}>
-    <a class="aip-header__brand" href="/" aria-label="AIP home">
+    <a class="aip-header__brand" href={localizePath(locale, "/")} aria-label={ui.home}>
       <img src="/brand/logo-mark.svg" alt="" width="24" height="24" /><span>AIP</span>
       {product && <span class="aip-header__product">{product}</span>}
     </a>
-    <nav class="aip-nav" aria-label="Main">
+    <nav class="aip-nav" aria-label={ui.mainNav}>
       {nav.map((n) => <a class="aip-nav__link" href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
     </nav>
     <div class="aip-header__actions">
@@ -29,36 +36,46 @@ const nav = [
         search && (
           <button class="aip-search-trigger" type="button" data-aip-search-open>
             <svg class="aip-icon" aria-hidden="true"><use href="#i-search" /></svg>
-            <span>Search docs</span>
+            <span>{ui.searchDocs}</span>
             <kbd>⌘K</kbd>
           </button>
         )
       }
-      <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-theme-toggle aria-label="Dark theme" data-aip-tooltip="Toggle theme">
+      <span class="aip-hide-below-md"><LanguageMenu locale={locale} path={path} /></span>
+      <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-theme-toggle aria-label={ui.theme} data-aip-tooltip={ui.theme}>
         <svg class="aip-icon aip-theme-toggle__to-dark" aria-hidden="true"><use href="#i-moon" /></svg>
         <svg class="aip-icon aip-theme-toggle__to-light" aria-hidden="true"><use href="#i-sun" /></svg>
       </button>
-      <a class="aip-icon-button aip-icon-button--sm aip-hide-below-md" href={CORE_REPO} aria-label="AIP on GitHub" data-aip-tooltip="AIP on GitHub">
+      <a class="aip-icon-button aip-icon-button--sm aip-hide-below-md" href={CORE_REPO} aria-label={ui.githubLabel} data-aip-tooltip={ui.githubLabel}>
         <svg class="aip-icon" aria-hidden="true"><use href="#i-github" /></svg>
       </a>
-      <button class="aip-icon-button aip-icon-button--sm aip-header__menu" type="button" aria-label="Open navigation" data-aip-dialog-open="nav-drawer">
+      <button class="aip-icon-button aip-icon-button--sm aip-header__menu" type="button" aria-label={ui.openNav} data-aip-dialog-open="nav-drawer">
         <svg class="aip-icon" aria-hidden="true"><use href="#i-menu" /></svg>
       </button>
     </div>
   </div>
 </header>
 
-<dialog class="aip-drawer" id="nav-drawer" aria-label="Main navigation">
+<dialog class="aip-drawer" id="nav-drawer" aria-label={ui.mainNav}>
   <div class="aip-drawer__header">
     <span class="aip-header__brand"><img src="/brand/logo-mark.svg" alt="" width="24" height="24" /><span>AIP</span></span>
-    <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-dialog-close aria-label="Close navigation">
+    <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-dialog-close aria-label={ui.closeNav}>
       <svg class="aip-icon" aria-hidden="true"><use href="#i-x" /></svg>
     </button>
   </div>
-  <div class="aip-drawer__body">
-    <nav class="aip-nav aip-nav--vertical" aria-label="Main">
+  <div class="aip-drawer__body aip-stack aip-gap-6">
+    <nav class="aip-nav aip-nav--vertical" aria-label={ui.mainNav}>
       {nav.map((n) => <a class="aip-nav__link" href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
-      <a class="aip-nav__link" href={CORE_REPO}>GitHub</a>
+      <a class="aip-nav__link" href={CORE_REPO}>{ui.github}</a>
+    </nav>
+    <nav class="aip-nav aip-nav--vertical" aria-label={ui.language}>
+      {
+        LOCALES.map((l) => (
+          <a class="aip-nav__link" href={localizePath(l, path)} hreflang={LOCALE_META[l].hreflang} lang={LOCALE_META[l].htmlLang} aria-current={l === locale ? "true" : undefined}>
+            {LOCALE_META[l].label}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </dialog>

@@ -7,12 +7,15 @@ AIP(Application Intent Protocol)의 공식 웹사이트. AIP 소개, Documentati
 ## 구조
 
 ```
-src/content/docs/          문서 원본(canonical source). Markdown + frontmatter
+src/content/docs/en/       문서 원본(canonical source, 영어). Markdown + frontmatter
+src/content/docs/{ko,ja,zh}/ 번역. 영어와 같은 경로·같은 {#id}, translatedFrom 해시로 동기화
 src/lib/site.ts            문서 사이드바·pager·검색 순서(DOC_NAV), 저장소 URL
+src/i18n/                  언어 목록과 화면 문구 사전(홈·생태계·UI 크롬)
+src/views/                 홈·생태계 페이지 본문(언어별 라우트가 공유)
 src/lib/docs.ts            원본 → 문서 목록·URL·Markdown 판 파생
 src/lib/markdown.ts        Markdown → AIP Design System 문서 마크업
 src/layouts/               Base(공통 head·셸), Docs(사이드바·TOC·pager·검색)
-src/pages/                 /, /docs/…, /ecosystem/, /llms.txt, /llms-full.txt, /docs/….md
+src/pages/                 /, /docs/…, /ecosystem/, /{ko,ja,zh}/…, /llms.txt, /llms-full.txt, /…/*.md, /sitemap.xml, /robots.txt
 public/vendor/aip/         AIP Design System 배포 산출물 복사본(SOURCE.json에 출처 commit)
 scripts/verify-build.mjs   빌드 결과 검사
 ```
@@ -26,12 +29,13 @@ Node 22 이상과 pnpm이 필요하다.
 ```sh
 pnpm install
 pnpm dev       # http://localhost:4321
-pnpm verify    # build + 본문 HTML·Markdown 판·llms.txt 파생, 내부 링크·앵커, 토큰 전용 CSS 검사
+pnpm verify    # build + 4개 언어 본문·Markdown 판·llms.txt, 번역 동기화, canonical·hreflang·robots·sitemap, 링크·앵커, 토큰 전용 CSS
+pnpm i18n:status  # 영어 원본보다 뒤처진 번역 목록
 pnpm check     # 타입·frontmatter 검사
 pnpm sync:ds   # ../winterholic-design-system 의 aip/ 산출물을 public/ 으로 다시 복사
 ```
 
-공식 도메인이 정해지면 `SITE_URL=https://... pnpm build`로 canonical URL을 만든다.
+기본 사이트 주소는 `https://aip-portal.vercel.app`이다. 공식 도메인이 정해지면 `SITE_URL`로 바꾼다. canonical·hreflang·sitemap·robots가 이 값을 쓴다.
 
 ## License
 

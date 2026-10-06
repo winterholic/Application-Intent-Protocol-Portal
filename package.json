@@ -12,7 +12,8 @@
     "check": "astro check",
     "verify": "astro build && node scripts/verify-build.mjs",
     "preview": "astro preview",
-    "sync:ds": "node scripts/sync-design-system.mjs"
+    "sync:ds": "node scripts/sync-design-system.mjs",
+    "i18n:status": "node scripts/i18n-status.mjs"
   },
   "dependencies": {
     "astro": "7.3.5",

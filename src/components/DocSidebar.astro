@@ -1,4 +1,5 @@
 ---
+import { t } from "../i18n/ui";
 import { getDocs, htmlPath, type Doc } from "../lib/docs";
 
 interface Props {
@@ -7,24 +8,24 @@ interface Props {
   instance: "main" | "drawer";
 }
 const { current, instance } = Astro.props;
-const docs = await getDocs();
+const ui = t(current.locale);
+const docs = await getDocs(current.locale);
 const groups = [...new Set(docs.map((d) => d.group))];
-const slug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
 ---
 
-<nav class="aip-sidebar" aria-label="Documentation">
+<nav class="aip-sidebar" aria-label={ui.chrome.documentation}>
   {
     groups.map((group) => (
       <div>
-        <p class="aip-sidebar__title" id={`sb-${slug(group)}-${instance}`}>{group}</p>
-        <ul aria-labelledby={`sb-${slug(group)}-${instance}`}>
+        <p class="aip-sidebar__title" id={`sb-${group}-${instance}`}>{ui.nav[group]}</p>
+        <ul aria-labelledby={`sb-${group}-${instance}`}>
           {docs
             .filter((d) => d.group === group)
             .map((d) => (
               <li>
-                <a class="aip-sidebar__link" href={htmlPath(d)} aria-current={d === current ? "page" : undefined}>
+                <a class="aip-sidebar__link" href={htmlPath(d)} aria-current={d.key === current.key ? "page" : undefined}>
                   {d.entry.data.title}
-                  {d.entry.data.status === "stub" && <span class="aip-badge">stub</span>}
+                  {d.meta.status === "stub" && <span class="aip-badge">{ui.chrome.stub}</span>}
                 </a>
               </li>
             ))}

@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths } from "astro";
+import { TRANSLATED_LOCALES } from "../../../i18n/locales";
+import Docs from "../../../layouts/Docs.astro";
+import { getDocs, type Doc } from "../../../lib/docs";
+
+export const getStaticPaths = (async () => {
+  const paths = [];
+  for (const lang of TRANSLATED_LOCALES) {
+    for (const doc of await getDocs(lang)) {
+      paths.push({ params: { lang, slug: doc.key === "index" ? undefined : doc.key }, props: { doc } });
+    }
+  }
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { doc } = Astro.props as { doc: Doc };
+---
+
+<Docs doc={doc} />
