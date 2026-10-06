@@ -4,7 +4,7 @@ title: 扩展
 description: AIP 标准能力无法表达的逻辑，以 JavaScript/TypeScript 或 Python 官方扩展编写，并始终处于服务器的契约与控制之下。
 ---
 
-## 铺好的路与官方的出口 {#paved-road}
+## 先用标准，不够再用官方扩展 {#paved-road}
 
 AIP 力求用标准能力和一种明确的标准表达覆盖尽可能多的场景。但真实的应用里总有任何标准都无法预见的逻辑。为此，AIP 提供 JavaScript/TypeScript 和 Python 官方扩展。`Decided`
 

@@ -24,7 +24,7 @@ const groups = [...new Set(docs.map((d) => d.group))];
             .map((d) => (
               <li>
                 <a class="aip-sidebar__link" href={htmlPath(d)} aria-current={d.key === current.key ? "page" : undefined}>
-                  {d.entry.data.title}
+                  {d.entry.data.sidebarLabel ?? d.entry.data.title}
                   {d.meta.status === "stub" && <span class="aip-badge">{ui.chrome.stub}</span>}
                 </a>
               </li>

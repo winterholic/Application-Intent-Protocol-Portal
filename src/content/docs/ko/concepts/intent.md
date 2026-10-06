@@ -2,6 +2,7 @@
 translatedFrom: bc97b44ce25a
 title: "Intent: 표현과 권한"
 description: AIP에서 호출자는 필요한 것을 표현하고, 실행 여부와 방법은 서버가 결정한다. 호출자가 무엇을 표현할 수 있고 무엇이 항상 서버에 남는지 설명한다.
+sidebarLabel: "Intent"
 ---
 
 ## endpoint에서 intent로 {#endpoints-to-intent}

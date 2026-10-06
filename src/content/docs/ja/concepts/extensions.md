@@ -4,7 +4,7 @@ title: 拡張
 description: AIP の標準機能で表現できないロジックは、JavaScript/TypeScript または Python の公式拡張として書きます。拡張もサーバーの契約と統制のもとにあります。
 ---
 
-## 舗装された道と公式の出口 {#paved-road}
+## まず標準、足りなければ公式の拡張 {#paved-road}
 
 AIP は標準機能と一つの明確な標準表現で、できるだけ多くを扱おうとします。それでも実際のアプリケーションには、どの標準も予測できないロジックがあります。そのために AIP は JavaScript/TypeScript と Python の公式拡張を提供します。`Decided`
 

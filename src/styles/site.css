@@ -36,3 +36,5 @@
 .site-list { margin: 0; padding-left: var(--aip-space-5); display: flex; flex-direction: column; gap: var(--aip-space-2); }
 /* 장 본문 열(2/3)에 들어가면 좁아지는 넓은 시각 자료(카드 3열·flow·근거)를 장 아래 전체 폭에 둔다 */
 .site-chapter-wide { margin-top: var(--aip-space-10); }
+.site-doc-source { margin: var(--aip-space-2) 0 0; }
+.site-note { margin: 0; }

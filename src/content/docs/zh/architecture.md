@@ -15,7 +15,7 @@ description: AIP 由内置标准能力、在自己端口上运行的服务器框
 
 服务器和前端库并不互相替代，AIP 两者都提供。从 Node 或 Python 包自动启动服务器，作为开发便利功能正在评估中。`Open`
 
-## 像 Spring Boot，但不是空的 {#spring-boot}
+## 像 Spring Boot 一样启动，但自带能力 {#spring-boot}
 
 安装并配置一个 Spring Boot 项目后，应用服务器会在某个端口启动。在你实现功能之前，它几乎什么都不做。
 

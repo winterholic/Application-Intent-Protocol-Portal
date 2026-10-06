@@ -4,14 +4,14 @@ title: 简介
 description: AIP 是一个以 AI 编写并维护大部分代码为前提、正在设计中的开源 Web 框架。前端表达所需的数据和操作，AIP 服务器按照策略判断并执行。
 ---
 
-AIP（Application Intent Protocol）始于一个观察：当页面需要新的数据或操作时，团队仍然要把它转换成新的 endpoint、controller、service、DTO、校验、授权检查和 API 文档，并在前端和后端两侧维护这一切。
+AIP（Application Intent Protocol）的出发点很简单：当页面需要新的数据或操作时，团队仍然要把它转换成新的 endpoint、controller、service、DTO、校验、授权检查和 API 文档，并在前端和后端两侧维护这一切。
 
 AI 可以更快地写出这些代码，但重复并不会因此消失。
 
 AIP 走另一条路。前端以结构化的形式表达所需的数据和操作。按设计将内置丰富标准能力的 AIP 服务器，根据你定义的契约和策略检查请求并执行。应用特有的后端代码缩减到真正属于该应用的部分。
 
 > [!IMPORTANT]
-> AIP 正处于设计与验证阶段，尚无公开发布，定义语法也未确定。本文档只记录 AIP Core 项目已决定的内容，其余内容标注为 direction 或 open。参见[项目状态](/zh/docs/status/)。
+> AIP 正处于设计与验证阶段，尚无公开发布，定义语法也未确定。本文档只记录 AIP Core 项目已决定的内容，其余内容标注为 `Direction` 或 `Open`。参见[项目状态](/zh/docs/status/)。
 
 ## AIP 是什么 {#what-aip-is}
 

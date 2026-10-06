@@ -62,15 +62,14 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
           <p class="aip-body-md aip-text-secondary">{h.ch1.intro}</p>
         </header>
         <div class="aip-chapter__body aip-stack aip-gap-8">
-          <blockquote class="aip-statement"><p>{h.ch1.statement}</p><cite>{h.ch1.cite}</cite></blockquote>
+          <blockquote class="aip-statement"><p>{h.ch1.statement}</p></blockquote>
         </div>
       </div>
       <div class="aip-container aip-container--lg site-chapter-wide">
           <div class="aip-grid aip-grid--3">
             {
-              h.ch1.cards.map(([eyebrow, title, body]) => (
+              h.ch1.cards.map(([title, body]) => (
                 <div class="aip-card">
-                  <p class="aip-card__eyebrow">{eyebrow}</p>
                   <p class="aip-card__title">{title}</p>
                   <p class="aip-card__body">{body}</p>
                 </div>
@@ -102,9 +101,10 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
           </div>
           <figure class="aip-code">
             <div class="aip-code__header"><span class="aip-code__lang">{h.ch2.codeLabel}</span></div>
-            <pre class="aip-code__pre" tabindex="0"><code><span class="token keyword">POST</span> /api/orders/:id/approve      <span class="token comment">{h.ch2.codeCommentBefore}</span>
-<span class="token function">approve</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span>                    <span class="token comment">{h.ch2.codeComment}</span></code></pre>
+            <pre class="aip-code__pre" tabindex="0"><code><span class="token keyword">POST</span> /api/orders/:id/approve
+<span class="token function">approve</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span></code></pre>
           </figure>
+          <p class="aip-body-sm aip-text-secondary site-note">{h.ch2.codeNote}</p>
         </div>
       </div>
     </section>
@@ -162,8 +162,8 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
           </ol>
           <figure class="aip-code">
             <div class="aip-code__header"><span class="aip-code__lang">shell</span></div>
-            <pre class="aip-code__pre" tabindex="0"><code><span class="aip-code__prompt">$</span> curl https://aip-portal.vercel.app/llms.txt
-<span class="aip-code__prompt">$</span> curl https://aip-portal.vercel.app/docs/concepts.md</code></pre>
+            <pre class="aip-code__pre" tabindex="0"><code><span class="aip-code__prompt">$</span> curl aip-portal.vercel.app/llms.txt
+<span class="aip-code__prompt">$</span> curl aip-portal.vercel.app/docs.md</code></pre>
           </figure>
         </div>
       </div>
@@ -175,10 +175,8 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
           <p class="aip-mono-label aip-text-brand">05</p>
           <h2 class="aip-heading-1" id="status-title">{h.ch5.title}</h2>
           <p class="aip-body-md aip-text-secondary">{h.ch5.intro}</p>
-        </header>
-        <div class="aip-chapter__body">
           <p class="aip-body-md"><a class="aip-link" href={link("/docs/status/")}>{h.ch5.link}</a></p>
-        </div>
+        </header>
       </div>
       <div class="aip-container aip-container--lg site-chapter-wide">
           <div class="aip-grid aip-grid--3">
@@ -196,7 +194,7 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
               <p class="aip-mono-label aip-text-secondary">{h.ch5.prototypeLabel}</p>
               <h3 class="aip-heading-3">{h.ch5.prototypeTitle}</h3>
               <p>{h.ch5.prototype}</p>
-              <p class="aip-proof__scope">{h.ch5.prototypeScope}</p>
+              <p class="aip-proof__scope">{h.ch5.prototypeScope.map((line, i) => <>{i > 0 && <br />}{line}</>)}</p>
             </article>
           </div>
       </div>

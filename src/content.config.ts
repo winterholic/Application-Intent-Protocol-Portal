@@ -14,6 +14,8 @@ export const collections = {
       title: z.string(),
       /** 페이지 요지 한두 문장. 제목 아래 lead와 llms.txt 설명에 쓴다. */
       description: z.string(),
+      /** 사이드바에 쓰는 짧은 이름. 제목이 길어 두 줄로 접힐 때만 쓴다. */
+      sidebarLabel: z.string().optional(),
       /**
        * 영어 원본에만 쓴다. 번역은 영어 원본의 값을 따른다.
        * - stub: 자리만 있고 내용은 AIP Core 확정 대기

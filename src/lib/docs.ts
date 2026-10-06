@@ -61,7 +61,7 @@ async function load(locale: Locale): Promise<Doc[]> {
       if (!entry) throw new Error(`${locale} 번역이 없다: ${key}`);
       if (!canonical.data.status) throw new Error(`영어 원본에 status가 없다: ${key}`);
 
-      const rendered = await renderMarkdown(entry.body ?? "", entry.filePath ?? entry.id);
+      const rendered = await renderMarkdown(entry.body ?? "", entry.filePath ?? entry.id, locale);
       let translation: Doc["translation"] = null;
       if (locale !== DEFAULT_LOCALE) {
         const enRendered = await renderMarkdown(canonical.body ?? "", canonical.filePath ?? canonical.id);

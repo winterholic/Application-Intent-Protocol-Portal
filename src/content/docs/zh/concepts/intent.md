@@ -2,6 +2,7 @@
 translatedFrom: bc97b44ce25a
 title: "Intent：表达与权限"
 description: 在 AIP 中，调用方表达所需，是否执行以及如何执行由服务器决定。本页说明调用方可以表达什么，以及什么始终留在服务器上。
+sidebarLabel: "Intent"
 ---
 
 ## 从 endpoint 到 intent {#endpoints-to-intent}

@@ -31,6 +31,13 @@ export class MarkdownContractError extends Error {
 
 const HEADING_ID = /\s*\{#([a-z0-9]+(?:-[a-z0-9]+)*)\}\s*$/;
 const ALERTS = ["note", "tip", "important", "warning", "caution"] as const;
+type AlertKind = (typeof ALERTS)[number];
+const ALERT_TITLE: Record<string, Record<AlertKind, string>> = {
+  en: { note: "Note", tip: "Tip", important: "Important", warning: "Warning", caution: "Caution" },
+  ko: { note: "참고", tip: "팁", important: "중요", warning: "주의", caution: "경고" },
+  ja: { note: "注記", tip: "ヒント", important: "重要", warning: "注意", caution: "警告" },
+  zh: { note: "说明", tip: "提示", important: "重要", warning: "注意", caution: "警告" },
+};
 const LANG_LABEL: Record<string, string> = { sh: "shell", shell: "shell", ts: "TypeScript", py: "Python", json: "JSON" };
 
 
@@ -92,18 +99,18 @@ function rehypeHeadings(headings: DocHeading[]) {
   };
 }
 
-function rehypeAlerts() {
+function rehypeAlerts(locale: string) {
   return (tree: HastRoot) => {
     visit(tree, "element", (node: Element) => {
       if (node.tagName !== "blockquote") return;
       const first = node.children.find((c): c is Element => c.type === "element");
       const lead = first?.children[0];
       const match = lead?.type === "text" ? lead.value.match(/^\[!(\w+)\]\s*/) : null;
-      const kind = match?.[1]?.toLowerCase() as (typeof ALERTS)[number] | undefined;
+      const kind = match?.[1]?.toLowerCase() as AlertKind | undefined;
       if (!first || !match || !kind || !ALERTS.includes(kind)) return;
       (lead as { value: string }).value = (lead as { value: string }).value.slice(match[0].length);
       // NOTE: prose.css 는 제목 svg 를 fill 로 칠한다. 선 아이콘(Lucide)은 면으로 뭉개지므로 제목에 아이콘을 넣지 않는다.
-      const title = el("p", { className: ["markdown-alert-title"] }, [text(kind[0]!.toUpperCase() + kind.slice(1))]);
+      const title = el("p", { className: ["markdown-alert-title"] }, [text((ALERT_TITLE[locale] ?? ALERT_TITLE.en!)[kind])]);
       node.tagName = "div";
       node.properties = { className: ["markdown-alert", `markdown-alert-${kind}`], role: "note" };
       node.children.unshift(title);
@@ -156,7 +163,7 @@ function rehypeTables() {
   };
 }
 
-export async function renderMarkdown(source: string, file: string): Promise<RenderedDoc> {
+export async function renderMarkdown(source: string, file: string, locale = "en"): Promise<RenderedDoc> {
   const headings: DocHeading[] = [];
   const hl = await getHighlighter();
   const html = await unified()
@@ -164,7 +171,7 @@ export async function renderMarkdown(source: string, file: string): Promise<Rend
     .use(remarkGfm)
     .use(remarkHeadingIds, file)
     .use(remarkRehype)
-    .use(rehypeAlerts)
+    .use(rehypeAlerts, locale)
     .use(rehypeCodeBlocks, hl)
     .use(rehypeTables)
     .use(rehypeHeadings, headings)

@@ -2,6 +2,7 @@
 translatedFrom: 3611fd430ece
 title: "SPR: Specification, Presentation, Runtime"
 description: SPR は AIP で誰が何に責任を持つかを理解するための基本モデルです。固定されたパッケージ構成ではなく、責任を説明します。
+sidebarLabel: "SPR"
 ---
 
 SPR は責任を理解するためのモデルとして `Decided` です。SPR という名前で具体的なパッケージ構成や内部実装を固定することはしません。

@@ -1,6 +1,7 @@
 ---
 title: "Intent: expression and authority"
 description: In AIP the caller expresses what it needs and the server decides whether and how it runs. This page explains what a caller can express and what always stays with the server.
+sidebarLabel: "Intent"
 status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md

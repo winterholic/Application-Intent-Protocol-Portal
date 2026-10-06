@@ -1,6 +1,7 @@
 ---
 title: "SPR: Specification, Presentation, Runtime"
 description: SPR is the basic model for who is responsible for what in AIP. It describes responsibilities, not a fixed package layout.
+sidebarLabel: "SPR"
 status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md

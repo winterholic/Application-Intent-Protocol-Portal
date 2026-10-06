@@ -2,6 +2,7 @@
 translatedFrom: bc97b44ce25a
 title: "Intent: 表現と権限"
 description: AIP では呼び出し側が必要なものを表現し、実行するかどうかと方法はサーバーが決めます。呼び出し側が何を表現でき、何が常にサーバーに残るかを説明します。
+sidebarLabel: "Intent"
 ---
 
 ## endpoint から intent へ {#endpoints-to-intent}

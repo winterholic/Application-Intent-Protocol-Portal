@@ -2,6 +2,7 @@
 translatedFrom: 3223bca789b9
 title: AI のために設計し、人が読めるように
 description: AIP における AI-first の意味。根拠のない選択を減らし、説明に決まった場所を与え、任意の検証層を分けて置く。ただし人の可読性とサーバーの安全は手放さない。
+sidebarLabel: "AI のための設計"
 ---
 
 ## AI-first の意味 {#meaning}

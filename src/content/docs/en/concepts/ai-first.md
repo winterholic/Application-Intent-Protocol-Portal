@@ -1,6 +1,7 @@
 ---
 title: Built for AI, readable by people
 description: What "AI-first" means in AIP. Fewer arbitrary choices, a defined place for explanations, and a separate optional verification layer, without giving up human readability or server-side safety.
+sidebarLabel: "Built for AI"
 status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md

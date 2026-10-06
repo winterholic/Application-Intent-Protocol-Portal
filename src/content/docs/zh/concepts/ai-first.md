@@ -2,6 +2,7 @@
 translatedFrom: 3223bca789b9
 title: 为 AI 设计，也让人读得懂
 description: AI-first 在 AIP 中的含义：减少随意的选择，为说明提供确定的位置，单独设置可选的验证层，同时不放弃人的可读性和服务器的安全。
+sidebarLabel: "为 AI 设计"
 ---
 
 ## AI-first 的含义 {#meaning}

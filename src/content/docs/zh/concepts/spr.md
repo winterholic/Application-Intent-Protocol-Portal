@@ -2,6 +2,7 @@
 translatedFrom: 3611fd430ece
 title: "SPR：Specification、Presentation、Runtime"
 description: SPR 是理解 AIP 中谁负责什么的基本模型。它描述职责，而不是固定的包结构。
+sidebarLabel: "SPR"
 ---
 
 SPR 作为理解职责的模型是 `Decided`。不会以 SPR 之名固定具体的包结构或内部实现。

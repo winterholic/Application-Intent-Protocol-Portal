@@ -50,41 +50,52 @@ const englishPath = `/${doc.route}/`;
     <div class="aip-docs__body">
       <main class="aip-docs__main" id="main" tabindex="-1">
         <div class="aip-docs__head">
-          <nav class="aip-breadcrumb aip-hide-below-md" aria-label={ui.chrome.breadcrumb}>
-            <ol>
-              <li>{crumbs.length ? <a href={docsHome}>{ui.chrome.docs}</a> : <span aria-current="page">{ui.chrome.docs}</span>}</li>
-              {crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c}</span> : <span>{c}</span>}</li>)}
-            </ol>
-          </nav>
+          {
+            crumbs.length > 0 && (
+              <nav class="aip-breadcrumb aip-hide-below-md" aria-label={ui.chrome.breadcrumb}>
+                <ol>
+                  <li><a href={docsHome}>{ui.chrome.docs}</a></li>
+                  {crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c}</span> : <span>{c}</span>}</li>)}
+                </ol>
+              </nav>
+            )
+          }
           <h1 class="aip-doc-title">{title}</h1>
           <p class="aip-doc-lead aip-text-secondary">{description}</p>
           <div class="aip-docs__meta">
             <span class="aip-badge" data-doc-status={status}>{status}</span>
             {checked && <span>{ui.chrome.checked} {checked.toISOString().slice(0, 10)}</span>}
             {
-              source.length > 0 && (
+              locale !== DEFAULT_LOCALE && doc.translation?.upToDate && (
                 <span>
-                  {ui.chrome.source}:{" "}
-                  {source.map((s, i) => (
-                    <>
-                      {i > 0 && ", "}
-                      <a class="aip-link" href={coreFile(s)}>{s}</a>
-                    </>
-                  ))}
+                  {ui.chrome.translationNote} <a class="aip-link" href={englishPath} hreflang="en" lang="en">{ui.chrome.readEnglish}</a>
                 </span>
               )
             }
-            <a class="aip-link" href={editUrl}>{ui.chrome.editPage}</a>
             <a class="aip-link" href={markdownPath(doc)}>{ui.chrome.viewMarkdown}</a>
+            <a class="aip-link" href={editUrl}>{ui.chrome.editPage}</a>
           </div>
+          {
+            source.length > 0 && (
+              <p class="aip-caption aip-text-tertiary site-doc-source">
+                {ui.chrome.source}:{" "}
+                {source.map((s, i) => (
+                  <>
+                    {i > 0 && " · "}
+                    <a class="aip-link" href={coreFile(s)} title={s}>{s.split("/").pop()}</a>
+                  </>
+                ))}
+              </p>
+            )
+          }
         </div>
 
         {
-          locale !== DEFAULT_LOCALE && (
-            <aside class:list={["aip-callout", doc.translation?.upToDate ? "aip-callout--note" : "aip-callout--warning", "site-translation-note"]} role="note">
+          locale !== DEFAULT_LOCALE && !doc.translation?.upToDate && (
+            <aside class="aip-callout aip-callout--warning site-translation-note" role="note">
               <div class="aip-callout__body">
                 <p>
-                  {doc.translation?.upToDate ? ui.chrome.translationNote : ui.chrome.translationBehind}{" "}
+                  {ui.chrome.translationBehind}{" "}
                   <a class="aip-link" href={englishPath} hreflang="en" lang="en">{ui.chrome.readEnglish}</a>
                 </p>
               </div>
