@@ -1,0 +1,22 @@
+---
+import Site from "../layouts/Site.astro";
+---
+
+<Site title="AIP — Application Intent Protocol" description="호출자는 필요한 데이터와 동작을 표현하고, 서버가 권한과 실행을 최종 결정한다.">
+  <h1>Application Intent Protocol</h1>
+  <p class="lede">
+    프론트엔드가 필요한 데이터와 동작을 표현하면, 서버가 정책과 계약에 따라 실행한다.
+    기능마다 백엔드 API를 새로 만드는 반복을 줄인다.
+  </p>
+  <p><a href="/docs/">Documentation</a> · <a href="/docs/concepts/">AIP의 목적과 원칙</a></p>
+
+  <h2>원칙</h2>
+  <ul class="cards">
+    <li><strong>요청의 자유와 실행 권한의 분리</strong><p>호출자는 표현하고, 서버가 권한과 실행을 최종 결정한다.</p></li>
+    <li><strong>반복 구현의 최소화</strong><p>애플리케이션마다 반복되는 백엔드 구현과 유지보수를 줄인다.</p></li>
+    <li><strong>Rust 엔진, JS/TS·Python 생태계</strong><p>핵심 엔진은 Rust, 정의와 확장은 익숙한 생태계에서.</p></li>
+  </ul>
+
+  <h2>상태</h2>
+  <p>AIP는 설계와 검증이 진행 중이다. 문서는 AIP Core에서 확정된 내용만 다룬다.</p>
+</Site>
