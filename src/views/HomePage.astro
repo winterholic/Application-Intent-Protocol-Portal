@@ -54,18 +54,15 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
       </div>
     </nav>
 
-    <section class="aip-chapter" id="why-now" aria-labelledby="why-now-title">
+    <section class="aip-chapter aip-chapter--stacked" id="why-now" aria-labelledby="why-now-title">
       <div class="aip-container aip-container--lg aip-chapter__inner">
         <header class="aip-chapter__intro">
           <p class="aip-mono-label aip-text-brand">01</p>
           <h2 class="aip-heading-1" id="why-now-title">{h.ch1.title}</h2>
           <p class="aip-body-md aip-text-secondary">{h.ch1.intro}</p>
         </header>
-        <div class="aip-chapter__body aip-stack aip-gap-8">
+        <div class="aip-chapter__body site-chapter-body">
           <blockquote class="aip-statement"><p>{h.ch1.statement}</p></blockquote>
-        </div>
-      </div>
-      <div class="aip-container aip-container--lg site-chapter-wide">
           <div class="aip-grid aip-grid--3">
             {
               h.ch1.cards.map(([title, body]) => (
@@ -76,69 +73,63 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
               ))
             }
           </div>
+        </div>
       </div>
     </section>
 
-    <section class="aip-chapter" id="endpoints-to-intent" aria-labelledby="e2i-title">
+    <section class="aip-chapter aip-chapter--stacked" id="endpoints-to-intent" aria-labelledby="e2i-title">
       <div class="aip-container aip-container--lg aip-chapter__inner">
         <header class="aip-chapter__intro">
           <p class="aip-mono-label aip-text-brand">02</p>
           <h2 class="aip-heading-1" id="e2i-title">{h.ch2.title}</h2>
           <p class="aip-body-md aip-text-secondary">{h.ch2.intro}</p>
         </header>
-        <div class="aip-chapter__body aip-stack aip-gap-8">
+        <div class="aip-chapter__body">
           <div class="aip-comparison">
             <section class="aip-comparison__side" aria-labelledby="before-title">
               <p class="aip-mono-label aip-text-secondary">{h.ch2.beforeLabel}</p>
               <h3 class="aip-heading-2" id="before-title">{h.ch2.beforeTitle}</h3>
               <ul class="aip-body-md">{h.ch2.before.map((x) => <li>{x}</li>)}</ul>
+              <p class="aip-comparison__foot aip-body-sm aip-text-secondary">
+                {h.ch2.footLabel} <code class="aip-code-inline">POST /api/orders/:id/approve</code>
+              </p>
             </section>
             <section class="aip-comparison__side" aria-labelledby="after-title">
               <p class="aip-mono-label aip-text-brand">{h.ch2.afterLabel}</p>
               <h3 class="aip-heading-2" id="after-title">{h.ch2.afterTitle}</h3>
               <ul class="aip-body-md">{h.ch2.after.map((x) => <li>{x}</li>)}</ul>
+              <p class="aip-comparison__foot aip-body-sm aip-text-secondary">
+                {h.ch2.footLabel} <code class="aip-code-inline">approve(order)</code>
+              </p>
             </section>
           </div>
-          <figure class="aip-code">
-            <div class="aip-code__header"><span class="aip-code__lang">{h.ch2.codeLabel}</span></div>
-            <pre class="aip-code__pre" tabindex="0"><code><span class="token keyword">POST</span> /api/orders/:id/approve
-<span class="token function">approve</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span></code></pre>
-          </figure>
-          <p class="aip-body-sm aip-text-secondary site-note">{h.ch2.codeNote}</p>
         </div>
       </div>
     </section>
 
-    <section class="aip-chapter" id="strict-inside" aria-labelledby="strict-title">
+    <section class="aip-chapter aip-chapter--stacked" id="strict-inside" aria-labelledby="strict-title">
       <div class="aip-container aip-container--lg aip-chapter__inner">
         <header class="aip-chapter__intro">
           <p class="aip-mono-label aip-text-brand">03</p>
           <h2 class="aip-heading-1" id="strict-title">{h.ch3.title}</h2>
           <p class="aip-body-md aip-text-secondary">{h.ch3.intro}</p>
         </header>
-        <div class="aip-chapter__body aip-stack aip-gap-8">
-          <div class="aip-stack aip-gap-3">
-            <h3 class="aip-heading-3">{h.ch3.responsibilitiesTitle}</h3>
-            <ul class="aip-body-md site-list">{h.ch3.responsibilities.map((x) => <li>{x}</li>)}</ul>
-          </div>
-        </div>
-      </div>
-      <div class="aip-container aip-container--lg site-chapter-wide">
+        <div class="aip-chapter__body">
           <figure class="aip-diagram">
-          <div class="aip-diagram__canvas">
-            <ol class="aip-flow" aria-label={h.ch3.flowLabel}>
-              {
-                roles.map((role, i) => (
-                  <li class="aip-node" data-role={role} data-edge={role === "permission" ? "emphasis" : role === "execution" ? "allow" : undefined}>
-                    <span class="aip-node__kind">{role}</span>
-                    {h.ch3.nodes[i]}
-                  </li>
-                ))
-              }
-            </ol>
-          </div>
-          <figcaption class="aip-diagram__caption">{h.ch3.caption}</figcaption>
-        </figure>
+            <div class="aip-diagram__canvas">
+              <ol class="aip-flow aip-flow--focus" aria-label={h.ch3.flowLabel}>
+                {
+                  roles.map((role, i) => (
+                    <li class="aip-node" data-role={role} data-focus={role === "permission" ? "" : undefined}>
+                      {h.ch3.nodes[i]}
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+            <figcaption class="aip-diagram__caption">{h.ch3.caption}</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -154,7 +145,7 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
             {
               h.ch4.items.map(([title, body]) => (
                 <li>
-                  <h3 class="aip-heading-2">{title}</h3>
+                  <h3 class="aip-heading-3">{title}</h3>
                   <div class="aip-decision-list__reason"><p>{body}</p></div>
                 </li>
               ))
@@ -169,7 +160,7 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
       </div>
     </section>
 
-    <section class="aip-chapter" id="status" aria-labelledby="status-title">
+    <section class="aip-chapter aip-chapter--stacked" id="status" aria-labelledby="status-title">
       <div class="aip-container aip-container--lg aip-chapter__inner">
         <header class="aip-chapter__intro">
           <p class="aip-mono-label aip-text-brand">05</p>
@@ -177,8 +168,7 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
           <p class="aip-body-md aip-text-secondary">{h.ch5.intro}</p>
           <p class="aip-body-md"><a class="aip-link" href={link("/docs/status/")}>{h.ch5.link}</a></p>
         </header>
-      </div>
-      <div class="aip-container aip-container--lg site-chapter-wide">
+        <div class="aip-chapter__body">
           <div class="aip-grid aip-grid--3">
             <article class="aip-proof">
               <p class="aip-mono-label aip-text-brand">{h.ch5.decidedLabel}</p>
@@ -197,6 +187,7 @@ const roles = ["frontend", "intent", "permission", "execution", "data"] as const
               <p class="aip-proof__scope">{h.ch5.prototypeScope.map((line, i) => <>{i > 0 && <br />}{line}</>)}</p>
             </article>
           </div>
+        </div>
       </div>
     </section>
 
