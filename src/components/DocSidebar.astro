@@ -1,0 +1,35 @@
+---
+import { getDocs, htmlPath, type Doc } from "../lib/docs";
+
+interface Props {
+  current: Doc;
+  /** 같은 사이드바가 데스크톱 열과 모바일 드로어에 두 번 들어가므로 id를 구분한다. */
+  instance: "main" | "drawer";
+}
+const { current, instance } = Astro.props;
+const docs = await getDocs();
+const groups = [...new Set(docs.map((d) => d.group))];
+const slug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+---
+
+<nav class="aip-sidebar" aria-label="Documentation">
+  {
+    groups.map((group) => (
+      <div>
+        <p class="aip-sidebar__title" id={`sb-${slug(group)}-${instance}`}>{group}</p>
+        <ul aria-labelledby={`sb-${slug(group)}-${instance}`}>
+          {docs
+            .filter((d) => d.group === group)
+            .map((d) => (
+              <li>
+                <a class="aip-sidebar__link" href={htmlPath(d)} aria-current={d === current ? "page" : undefined}>
+                  {d.entry.data.title}
+                  {d.entry.data.status === "stub" && <span class="aip-badge">stub</span>}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ))
+  }
+</nav>

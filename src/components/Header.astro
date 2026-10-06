@@ -1,0 +1,64 @@
+---
+import { CORE_REPO } from "../lib/site";
+
+interface Props {
+  /** 헤더의 `AIP / <product>` 표기. 홈과 일반 페이지는 생략한다. */
+  product?: string;
+  current?: "docs" | "ecosystem";
+  search?: boolean;
+  full?: boolean;
+}
+const { product, current, search = false, full = false } = Astro.props;
+const nav = [
+  { key: "docs", href: "/docs/", label: "Docs" },
+  { key: "ecosystem", href: "/ecosystem/", label: "Ecosystem" },
+] as const;
+---
+
+<header class="aip-header">
+  <div class:list={["aip-header__inner aip-container", full ? "aip-container--full" : "aip-container--lg"]}>
+    <a class="aip-header__brand" href="/" aria-label="AIP home">
+      <img src="/brand/logo-mark.svg" alt="" width="24" height="24" /><span>AIP</span>
+      {product && <span class="aip-header__product">{product}</span>}
+    </a>
+    <nav class="aip-nav" aria-label="Main">
+      {nav.map((n) => <a class="aip-nav__link" href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
+    </nav>
+    <div class="aip-header__actions">
+      {
+        search && (
+          <button class="aip-search-trigger" type="button" data-aip-search-open>
+            <svg class="aip-icon" aria-hidden="true"><use href="#i-search" /></svg>
+            <span>Search docs</span>
+            <kbd>⌘K</kbd>
+          </button>
+        )
+      }
+      <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-theme-toggle aria-label="Dark theme" data-aip-tooltip="Toggle theme">
+        <svg class="aip-icon aip-theme-toggle__to-dark" aria-hidden="true"><use href="#i-moon" /></svg>
+        <svg class="aip-icon aip-theme-toggle__to-light" aria-hidden="true"><use href="#i-sun" /></svg>
+      </button>
+      <a class="aip-icon-button aip-icon-button--sm aip-hide-below-md" href={CORE_REPO} aria-label="AIP on GitHub" data-aip-tooltip="AIP on GitHub">
+        <svg class="aip-icon" aria-hidden="true"><use href="#i-github" /></svg>
+      </a>
+      <button class="aip-icon-button aip-icon-button--sm aip-header__menu" type="button" aria-label="Open navigation" data-aip-dialog-open="nav-drawer">
+        <svg class="aip-icon" aria-hidden="true"><use href="#i-menu" /></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog class="aip-drawer" id="nav-drawer" aria-label="Main navigation">
+  <div class="aip-drawer__header">
+    <span class="aip-header__brand"><img src="/brand/logo-mark.svg" alt="" width="24" height="24" /><span>AIP</span></span>
+    <button class="aip-icon-button aip-icon-button--sm" type="button" data-aip-dialog-close aria-label="Close navigation">
+      <svg class="aip-icon" aria-hidden="true"><use href="#i-x" /></svg>
+    </button>
+  </div>
+  <div class="aip-drawer__body">
+    <nav class="aip-nav aip-nav--vertical" aria-label="Main">
+      {nav.map((n) => <a class="aip-nav__link" href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
+      <a class="aip-nav__link" href={CORE_REPO}>GitHub</a>
+    </nav>
+  </div>
+</dialog>

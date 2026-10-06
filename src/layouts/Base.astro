@@ -1,0 +1,42 @@
+---
+import Icons from "../components/Icons.astro";
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** 같은 내용의 Markdown 판 경로. 있으면 <link rel="alternate">로 알린다. */
+  markdown?: string;
+}
+const { title, description, markdown } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/brand/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon-180.png" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} title="Markdown" />}
+    <script is:inline>try{var t=localStorage.getItem('aip-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5/index.min.css" />
+    <link rel="stylesheet" href="/vendor/aip/tokens.css" />
+    <link rel="stylesheet" href="/vendor/aip/typography.css" />
+    <link rel="stylesheet" href="/vendor/aip/prose.css" />
+    <link rel="stylesheet" href="/vendor/aip/components.css" />
+    <script is:inline src="/vendor/aip/aip.js" defer></script>
+  </head>
+  <body>
+    <Icons />
+    <a class="aip-skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

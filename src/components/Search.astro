@@ -1,0 +1,45 @@
+---
+import { getDocs, htmlPath } from "../lib/docs";
+
+// 빌드 시점에 전 문서의 제목과 h2·h3을 결과 목록으로 굽는다. aip.js가 텍스트 포함으로 거른다.
+const docs = await getDocs();
+const groups = [...new Set(docs.map((d) => d.group))];
+const pathLabel = (route: string) => route.split("/").join(" / ");
+---
+
+<dialog class="aip-search" aria-label="Search documentation">
+  <div class="aip-search__field">
+    <svg class="aip-icon" aria-hidden="true"><use href="#i-search" /></svg>
+    <input class="aip-search__input" type="search" placeholder="Search docs" aria-label="Search docs" autocomplete="off" spellcheck="false" />
+    <kbd>esc</kbd>
+  </div>
+  <ul class="aip-search__results">
+    {
+      groups.map((group) => (
+        <>
+          <li class="aip-search__group" role="presentation">{group}</li>
+          {docs
+            .filter((d) => d.group === group)
+            .flatMap((d) => [
+              { href: htmlPath(d), title: d.entry.data.title, path: pathLabel(d.route) },
+              ...d.rendered.headings.map((h) => ({
+                href: `${htmlPath(d)}#${h.id}`,
+                title: `${h.text} · ${d.entry.data.title}`,
+                path: `${pathLabel(d.route)} #${h.id}`,
+              })),
+            ])
+            .map((r) => (
+              <li>
+                <a class="aip-search__result" href={r.href}>
+                  <span class="aip-search__title">{r.title}</span>
+                  <span class="aip-search__path">{r.path}</span>
+                </a>
+              </li>
+            ))}
+        </>
+      ))
+    }
+  </ul>
+  <p class="aip-search__empty" hidden>No results for “<span data-aip-search-query></span>”.</p>
+  <div class="aip-search__footer"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+</dialog>

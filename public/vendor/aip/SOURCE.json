@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/winterholic/winterholic-design-system",
+  "path": "aip",
+  "version": "1.1.0",
+  "commit": "aef1a8440302619ff2a30ca18ba904247b6e76d7",
+  "files": {
+    "public/vendor/aip": [
+      "tokens.css",
+      "typography.css",
+      "components.css",
+      "prose.css",
+      "aip.js"
+    ],
+    "public/brand": [
+      "favicon.svg",
+      "favicon-32.png",
+      "apple-touch-icon-180.png",
+      "logo-mark.svg",
+      "logo-mark-mono.svg",
+      "intent-runtime-3d.webp"
+    ]
+  }
+}

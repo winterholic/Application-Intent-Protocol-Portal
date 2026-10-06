@@ -1,0 +1,33 @@
+/* 사이트 전용 보조 스타일. 값은 AIP Design System 토큰만 쓴다(hex·px 금지).
+   home-* 는 design system examples/home.html 템플릿의 보조 규칙을 그대로 옮긴 것이다. */
+.site-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.site-head { display: flex; flex-direction: column; gap: var(--aip-space-2); max-width: var(--aip-size-container-prose); }
+.site-head > * { margin: 0; }
+
+.home-hero {
+  padding-block: var(--aip-space-20);
+  background-color: var(--aip-color-surface-canvas);
+  background-image: radial-gradient(circle, var(--aip-color-diagram-grid) var(--aip-pattern-grid-dot), transparent calc(var(--aip-pattern-grid-dot) + var(--aip-space-px)));
+  background-size: var(--aip-pattern-grid-size) var(--aip-pattern-grid-size);
+  border-bottom: var(--aip-border-width-hairline) solid var(--aip-color-border-default);
+}
+@media (min-width: 1024px) { .home-hero { padding-block: var(--aip-space-32); } }
+.home-hero__inner { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--aip-space-12); align-items: center; }
+@media (min-width: 1024px) { .home-hero__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); } }
+.home-hero__copy { display: flex; flex-direction: column; gap: var(--aip-space-6); }
+.home-hero__copy > * { margin: 0; }
+.home-mark { background: linear-gradient(transparent 55%, var(--aip-color-highlight-mark) 55%, var(--aip-color-highlight-mark) 92%, transparent 92%); color: inherit; padding-inline: 0.05em; }
+.home-cta { padding-block: var(--aip-space-16); background: var(--aip-color-surface-brand); color: var(--aip-color-text-on-brand); }
+.home-cta__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--aip-space-8); }
+.home-cta__inner p, .home-cta__inner h2 { margin: 0; }
+.home-cta__button { --aip-_bg: var(--aip-base-white); --aip-_bg-hover: var(--aip-blue-50); --aip-_bg-active: var(--aip-blue-100); --aip-_fg: var(--aip-blue-800); --aip-_border: var(--aip-base-white); }
+.home-footer { padding-block: var(--aip-space-8); border-top: var(--aip-border-width-hairline) solid var(--aip-color-border-default); }
+.home-footer__mark { color: var(--aip-color-text-tertiary); }
+
+.site-status { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--aip-space-6); }
+@media (min-width: 768px) { .site-status { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.site-status ul { margin: 0; padding-left: var(--aip-space-5); display: flex; flex-direction: column; gap: var(--aip-space-2); }
+
+.site-error { padding-block: var(--aip-space-24); }
+.site-error > * { margin: 0; }

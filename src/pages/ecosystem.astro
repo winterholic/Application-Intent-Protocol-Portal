@@ -1,36 +1,40 @@
 ---
-import Site from "../layouts/Site.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Base from "../layouts/Base.astro";
+import { CORE_REPO, MAKEAIP_REPO } from "../lib/site";
 
 // NOTE: 공개 URL이 없는 도구는 링크를 만들지 않는다.
 const projects = [
-  {
-    name: "AIP Core",
-    description: "AIP Specification과 Rust 엔진. 모든 AIP 규칙의 정본.",
-    href: "https://github.com/winterholic/Application-Intent-Protocol",
-    state: "설계·검증 중",
-  },
-  {
-    name: "MakeAIP",
-    description: "AIP 프로젝트를 시작하는 공식 Project Generator.",
-    href: "https://github.com/winterholic/Application-Intent-Protocol-Starter",
-    state: "초기 세팅",
-  },
-  { name: "Playground", description: "향후 제공할 공식 도구.", state: "계획" },
+  { name: "AIP Core", eyebrow: "Specification · Engine", body: "AIP Specification과 Rust 엔진. 모든 AIP 규칙의 정본이다.", href: CORE_REPO, state: "설계·검증 중" },
+  { name: "MakeAIP", eyebrow: "Project generator", body: "AIP 프로젝트를 시작하는 공식 Project Generator.", href: MAKEAIP_REPO, state: "준비 중" },
+  { name: "Playground", eyebrow: "Tool", body: "향후 제공할 공식 도구.", state: "계획" },
 ];
 ---
 
-<Site title="Ecosystem — AIP" description="AIP 관련 공식 프로젝트와 도구">
-  <h1>Ecosystem</h1>
-  <p class="lede">AIP 관련 공식 프로젝트와 도구.</p>
-  <ul class="cards">
-    {
-      projects.map((p) => (
-        <li>
-          <strong>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</strong>
-          <span class="tag">{p.state}</span>
-          <p>{p.description}</p>
-        </li>
-      ))
-    }
-  </ul>
-</Site>
+<Base title="Ecosystem · AIP" description="AIP 관련 공식 프로젝트와 도구.">
+  <Header current="ecosystem" />
+  <main id="main" tabindex="-1">
+    <section class="aip-section">
+      <div class="aip-container aip-container--lg aip-stack aip-gap-12">
+        <div class="site-head">
+          <p class="aip-eyebrow aip-text-brand">Ecosystem</p>
+          <h1 class="aip-display-md">AIP 공식 프로젝트와 도구</h1>
+          <p class="aip-lead aip-text-secondary">모든 도구는 AIP Core를 기준으로 동작한다. Core에서 정해지지 않은 규칙을 도구가 따로 만들지 않는다.</p>
+        </div>
+        <div class="aip-grid aip-grid--3">
+          {
+            projects.map((p) => (
+              <div class="aip-card aip-card--lg">
+                <p class="aip-card__eyebrow">{p.eyebrow} · {p.state}</p>
+                <p class="aip-card__title">{p.href ? <a class="aip-link" href={p.href}>{p.name}</a> : p.name}</p>
+                <p class="aip-card__body">{p.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
