@@ -12,10 +12,10 @@ export type NavGroup = "getStarted" | "concepts" | "architecture" | "reference" 
  * 항목은 언어 중립 문서 key(src/content/docs/<locale>/ 기준 경로, 루트는 "index").
  */
 export const DOC_NAV: readonly { group: NavGroup; items: readonly string[] }[] = [
-  { group: "getStarted", items: ["index", "why-aip", "getting-started"] },
+  { group: "getStarted", items: ["index", "why-aip", "installation", "getting-started"] },
   { group: "concepts", items: ["concepts", "concepts/intent", "concepts/spr", "concepts/extensions", "concepts/ai-first"] },
-  { group: "architecture", items: ["architecture", "security"] },
-  { group: "reference", items: ["specification"] },
-  { group: "guides", items: ["guides", "examples"] },
-  { group: "project", items: ["status"] },
+  { group: "architecture", items: ["architecture", "security", "authentication"] },
+  { group: "reference", items: ["specification", "definition-syntax", "sdk", "compatibility"] },
+  { group: "guides", items: ["guides", "deployment", "workers", "examples"] },
+  { group: "project", items: ["status", "known-limitations", "release-notes"] },
 ];

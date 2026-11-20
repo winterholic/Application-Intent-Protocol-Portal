@@ -1,14 +1,23 @@
 ---
-translatedFrom: 9df750a576ca
-title: 示例
-description: 用 AIP 构建的示例应用。
+translatedFrom: b484e0c2e134
+title: "示例"
+description: "AIP 1.0 中可运行的示例。"
 ---
 
-> [!IMPORTANT]
-> 本页尚未撰写。待 AIP Core 决定这一领域后，将附上来源补全内容。
+[快速入门](/zh/docs/getting-started/)演示有身份验证的读写。Core 的 `product/examples/event-checkin` 和 `product/examples/folder-notes` 可分别打包。
 
-## 当前状态 {#current-state}
+## 快速入门示例 {#current-state}
 
-AIP Core 中有用于验证的示例，但其定义语法并非最终版本，因此不作为官方示例发布。
+[查看对应的英文小节](/docs/examples/#current-state)
 
-已决定和仍待决定的内容见[项目状态](/zh/docs/status/)。设计工作在 [AIP Core 仓库](https://github.com/winterholic/Application-Intent-Protocol)中进行。
+## 可打包应用 {#packaged}
+
+[查看对应的英文小节](/docs/examples/#packaged)
+
+## 扩展示例 {#extension}
+
+[查看对应的英文小节](/docs/examples/#extension)
+
+## 移植验证应用 {#ports}
+
+[查看对应的英文小节](/docs/examples/#ports)

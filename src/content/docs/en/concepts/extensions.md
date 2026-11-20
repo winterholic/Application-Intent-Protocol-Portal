@@ -5,7 +5,9 @@ status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md
   - plan-docs/STATUS.md
-checked: 2026-10-06
+  - product/MANAGED-EXECUTION.md
+  - spec/definition-syntax.md
+checked: 2026-11-21
 ---
 
 ## A paved road and an official way out {#paved-road}
@@ -31,5 +33,9 @@ Application developers and AI agents write extensions in JS/TS or Python. `Decid
 
 ## What is still being validated {#open}
 
-- The isolation technology for running extensions in production. Experiments showed that running an extension in a separate process alone does not stop it from connecting to the database directly, so the isolation level is `Open`.
+- Operating-system isolation is available for workers. Coverage and prerequisites vary by platform, as described in [Extensions and workers](/docs/workers/#isolation).
 - The extension interface (ABI) and the execution boundary between the Rust engine and JS/TS or Python are designed from measured cost and extensibility, not assumed.
+
+## In 1.0 {#in-1-0}
+
+1.0 ships working Node.js and Python workers with durable jobs, declared in the definition and run in an operating-system sandbox. See [Extensions and workers](/docs/workers/) for the declarations, configuration and limits.

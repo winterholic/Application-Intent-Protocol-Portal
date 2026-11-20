@@ -1,14 +1,19 @@
 ---
-translatedFrom: afbd7ff826a2
-title: Specification
-description: AIP 官方 Specification。
+translatedFrom: ee7ccc9dbc9c
+title: "规范"
+description: "查阅 AIP 1.0 语法与 HTTP 契约的权威文档。"
 ---
 
-> [!IMPORTANT]
-> 本页尚未撰写。待 AIP Core 决定这一领域后，将附上来源补全内容。
+正式产品使用 `.aip` 定义与 `aip-protocol/1.0`。语法、诊断、HTTP 错误和 SDK 契约以 Core 文档为准。
 
-## 当前状态 {#current-state}
+## 规范文档 {#current-state}
 
-AIP Specification 正在设计中。版本体系和规范格式确定后会在这里发布。
+[查看对应的英文小节](/docs/specification/#current-state)
 
-已决定和仍待决定的内容见[项目状态](/zh/docs/status/)。设计工作在 [AIP Core 仓库](https://github.com/winterholic/Application-Intent-Protocol)中进行。
+## 版本 {#versions}
+
+[查看对应的英文小节](/docs/specification/#versions)
+
+## 规范范围 {#not-spec}
+
+[查看对应的英文小节](/docs/specification/#not-spec)

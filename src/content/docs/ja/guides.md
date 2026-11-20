@@ -1,14 +1,15 @@
 ---
-translatedFrom: 1a9226489337
-title: ガイド
-description: 実際のアプリケーションに AIP を適用する方法。
+translatedFrom: "651644827468"
+title: "ガイド"
+description: "インストールから定義の作成、サービスの配置までを案内します。"
 ---
 
-> [!IMPORTANT]
-> このページはまだ書かれていません。AIP Core がこの領域を決定したら、出典とともに埋めます。
+[インストール](/ja/docs/installation/)と[クイックスタート](/ja/docs/getting-started/)で最初のサービスを起動し、[定義の構文](/ja/docs/definition-syntax/)、[SDK](/ja/docs/sdk/)、[デプロイ](/ja/docs/deployment/)に進みます。
 
-## 現在の状態 {#current-state}
+## 最初に読むページ {#current-state}
 
-手順ごとのガイドには確定した定義形式と呼び出し方が必要ですが、どちらもまだ開いています。
+[該当する節を英語版で読む](/docs/guides/#current-state)
 
-決まったことと開いていることは[現状](/ja/docs/status/)にあります。設計作業は [AIP Core リポジトリ](https://github.com/winterholic/Application-Intent-Protocol)で進んでいます。
+## 開発の流れ {#path}
+
+[該当する節を英語版で読む](/docs/guides/#path)

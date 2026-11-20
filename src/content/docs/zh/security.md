@@ -1,5 +1,5 @@
 ---
-translatedFrom: 7fd312a41172
+translatedFrom: fb7489e8a838
 title: 安全模型
 description: 在 AIP 中，表达一个请求从不赋予执行它的权利。最终权限在服务器，必需的安全检查始终在服务器上运行，扩展也无法绕过它们。
 ---
@@ -23,11 +23,15 @@ AIP 让前端表达所需的数据和操作，但这种便利绝不会把安全�
 
 ## 扩展遵守同样的规则 {#extensions}
 
-JS/TS 或 Python 扩展同样必须遵守服务器的安全策略和契约，不能借此绕过权限、成本限制或事务。在生产环境运行扩展的隔离级别为 `Open`。参见[扩展](/zh/docs/concepts/extensions/)。
+1.0 在操作系统沙箱中运行工作进程。各平台的要求见[扩展和工作进程](/zh/docs/workers/)。
 
 ## 自然语言不是安全输入 {#natural-language}
 
 以自然语言编写的说明，绝不用于决定执行权限或安全。AIP 不会为了决定执行什么而逐个请求地解释自然语言。`Decided`
+
+## 1.0 的运行时检查 {#enforcement}
+
+服务器验证令牌并把 subject 映射到 actor。操作权限由应用定义决定。参见[身份验证和授权](/zh/docs/authentication/)。
 
 ## 正在验证的方向 {#direction}
 

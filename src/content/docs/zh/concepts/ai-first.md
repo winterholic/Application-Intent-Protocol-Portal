@@ -1,5 +1,5 @@
 ---
-translatedFrom: 3223bca789b9
+translatedFrom: 21db7e4bcace
 title: 为 AI 设计，也让人读得懂
 description: AI-first 在 AIP 中的含义：减少随意的选择，为说明提供确定的位置，单独设置可选的验证层，同时不放弃人的可读性和服务器的安全。
 sidebarLabel: "为 AI 设计"
@@ -31,7 +31,7 @@ AIP 以 AI 编写并维护大部分代码的时代为前提进行设计，这是
 - 错误的表达是否容易被静态检测？
 - 在不冗长的前提下，人是否能理解？
 
-创始人偏好声明式语法。具体语法，以及它写在独立文件中还是写在 JS/TS、Python 内部，为 `Open`。
+1.0 使用声明式 `.aip`，也可嵌入 TypeScript 或 Python。参见[定义语法](/zh/docs/definition-syntax/)。
 
 ## 有确定位置的说明 {#metadata}
 

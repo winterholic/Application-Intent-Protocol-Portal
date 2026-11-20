@@ -1,11 +1,12 @@
 ---
 title: Introduction
-description: AIP is an open-source web framework being designed for an era in which AI writes and maintains much of the code. The frontend expresses the data and actions it needs; the AIP server decides and executes them under your policies.
+description: AIP is an open-source web framework built for an era in which AI writes and maintains much of the code. The frontend expresses the data and actions it needs; the AIP server decides and executes them under your policies.
 status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md
   - README.md
-checked: 2026-10-06
+  - CHANGELOG.md
+checked: 2026-11-21
 ---
 
 AIP (Application Intent Protocol) starts from one observation: when a screen needs new data or a new action, teams still translate that need into a new endpoint, a controller, a service, DTOs, validation, authorization checks and API docs, and then maintain all of it on both the frontend and the backend.
@@ -15,12 +16,18 @@ AI can write that code faster. It does not make the duplication go away.
 AIP takes a different route. The frontend expresses the data and actions it needs in a structured form. The AIP server, designed to ship with a rich set of built-in capabilities, checks the request against the contracts and policies you defined and executes it. Application-specific backend code shrinks to what is genuinely specific to your application.
 
 > [!IMPORTANT]
-> AIP is in active design and validation. It has no public release yet, and its definition syntax is not final. This documentation only states what the AIP Core project has decided, and marks everything else as direction or open. See [Project status](/docs/status/).
+> AIP 1.0.0 is being prepared for release. You can build it from source while the `v1.0.0` tag and registry packages are pending. This documentation states only what the AIP Core project has decided, and marks everything else as direction or open. See [Project status](/docs/status/) and [Known limitations](/docs/known-limitations/).
+
+## Start here {#start}
+
+1. [Installation](/docs/installation/): the `aip` command-line tool, `@aip/sdk` and the Python SDK.
+2. [Quick Start](/docs/getting-started/): one definition, deployed and called, in a few minutes.
+3. [Definition syntax](/docs/definition-syntax/) and [SDK](/docs/sdk/): the two things you write against.
 
 ## What AIP is {#what-aip-is}
 
 - A **backend server framework** that you install and configure, which then runs on its own port with standard capabilities already built in.
-- A **frontend library** that the application uses to express the data and actions it needs.
+- **SDKs** for TypeScript and Python that applications use to express the data and actions they need.
 - The **Application Intent Protocol** between the two.
 - A **shared execution engine** written in Rust, with contracts and policies that keep the server in control.
 

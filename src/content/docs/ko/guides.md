@@ -1,14 +1,15 @@
 ---
-translatedFrom: 1a9226489337
-title: 가이드
-description: 실제 애플리케이션에 AIP를 적용하는 방법.
+translatedFrom: "651644827468"
+title: "가이드"
+description: "설치부터 정의 작성과 서비스 배포까지 이어 간다."
 ---
 
-> [!IMPORTANT]
-> 이 페이지는 아직 작성되지 않았다. AIP Core가 이 영역을 결정하면 출처와 함께 채운다.
+[설치](/ko/docs/installation/)와 [빠른 시작](/ko/docs/getting-started/)에서 첫 서비스를 띄운 뒤 [정의 문법](/ko/docs/definition-syntax/), [SDK](/ko/docs/sdk/), [배포](/ko/docs/deployment/)를 참고한다.
 
-## 현재 상태 {#current-state}
+## 시작할 곳 {#current-state}
 
-단계별 가이드에는 확정된 정의 형식과 호출 방식이 필요한데, 둘 다 아직 열려 있다.
+[영어 원문의 절 보기](/docs/guides/#current-state)
 
-정해진 것과 열린 것은 [현재 상태](/ko/docs/status/)에 있다. 설계 작업은 [AIP Core 저장소](https://github.com/winterholic/Application-Intent-Protocol)에서 진행된다.
+## 개발 순서 {#path}
+
+[영어 원문의 절 보기](/docs/guides/#path)

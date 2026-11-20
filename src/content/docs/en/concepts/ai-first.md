@@ -34,7 +34,7 @@ The syntax is evaluated by questions like these:
 - Are wrong expressions easy to detect statically?
 - Can a human understand it, without needless verbosity?
 
-The founder prefers a declarative syntax. The concrete syntax, and whether it lives in standalone files or inside JS/TS and Python, is `Open`.
+The founder prefers a declarative syntax, and the 1.0 definition language is declarative. It can live in a `.aip` file or inside TypeScript and Python source; see [Definition syntax](/docs/definition-syntax/). Whether later releases keep every 1.0 definition valid is `Open`.
 
 ## Explanations with a defined place {#metadata}
 

@@ -1,5 +1,5 @@
 ---
-translatedFrom: b529e33555cd
+translatedFrom: a8a1e4c2202f
 title: 扩展
 description: AIP 标准能力无法表达的逻辑，以 JavaScript/TypeScript 或 Python 官方扩展编写，并始终处于服务器的契约与控制之下。
 ---
@@ -27,5 +27,8 @@ AIP 力求用标准能力和一种明确的标准表达覆盖尽可能多的场�
 
 ## 仍在验证的内容 {#open}
 
-- 在生产环境运行扩展的隔离技术。实验表明，仅把扩展放在单独进程中运行，并不能阻止它直接连接数据库，因此隔离级别为 `Open`。
 - 扩展接口（ABI）以及 Rust 引擎与 JS/TS、Python 之间的执行边界，依据实测的成本与可扩展性来设计，而不是凭假设。
+
+## 1.0 中的扩展 {#in-1-0}
+
+1.0 在操作系统沙箱中运行工作进程。各平台的要求见[扩展和工作进程](/zh/docs/workers/)。 在定义中声明 Node.js 和 Python 工作进程。持久任务和不同平台的隔离要求见[扩展和工作进程](/zh/docs/workers/)。

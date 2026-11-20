@@ -10,7 +10,7 @@ const en = {
   meta: {
     homeTitle: "AIP · Application Intent Protocol",
     homeDescription:
-      "AIP is an open-source web framework being designed for an era in which AI writes much of the code. The frontend expresses what it needs; the server decides and runs it under your policies.",
+      "AIP is an open-source web framework built for an era in which AI writes much of the code. The frontend expresses what it needs; the server decides and runs it under your policies.",
   },
   chrome: {
     skip: "Skip to content",
@@ -68,7 +68,7 @@ const en = {
     primary: "Read the docs",
     secondary: "Why AIP",
     artworkCaption: "Intent → Runtime → Result, as a concept illustration.",
-    meta: [["Stage", "In design"], ["Engine", "Rust"], ["Ecosystem", "JS/TS, Python"], ["License", "Undecided"]],
+    meta: [["Stage", "Preparing 1.0.0"], ["Engine", "Rust"], ["Ecosystem", "JS/TS, Python"], ["License", "MIT"]],
     chapters: "Chapters on this page",
     ch1: {
       nav: "Why now",
@@ -84,7 +84,7 @@ const en = {
     ch2: {
       nav: "From endpoints to intent",
       title: "From endpoints to intent.",
-      intro: "What you write for the same feature, side by side. The code is a concept sketch. AIP's syntax isn't decided yet.",
+      intro: "The sample illustrates how a request is expressed.",
       beforeLabel: "Today",
       beforeTitle: "A new API for every need",
       before: ["A route and an HTTP method", "A controller and a service", "Request and response DTOs", "Validation and authorization checks", "Data access code and API docs", "The same contract again on the frontend"],
@@ -99,7 +99,7 @@ const en = {
       intro: "Being able to ask isn't permission to run. The server makes the final call.",
       flowLabel: "Request path",
       nodes: ["Your screen", "Expressed request", "Contracts & policies", "AIP Runtime", "Data"],
-      caption: "Every request passes the server's contracts and policies before it runs. Authentication, authorization, data integrity, transactions and cost limits always stay with the server. The request format and policy syntax are still being designed.",
+      caption: "Every request passes the server's contracts and policies before it runs. Authentication, authorization, data integrity, transactions and cost limits always stay with the server.",
     },
     ch4: {
       nav: "Built for AI",
@@ -118,14 +118,14 @@ const en = {
       intro: "Directions aren't dressed up as features. Decided, open and prototype are listed separately.",
       decidedLabel: "Decided",
       decidedTitle: "Principles and product shape",
-      decided: "The caller expresses, the server decides. AIP ships a server on its own port and an official frontend library. The engine is Rust; extensions are JS/TS and Python.",
+      decided: "The caller expresses, the server decides. AIP ships a server on its own port and an official TypeScript and Python SDKs. The engine is Rust; extensions are JS/TS and Python.",
       openLabel: "Open",
-      openTitle: "Syntax and first-release scope",
-      open: "Definition syntax and file format, how far write composition goes, the first frontend integration, supported databases and the license are not decided yet.",
-      prototypeLabel: "Prototype",
-      prototypeTitle: "Verified pieces, not a release",
-      prototype: "A server with JWT verification, migrations, a TypeScript SDK and Node/Python extensions runs on PostgreSQL on macOS.",
-      prototypeScope: ["Source: AIP Core product/VERIFICATION.md", "Checked 2026-10-06 · macOS, local PostgreSQL"],
+      openTitle: "Release decisions",
+      open: "Package names, publishing and the extension ABI await final decisions.",
+      prototypeLabel: "Product",
+      prototypeTitle: "What 1.0.0 includes",
+      prototype: "The AIP service runs on PostgreSQL 17 with JWT verification, migration, TypeScript and Python SDKs, and Node.js and Python workers.",
+      prototypeScope: ["Source: AIP Core", "Product scope: PostgreSQL 17"],
       link: "Full project status",
     },
     next: {
@@ -141,7 +141,7 @@ const en = {
     heading: "One protocol, a few official tools",
     lead: "Every tool follows AIP Core. None of them defines AIP rules of its own.",
     projects: [
-      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "In design", body: "The AIP Specification, the Rust engine, the server framework and the frontend library. The source of truth for every AIP rule.", href: "core" },
+      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "Preparing 1.0.0", body: "The AIP Specification, the Rust engine, the server framework and the TypeScript and Python SDKs. The source of truth for every AIP rule.", href: "core" },
       { name: "Documentation", kind: "This site", state: "Live", body: "Where people and AI agents learn AIP. Agents get Markdown versions of every page and llms.txt.", href: "docs" },
       { name: "MakeAIP", kind: "Project generator", state: "Planned", body: "The official way to start an AIP project: pick options and get a project that runs. It follows AIP Core as decisions are made.", href: "makeaip" },
       { name: "Playground", kind: "Tool", state: "Planned", body: "An official tool for trying AIP in the browser is planned. It isn't available yet.", href: null },
@@ -155,7 +155,7 @@ const ko: UI = {
   meta: {
     homeTitle: "AIP · Application Intent Protocol",
     homeDescription:
-      "AIP는 AI가 코드의 많은 부분을 작성하는 시대를 전제로 설계 중인 오픈소스 웹 프레임워크다. 프론트엔드가 필요한 것을 표현하면 서버가 정책에 따라 판단하고 실행한다.",
+      "AIP는 AI가 코드의 많은 부분을 작성하는 시대를 전제로 만든 오픈소스 웹 프레임워크다. 프론트엔드가 필요한 것을 표현하면 서버가 정책에 따라 판단하고 실행한다.",
   },
   chrome: {
     skip: "본문으로 건너뛰기",
@@ -213,7 +213,7 @@ const ko: UI = {
     primary: "문서 읽기",
     secondary: "Why AIP",
     artworkCaption: "Intent → Runtime → Result를 표현한 개념 이미지",
-    meta: [["단계", "설계 중, 미출시"], ["엔진", "Rust"], ["생태계", "JS/TS, Python"], ["라이선스", "미정"]],
+    meta: [["단계", "1.0.0 출시 준비"], ["엔진", "Rust"], ["생태계", "JS/TS, Python"], ["라이선스", "MIT"]],
     chapters: "이 페이지의 장",
     ch1: {
       nav: "왜 지금인가",
@@ -229,7 +229,7 @@ const ko: UI = {
     ch2: {
       nav: "endpoint에서 intent로",
       title: "endpoint 대신 intent.",
-      intro: "같은 기능을 만들 때 쓰는 것을 나란히 놓았습니다. 코드는 개념을 보여 주는 예시이고, AIP 문법은 아직 정하지 않았습니다.",
+      intro: "코드는 요청을 어떻게 표현하는지 보여 주는 개념 예시입니다.",
       beforeLabel: "지금",
       beforeTitle: "필요할 때마다 API를 만듭니다",
       before: ["route와 HTTP method", "controller와 service", "요청·응답 DTO", "검증과 권한 검사", "데이터 접근 코드와 API 문서", "프론트엔드에도 같은 계약을 한 번 더"],
@@ -244,7 +244,7 @@ const ko: UI = {
       intro: "요청할 수 있다고 실행까지 허락되지는 않습니다. 마지막 판단은 서버가 합니다.",
       flowLabel: "요청 경로",
       nodes: ["화면", "표현한 요청", "계약·정책", "AIP Runtime", "데이터"],
-      caption: "모든 요청은 서버의 계약과 정책을 통과해야 실행됩니다. 인증과 인가, 데이터 무결성, 트랜잭션, 비용 제한은 언제나 서버가 맡습니다. 요청 형식과 정책 문법은 아직 설계 중입니다.",
+      caption: "모든 요청은 서버의 계약과 정책을 통과해야 실행됩니다. 인증과 인가, 데이터 무결성, 트랜잭션, 비용 제한은 언제나 서버가 맡습니다.",
     },
     ch4: {
       nav: "AI를 위한 설계",
@@ -263,14 +263,14 @@ const ko: UI = {
       intro: "방향을 기능처럼 쓰지 않습니다. 정해진 것, 열린 것, 프로토타입을 나눠 적었습니다.",
       decidedLabel: "Decided",
       decidedTitle: "원칙과 제품 형태",
-      decided: "호출자가 표현하고 서버가 결정합니다. 자체 포트로 뜨는 서버와 공식 프론트엔드 라이브러리를 함께 제공합니다. 엔진은 Rust, 확장은 JS/TS와 Python입니다.",
+      decided: "호출자가 표현하고 서버가 결정합니다. 자체 포트로 뜨는 서버와 공식 TypeScript·Python SDK를 함께 제공합니다. 엔진은 Rust, 확장은 JS/TS와 Python입니다.",
       openLabel: "Open",
-      openTitle: "문법과 첫 출시 범위",
-      open: "정의 문법과 파일 형식, 쓰기 조합 범위, 첫 프론트엔드 통합, 지원 DB, 라이선스는 아직 정하지 않았습니다.",
-      prototypeLabel: "Prototype",
-      prototypeTitle: "검증된 조각, 출시는 아직",
-      prototype: "JWT 검증, 마이그레이션, TypeScript SDK, Node/Python 확장을 갖춘 서버가 macOS의 PostgreSQL에서 돌아갑니다.",
-      prototypeScope: ["출처: AIP Core product/VERIFICATION.md", "2026-10-06 확인 · macOS, 로컬 PostgreSQL"],
+      openTitle: "남은 출시 결정",
+      open: "배포 패키지 이름, 공개 발행, 확장 ABI는 확정 전입니다.",
+      prototypeLabel: "제품",
+      prototypeTitle: "1.0.0에서 제공하는 기능",
+      prototype: "PostgreSQL 17에서 JWT 검증, 마이그레이션, TypeScript·Python SDK, Node.js·Python 워커를 제공합니다.",
+      prototypeScope: ["출처: AIP Core", "제품 범위: PostgreSQL 17"],
       link: "현재 상태 전체 보기",
     },
     next: {
@@ -286,7 +286,7 @@ const ko: UI = {
     heading: "프로토콜 하나, 공식 도구 몇 가지",
     lead: "모든 도구는 AIP Core를 따릅니다. 도구가 AIP 규칙을 따로 만들지 않습니다.",
     projects: [
-      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "설계 중", body: "AIP Specification, Rust 엔진, 서버 프레임워크, 프론트엔드 라이브러리. 모든 AIP 규칙의 기준입니다.", href: "core" },
+      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "1.0.0 출시 준비", body: "AIP Specification, Rust 엔진, 서버 프레임워크, TypeScript·Python SDK. 모든 AIP 규칙의 기준입니다.", href: "core" },
       { name: "Documentation", kind: "이 사이트", state: "운영 중", body: "사람과 AI 에이전트가 AIP를 익히는 곳입니다. 에이전트를 위해 모든 페이지의 Markdown 판과 llms.txt를 제공합니다.", href: "docs" },
       { name: "MakeAIP", kind: "Project generator", state: "계획", body: "AIP 프로젝트를 시작하는 공식 방법입니다. 옵션을 고르면 바로 실행되는 프로젝트를 만들어 줍니다. AIP Core의 결정을 따라갑니다.", href: "makeaip" },
       { name: "Playground", kind: "도구", state: "계획", body: "브라우저에서 AIP를 시험해 보는 공식 도구를 계획하고 있습니다. 아직 제공하지 않습니다.", href: null },
@@ -298,7 +298,7 @@ const ja: UI = {
   meta: {
     homeTitle: "AIP · Application Intent Protocol",
     homeDescription:
-      "AIP は、AI がコードの多くを書く時代を前提に設計中のオープンソース Web フレームワークです。フロントエンドが必要なものを表現し、サーバーがポリシーに従って判断・実行します。",
+      "AIP は、AI がコードの多くを書く時代を前提としたオープンソース Web フレームワークです。フロントエンドが必要なものを表現し、サーバーがポリシーに従って判断・実行します。",
   },
   chrome: {
     skip: "本文へスキップ",
@@ -356,7 +356,7 @@ const ja: UI = {
     primary: "ドキュメントを読む",
     secondary: "Why AIP",
     artworkCaption: "Intent → Runtime → Result のコンセプト画像",
-    meta: [["段階", "設計中・未リリース"], ["エンジン", "Rust"], ["エコシステム", "JS/TS、Python"], ["ライセンス", "未定"]],
+    meta: [["段階", "1.0.0 公開準備中"], ["エンジン", "Rust"], ["エコシステム", "JS/TS、Python"], ["ライセンス", "MIT"]],
     chapters: "このページの章",
     ch1: {
       nav: "なぜ今か",
@@ -372,7 +372,7 @@ const ja: UI = {
     ch2: {
       nav: "endpoint から intent へ",
       title: "endpoint ではなく intent。",
-      intro: "同じ機能を作るときに書くものを並べました。コードは考え方を示す例で、AIP の構文はまだ決まっていません。",
+      intro: "コードはリクエストの表現方法を示す例です。",
       beforeLabel: "いま",
       beforeTitle: "必要のたびに API を作る",
       before: ["route と HTTP メソッド", "controller と service", "リクエスト・レスポンスの DTO", "検証と認可チェック", "データアクセスのコードと API ドキュメント", "フロントエンドにも同じ契約をもう一度"],
@@ -406,14 +406,14 @@ const ja: UI = {
       intro: "方向性を機能のようには書きません。決まったこと、未決のこと、プロトタイプを分けて書きました。",
       decidedLabel: "Decided",
       decidedTitle: "原則と製品の形",
-      decided: "呼び出し側が表現し、サーバーが決めます。自前のポートで動くサーバーと公式フロントエンドライブラリを提供します。エンジンは Rust、拡張は JS/TS と Python です。",
+      decided: "呼び出し側が表現し、サーバーが決めます。自前のポートで動くサーバーと公式TypeScript・Python SDKを提供します。エンジンは Rust、拡張は JS/TS と Python です。",
       openLabel: "Open",
-      openTitle: "構文と最初のリリース範囲",
-      open: "定義の構文とファイル形式、書き込みの組み合わせの範囲、最初のフロントエンド統合、対応 DB、ライセンスはまだ決まっていません。",
-      prototypeLabel: "Prototype",
-      prototypeTitle: "検証済みの部品、リリースはまだ",
-      prototype: "JWT 検証、マイグレーション、TypeScript SDK、Node/Python 拡張を備えたサーバーが、macOS の PostgreSQL で動いています。",
-      prototypeScope: ["出典: AIP Core product/VERIFICATION.md", "2026-10-06 確認 · macOS、ローカル PostgreSQL"],
+      openTitle: "公開に向けた判断",
+      open: "配布名、公開作業、拡張 ABI は最終決定を待っています。",
+      prototypeLabel: "製品",
+      prototypeTitle: "1.0.0 の内容",
+      prototype: "PostgreSQL 17 向けに JWT 検証、移行、TypeScript・Python SDK、Node.js・Python ワーカーを提供します。",
+      prototypeScope: ["出典: AIP Core", "製品の範囲: PostgreSQL 17"],
       link: "現状をすべて見る",
     },
     next: {
@@ -429,7 +429,7 @@ const ja: UI = {
     heading: "一つのプロトコルと、いくつかの公式ツール",
     lead: "すべてのツールは AIP Core に従います。ツールが独自に AIP のルールを作ることはありません。",
     projects: [
-      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "設計中", body: "AIP Specification、Rust エンジン、サーバーフレームワーク、フロントエンドライブラリ。すべての AIP ルールの基準です。", href: "core" },
+      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "1.0.0 公開準備中", body: "AIP Specification、Rust エンジン、サーバーフレームワーク、TypeScript・Python SDK。すべての AIP ルールの基準です。", href: "core" },
       { name: "Documentation", kind: "このサイト", state: "公開中", body: "人と AI エージェントが AIP を学ぶ場所です。エージェント向けに、全ページの Markdown 版と llms.txt を提供します。", href: "docs" },
       { name: "MakeAIP", kind: "Project generator", state: "計画中", body: "AIP プロジェクトを始める公式の方法です。オプションを選ぶと、すぐ動くプロジェクトを生成します。AIP Core の決定に合わせて更新します。", href: "makeaip" },
       { name: "Playground", kind: "ツール", state: "計画中", body: "ブラウザで AIP を試せる公式ツールを計画しています。まだ提供していません。", href: null },
@@ -441,7 +441,7 @@ const zh: UI = {
   meta: {
     homeTitle: "AIP · Application Intent Protocol",
     homeDescription:
-      "AIP 是一个以 AI 编写大部分代码为前提、正在设计中的开源 Web 框架。前端表达所需内容，服务器按照策略判断并执行。",
+      "AIP 是一个以 AI 编写大部分代码为前提的开源 Web 框架。前端表达所需内容，服务器按照策略判断并执行。",
   },
   chrome: {
     skip: "跳到正文",
@@ -499,7 +499,7 @@ const zh: UI = {
     primary: "阅读文档",
     secondary: "Why AIP",
     artworkCaption: "Intent → Runtime → Result 概念图",
-    meta: [["阶段", "设计中，未发布"], ["引擎", "Rust"], ["生态", "JS/TS、Python"], ["许可证", "未定"]],
+    meta: [["阶段", "1.0.0 准备发布"], ["引擎", "Rust"], ["生态", "JS/TS、Python"], ["许可证", "MIT"]],
     chapters: "本页章节",
     ch1: {
       nav: "为什么是现在",
@@ -515,7 +515,7 @@ const zh: UI = {
     ch2: {
       nav: "从 endpoint 到 intent",
       title: "不写 endpoint，表达 intent。",
-      intro: "把实现同一功能时要写的东西并排放在一起。代码只是概念示例，AIP 的语法尚未确定。",
+      intro: "代码示例展示请求的表达方式。",
       beforeLabel: "现在",
       beforeTitle: "每个需求都新建一个 API",
       before: ["route 和 HTTP 方法", "controller 和 service", "请求与响应 DTO", "校验和授权检查", "数据访问代码和 API 文档", "在前端再写一遍同样的契约"],
@@ -549,14 +549,14 @@ const zh: UI = {
       intro: "不把方向写成功能。已决定、待决定和原型分开列出。",
       decidedLabel: "Decided",
       decidedTitle: "原则与产品形态",
-      decided: "调用方表达，服务器决定。提供在自己端口上运行的服务器和官方前端库。引擎是 Rust，扩展用 JS/TS 和 Python。",
+      decided: "调用方表达，服务器决定。提供在自己端口上运行的服务器和官方TypeScript 和 Python SDK。引擎是 Rust，扩展用 JS/TS 和 Python。",
       openLabel: "Open",
-      openTitle: "语法与首个版本范围",
-      open: "定义语法与文件格式、写入组合范围、首个前端集成、支持的数据库和许可证，目前都未确定。",
-      prototypeLabel: "Prototype",
-      prototypeTitle: "已验证的部件，尚未发布",
-      prototype: "服务器已具备 JWT 验证、数据库迁移、TypeScript SDK 和 Node/Python 扩展，在 macOS 的 PostgreSQL 上运行。",
-      prototypeScope: ["来源：AIP Core product/VERIFICATION.md", "2026-10-06 核对 · macOS，本地 PostgreSQL"],
+      openTitle: "发布待定事项",
+      open: "安装包名称、公开发布和扩展 ABI 尚待最终确定。",
+      prototypeLabel: "产品",
+      prototypeTitle: "1.0.0 包含的功能",
+      prototype: "基于 PostgreSQL 17 提供 JWT 验证、迁移、TypeScript 和 Python SDK，以及 Node.js 和 Python 工作进程。",
+      prototypeScope: ["来源：AIP Core", "产品范围：PostgreSQL 17"],
       link: "查看完整项目状态",
     },
     next: {
@@ -572,7 +572,7 @@ const zh: UI = {
     heading: "一个协议，几件官方工具",
     lead: "所有工具都遵循 AIP Core，不会各自定义 AIP 规则。",
     projects: [
-      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "设计中", body: "AIP Specification、Rust 引擎、服务器框架和前端库，是所有 AIP 规则的依据。", href: "core" },
+      { name: "AIP Core", kind: "Specification · Runtime · SDK", state: "1.0.0 准备发布", body: "AIP Specification、Rust 引擎、服务器框架和TypeScript 和 Python SDK，是所有 AIP 规则的依据。", href: "core" },
       { name: "Documentation", kind: "本站", state: "已上线", body: "人和 AI 智能体学习 AIP 的地方。为智能体提供每个页面的 Markdown 版本和 llms.txt。", href: "docs" },
       { name: "MakeAIP", kind: "Project generator", state: "计划中", body: "开始 AIP 项目的官方方式：选好选项，就能得到可以运行的项目，并随 AIP Core 的决定更新。", href: "makeaip" },
       { name: "Playground", kind: "工具", state: "计划中", body: "我们计划提供一个在浏览器中试用 AIP 的官方工具，目前尚未提供。", href: null },

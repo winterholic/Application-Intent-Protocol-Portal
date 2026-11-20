@@ -1,14 +1,23 @@
 ---
-translatedFrom: 9df750a576ca
-title: 例
-description: AIP で作ったサンプルアプリケーション。
+translatedFrom: b484e0c2e134
+title: "例"
+description: "AIP 1.0 で動かせるサンプルです。"
 ---
 
-> [!IMPORTANT]
-> このページはまだ書かれていません。AIP Core がこの領域を決定したら、出典とともに埋めます。
+[クイックスタート](/ja/docs/getting-started/)では認証済みの読み書きを試せます。Core の `product/examples/event-checkin` と `product/examples/folder-notes` はアプリごとにパッケージ化できます。
 
-## 現在の状態 {#current-state}
+## クイックスタートの例 {#current-state}
 
-AIP Core には検証用の例がありますが、定義の構文が最終版ではないため、公式の例としては掲載しません。
+[該当する節を英語版で読む](/docs/examples/#current-state)
 
-決まったことと開いていることは[現状](/ja/docs/status/)にあります。設計作業は [AIP Core リポジトリ](https://github.com/winterholic/Application-Intent-Protocol)で進んでいます。
+## パッケージ化できるアプリ {#packaged}
+
+[該当する節を英語版で読む](/docs/examples/#packaged)
+
+## 拡張の例 {#extension}
+
+[該当する節を英語版で読む](/docs/examples/#extension)
+
+## 移植の検証用アプリ {#ports}
+
+[該当する節を英語版で読む](/docs/examples/#ports)

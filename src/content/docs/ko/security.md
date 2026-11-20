@@ -1,5 +1,5 @@
 ---
-translatedFrom: 7fd312a41172
+translatedFrom: fb7489e8a838
 title: 보안 모델
 description: AIP에서 요청을 표현한다고 실행 권한이 생기지 않는다. 최종 권한은 서버에 있고, 필수 안전 검사는 항상 서버에서 실행되며, 확장도 이를 우회할 수 없다.
 ---
@@ -23,11 +23,15 @@ AIP는 프론트엔드가 필요한 데이터와 동작을 표현하게 한다. 
 
 ## 확장도 같은 규칙을 따른다 {#extensions}
 
-JS/TS나 Python 확장도 서버의 보안 정책과 계약을 따라야 한다. 권한, 비용 제한, 트랜잭션을 피해 가는 길이 아니다. 운영 환경에서 확장을 실행하는 격리 수준은 `Open`이다. [확장](/ko/docs/concepts/extensions/)을 참고한다.
+1.0은 OS 샌드박스에서 워커를 실행한다. 플랫폼별 조건은 [확장과 워커](/ko/docs/workers/)에 있다.
 
 ## 자연어는 보안 입력이 아니다 {#natural-language}
 
 자연어로 쓴 설명은 실행 권한이나 보안 판단에 쓰지 않는다. AIP는 무엇을 실행할지 정하려고 요청마다 자연어를 해석하지 않는다. `Decided`
+
+## 1.0 실행 경로의 검사 {#enforcement}
+
+서버가 토큰을 검증하고 subject를 actor에 연결한다. 호출 권한은 앱 정의에서 정한다. [인증과 인가](/ko/docs/authentication/)를 참고한다.
 
 ## 검증 중인 방향 {#direction}
 

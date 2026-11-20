@@ -1,7 +1,7 @@
 ---
-translatedFrom: 5a48739cc165
+translatedFrom: 080fd4a7117b
 title: 아키텍처
-description: AIP는 표준 기능을 내장하고 자체 포트에서 동작하는 서버 프레임워크, 공식 프론트엔드 라이브러리, 둘 사이의 프로토콜, 계약과 정책이 통제하는 공통 Rust 엔진으로 이뤄진다.
+description: AIP는 표준 기능을 내장하고 자체 포트에서 동작하는 서버 프레임워크, 공식 TypeScript·Python SDK, 둘 사이의 프로토콜, 계약과 정책이 통제하는 공통 Rust 엔진으로 이뤄진다.
 ---
 
 ## 네 가지 구성 요소 {#parts}
@@ -9,11 +9,11 @@ description: AIP는 표준 기능을 내장하고 자체 포트에서 동작하�
 | 구성 요소 | 역할 | 상태 |
 |---|---|---|
 | AIP 서버 프레임워크 | 설치하고 설정하면 표준 기능을 내장한 채 자체 포트에서 동작 | `Decided` |
-| AIP 프론트엔드 라이브러리 | 프론트엔드가 데이터와 동작을 표현하는 공식 방법 | `Decided` |
-| Application Intent Protocol | 둘 사이의 통신 모델 | `Decided`. wire 형식 세부는 `Open` |
+| AIP TypeScript·Python SDK | 프론트엔드가 데이터와 동작을 표현하는 공식 방법 | `Decided` |
+| Application Intent Protocol | 둘 사이의 통신 모델 | 1.0의 통신 프로토콜은 `aip-protocol/1.0`이다. |
 | 공통 실행 엔진 | 요청을 실행하는 Rust 엔진과 계약·정책 체계 | `Decided` |
 
-서버와 프론트엔드 라이브러리는 서로를 대체하지 않는다. AIP는 둘 다 제공한다. Node나 Python 패키지에서 서버를 자동으로 띄우는 방식은 개발 편의 기능으로 검토 중이다. `Open`
+서버와 TypeScript·Python SDK는 서로를 대체하지 않는다. AIP는 둘 다 제공한다. Node나 Python 패키지에서 서버를 자동으로 띄우는 방식은 개발 편의 기능으로 검토 중이다. `Open`
 
 ## Spring Boot처럼 시작하되, 처음부터 기능이 있다 {#spring-boot}
 
@@ -23,22 +23,14 @@ AIP도 같은 시작을 지향한다. 설치하고 설정하면 서버가 자체
 
 ## 요청이 지나는 길 {#request-path}
 
-1. 프론트엔드 라이브러리가 화면이 표현한 것을 보낸다.
+1. TypeScript·Python SDK가 화면이 표현한 것을 보낸다.
 2. 런타임이 호출자를 인증하고 요청을 계약과 정책에 비춰 확인한다.
 3. 엔진이 허용된 요청을 계획하고 실행하며, 비용과 자원 제한을 지킨다.
 4. 표준 기능 밖의 로직은 같은 계약 아래에서 확장으로 실행된다.
-5. 결과가 프론트엔드 라이브러리로 돌아간다.
+5. 결과가 TypeScript·Python SDK로 돌아간다.
 
-책임이 어디에 있는지를 설명한 것이다. 프로토콜과 wire 세부는 `Open`이다.
+계약과 SDK는 [호환성](/ko/docs/compatibility/)에 설명한다.
 
 ## 지금 존재하는 것 {#implementation-today}
 
-AIP Core 저장소에는 동작하는 프로토타입이 있다. 릴리스가 아니며 그 동작이 사양도 아니다. 2026-10-06 기준 저장소에는 다음이 있다.
-
-- PostgreSQL을 대상으로 서버를 실행하는 Rust 엔진과 `aip service` 명령
-- 운영 access token(RS256 JWT) 검증과 서버 측 actor 연결
-- 계획을 세우고 트랜잭션으로 적용하는 데이터베이스 마이그레이션
-- 로컬에 설치하는 TypeScript SDK 패키지와 애플리케이션 계약에서 생성한 타입
-- 서버의 통제 아래에서 실행되는 Node.js·Python 확장
-
-macOS와 로컬 PostgreSQL에서 검증했다. 외부 ID 제공자, TLS 프록시 배포, 다른 운영체제는 시험하지 않았다. 프로토타입이 쓰는 정의 문법은 최종 AIP 문법이 아니다. [현재 상태](/ko/docs/status/)를 참고한다.
+1.0의 정식 경로는 PostgreSQL 17과 `aip service`다. 서버는 외부 IdP의 JWT를 검증하고 마이그레이션, TypeScript·Python SDK, Node.js·Python 워커를 지원한다. 범위와 조건은 [알려진 한계](/ko/docs/known-limitations/)를 참고한다.

@@ -5,8 +5,9 @@
 // 4. 사이트 안 링크와 앵커가 모두 실제로 있다.
 // 5. 사이트 CSS는 디자인 시스템 토큰만 쓴다(hex 색, 다크 분기 금지).
 import { execFileSync } from "node:child_process";
-import { readFile, readdir, stat } from "node:fs/promises";
-import { join, relative } from "node:path";
+import { mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, relative, resolve } from "node:path";
 
 const SRC = "src/content/docs";
 const DIST = "dist";
@@ -64,6 +65,32 @@ try {
   execFileSync("node", ["scripts/i18n-status.mjs"], { stdio: "pipe" });
 } catch (error) {
   failures.push(`번역이 영어 원본보다 뒤처짐:\n${error.stdout}`);
+}
+
+// AIP_BIN을 지정하면 문서의 제품 정의를 실제 CLI로 검사한다.
+if (process.env.AIP_BIN) {
+  const binary = resolve(process.env.AIP_BIN);
+  const scratch = await mkdtemp(join(tmpdir(), "aip-doc-examples-"));
+  let count = 0;
+  try {
+    for await (const file of walk(SRC, (name) => name.endsWith(".md"))) {
+      const text = await readFile(file, "utf8");
+      for (const [, definition] of text.matchAll(/^```aip\r?\n([\s\S]*?)^```[ \t]*\r?$/gm)) {
+        const example = join(scratch, `example-${++count}.aip`);
+        await writeFile(example, definition);
+        try {
+          const output = execFileSync(binary, ["service", "check", example], { encoding: "utf8" });
+          if (JSON.parse(output).ok !== true) failures.push(`${file}: AIP example ${count} was rejected`);
+        } catch (error) {
+          failures.push(`${file}: AIP example ${count}: ${error.stdout || error.message}`);
+        }
+      }
+    }
+  } finally {
+    await rm(scratch, { recursive: true, force: true });
+  }
+  if (count === 0) failures.push("AIP_BIN was set, but no AIP examples were found");
+  else console.log(`checked ${count} AIP examples with aip service check`);
 }
 
 // 3. SEO·크롤링

@@ -4,7 +4,10 @@ description: In AIP, expressing a request never grants the right to run it. Fina
 status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md
-checked: 2026-10-06
+  - product/OPERATIONS.md
+  - spec/definition-syntax.md
+  - SECURITY.md
+checked: 2026-11-21
 ---
 
 ## Expression is not authority {#expression-not-authority}
@@ -26,11 +29,19 @@ The optional development checks described in [Built for AI](/docs/concepts/ai-fi
 
 ## Extensions follow the same rules {#extensions}
 
-Extensions in JS/TS or Python must follow the server's security policies and contracts. They are not a way around permissions, cost limits or transactions. The isolation level for running extensions in production is `Open`. See [Extensions](/docs/concepts/extensions/).
+Extensions in JS/TS or Python must follow the server's security policies and contracts. They are not a way around permissions, cost limits or transactions. AIP 1.0 runs workers in an operating-system sandbox (Bubblewrap on Linux, Seatbelt on macOS) with limits described on [Extensions and workers](/docs/workers/#isolation). See also [Extensions](/docs/concepts/extensions/).
 
 ## Natural language is not a security input {#natural-language}
 
 Descriptions written in natural language are never used to decide execution permission or security. AIP does not interpret natural language per request to decide what may run. `Decided`
+
+## How 1.0 enforces it {#enforcement}
+
+- Tokens are verified against the provider's keys and linked to an actor by the server; claims never grant permission. See [Authentication and authorization](/docs/authentication/).
+- Nothing is open by default: a resource with no `rows read` has no readable rows, and an unlisted field, filter or transition cannot be requested. See [Definition syntax](/docs/definition-syntax/#no-defaults).
+- Rows a caller cannot see are indistinguishable from rows that do not exist. A `count` is the exception, and an aggregate that could leak hidden values through its filter is rejected by `aip service check`.
+- There is no automatic tenant isolation in 1.0, and counts do not inherit row policy. See [Known limitations](/docs/known-limitations/).
+- Report a vulnerability privately through GitHub's private vulnerability reporting on the AIP Core repository, not in a public issue. AIP Core's `SECURITY.md` has the steps and response targets.
 
 ## Directions under validation {#direction}
 

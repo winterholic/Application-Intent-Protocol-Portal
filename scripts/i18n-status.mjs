@@ -40,9 +40,10 @@ for await (const file of walk(join(ROOT, "en"))) {
     const tr = parse(text);
     if (tr.translatedFrom === hash) continue;
     if (write) {
+      const serializedHash = JSON.stringify(hash);
       const next = tr.translatedFrom
-        ? text.replace(/^translatedFrom:.*$/m, `translatedFrom: ${hash}`)
-        : text.replace(/^---\n/, `---\ntranslatedFrom: ${hash}\n`);
+        ? text.replace(/^translatedFrom:.*$/m, `translatedFrom: ${serializedHash}`)
+        : text.replace(/^---\n/, `---\ntranslatedFrom: ${serializedHash}\n`);
       await writeFile(target, next);
       console.log(`updated  ${locale}/${rel} -> ${hash}`);
     } else {
