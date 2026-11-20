@@ -13,7 +13,7 @@ checked: 2026-10-06
 
 With a REST API, the caller's need is encoded as a URL and an HTTP method that a backend developer implemented for that purpose. In AIP, what matters is what the application is trying to do, not which transport route was built for it.
 
-The two lines below only illustrate the shift in thinking. The second line is **not AIP syntax**; AIP's syntax is `Open`.
+The two lines below only illustrate the shift in thinking. The second line is **not valid AIP**. What AIP definitions look like is on [Definition syntax](/docs/definition-syntax/).
 
 ```text
 POST /api/orders/:id/approve      # a route someone had to implement

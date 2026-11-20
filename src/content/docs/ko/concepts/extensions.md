@@ -1,5 +1,5 @@
 ---
-translatedFrom: b529e33555cd
+translatedFrom: a8a1e4c2202f
 title: 확장
 description: AIP의 표준 기능으로 표현할 수 없는 로직은 JavaScript/TypeScript나 Python 공식 확장으로 쓴다. 확장도 서버의 계약과 통제 아래에 있다.
 ---
@@ -27,5 +27,8 @@ AIP는 표준 기능과 하나의 명확한 표준 표현으로 최대한 많은
 
 ## 아직 검증 중인 것 {#open}
 
-- 운영 환경에서 확장을 실행하는 격리 기술. 실험 결과 확장을 별도 프로세스로 띄우는 것만으로는 데이터베이스에 직접 연결하는 것을 막지 못했다. 격리 수준은 `Open`이다.
 - 확장 인터페이스(ABI)와 Rust 엔진·JS/TS·Python 사이의 실행 경계는 가정하지 않고 실제 비용과 확장성을 측정해 설계한다.
+
+## 1.0에서 제공하는 것 {#in-1-0}
+
+1.0은 OS 샌드박스에서 워커를 실행한다. 플랫폼별 조건은 [확장과 워커](/ko/docs/workers/)에 있다. Node.js와 Python 워커는 정의에 선언한다. durable job과 플랫폼별 격리는 [확장과 워커](/ko/docs/workers/)를 참고한다.

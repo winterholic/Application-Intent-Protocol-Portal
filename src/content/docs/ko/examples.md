@@ -1,14 +1,23 @@
 ---
-translatedFrom: 9df750a576ca
-title: 예제
-description: AIP로 만든 예제 애플리케이션.
+translatedFrom: b484e0c2e134
+title: "예제"
+description: "AIP 1.0에서 실행할 수 있는 예제를 살펴본다."
 ---
 
-> [!IMPORTANT]
-> 이 페이지는 아직 작성되지 않았다. AIP Core가 이 영역을 결정하면 출처와 함께 채운다.
+[빠른 시작](/ko/docs/getting-started/)에서 인증된 읽기와 쓰기를 실행한다. Core의 `product/examples/event-checkin`과 `product/examples/folder-notes`는 앱 단위로 패키징할 수 있다.
 
-## 현재 상태 {#current-state}
+## 빠른 시작 예제 {#current-state}
 
-AIP Core에는 검증용 예제가 있지만 정의 문법이 최종이 아니어서 공식 예제로 싣지 않는다.
+[영어 원문의 절 보기](/docs/examples/#current-state)
 
-정해진 것과 열린 것은 [현재 상태](/ko/docs/status/)에 있다. 설계 작업은 [AIP Core 저장소](https://github.com/winterholic/Application-Intent-Protocol)에서 진행된다.
+## 앱 패키지 예제 {#packaged}
+
+[영어 원문의 절 보기](/docs/examples/#packaged)
+
+## 확장 예제 {#extension}
+
+[영어 원문의 절 보기](/docs/examples/#extension)
+
+## 포팅 검증용 앱 {#ports}
+
+[영어 원문의 절 보기](/docs/examples/#ports)

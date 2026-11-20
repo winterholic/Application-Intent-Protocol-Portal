@@ -1,14 +1,19 @@
 ---
-translatedFrom: afbd7ff826a2
-title: Specification
-description: AIP 공식 Specification.
+translatedFrom: ee7ccc9dbc9c
+title: "사양"
+description: "AIP 1.0의 문법과 HTTP 계약 정본을 찾는다."
 ---
 
-> [!IMPORTANT]
-> 이 페이지는 아직 작성되지 않았다. AIP Core가 이 영역을 결정하면 출처와 함께 채운다.
+제품은 `.aip` 정의와 `aip-protocol/1.0`을 사용한다. 문법과 진단, HTTP 오류, SDK 계약은 Core의 문서를 따른다.
 
-## 현재 상태 {#current-state}
+## 사양 문서 {#current-state}
 
-AIP Specification은 설계 중이다. 버전 체계와 정본 형식이 정해지면 여기에 게시한다.
+[영어 원문의 절 보기](/docs/specification/#current-state)
 
-정해진 것과 열린 것은 [현재 상태](/ko/docs/status/)에 있다. 설계 작업은 [AIP Core 저장소](https://github.com/winterholic/Application-Intent-Protocol)에서 진행된다.
+## 버전 {#versions}
+
+[영어 원문의 절 보기](/docs/specification/#versions)
+
+## 사양의 범위 {#not-spec}
+
+[영어 원문의 절 보기](/docs/specification/#not-spec)

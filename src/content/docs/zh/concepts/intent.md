@@ -1,5 +1,5 @@
 ---
-translatedFrom: bc97b44ce25a
+translatedFrom: a751996214b0
 title: "Intent：表达与权限"
 description: 在 AIP 中，调用方表达所需，是否执行以及如何执行由服务器决定。本页说明调用方可以表达什么，以及什么始终留在服务器上。
 sidebarLabel: "Intent"
@@ -9,7 +9,7 @@ sidebarLabel: "Intent"
 
 在 REST API 中，调用方的需求被编码为后端开发者为此专门实现的 URL 和 HTTP 方法。在 AIP 中，重要的是应用想做什么，而不是为此构建了哪条传输路径。
 
-下面两行只是为了说明思路的转变。第二行**不是 AIP 语法**，AIP 的语法是 `Open`。
+下面两行是概念示例。第二行无法执行，正式写法见[定义语法](/zh/docs/definition-syntax/)。
 
 ```text
 POST /api/orders/:id/approve      # a route someone had to implement

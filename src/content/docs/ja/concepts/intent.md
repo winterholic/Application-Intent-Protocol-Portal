@@ -1,5 +1,5 @@
 ---
-translatedFrom: bc97b44ce25a
+translatedFrom: a751996214b0
 title: "Intent: 表現と権限"
 description: AIP では呼び出し側が必要なものを表現し、実行するかどうかと方法はサーバーが決めます。呼び出し側が何を表現でき、何が常にサーバーに残るかを説明します。
 sidebarLabel: "Intent"
@@ -9,7 +9,7 @@ sidebarLabel: "Intent"
 
 REST API では、呼び出し側の必要は、バックエンド開発者がその目的のために実装した URL と HTTP メソッドとして表されます。AIP で重要なのは、そのために作られた転送経路ではなく、アプリケーションが何をしようとしているかです。
 
-次の二行は考え方の転換を示すだけです。二行目は **AIP の構文ではありません**。AIP の構文は `Open` です。
+次の二行は考え方を示す例です。二行目は実行できません。製品の書き方は[定義の構文](/ja/docs/definition-syntax/)を参照してください。
 
 ```text
 POST /api/orders/:id/approve      # a route someone had to implement

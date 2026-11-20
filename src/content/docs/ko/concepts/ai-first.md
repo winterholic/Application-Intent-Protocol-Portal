@@ -1,5 +1,5 @@
 ---
-translatedFrom: 3223bca789b9
+translatedFrom: 21db7e4bcace
 title: AI를 위해 설계하고, 사람이 읽을 수 있게
 description: AIP에서 AI-first가 뜻하는 것. 근거 없는 선택을 줄이고, 설명에 정해진 자리를 주고, 선택적 검증 계층을 따로 두되 사람의 가독성과 서버의 안전은 포기하지 않는다.
 sidebarLabel: "AI를 위한 설계"
@@ -31,7 +31,7 @@ AIP는 AI가 코드의 많은 부분을 작성하고 유지보수하는 시대�
 - 잘못된 표현을 정적으로 찾기 쉬운가?
 - 불필요하게 장황하지 않으면서 사람이 이해할 수 있는가?
 
-창시자는 선언형 문법을 선호한다. 구체 문법과, 그것을 독립 파일에 쓸지 JS/TS·Python 안에 쓸지는 `Open`이다.
+1.0은 선언형 `.aip`를 지원한다. TypeScript와 Python 소스에 넣는 형식도 있다. [정의 문법](/ko/docs/definition-syntax/)을 참고한다.
 
 ## 설명을 붙이는 자리 {#metadata}
 

@@ -1,5 +1,5 @@
 ---
-translatedFrom: 3223bca789b9
+translatedFrom: 21db7e4bcace
 title: AI のために設計し、人が読めるように
 description: AIP における AI-first の意味。根拠のない選択を減らし、説明に決まった場所を与え、任意の検証層を分けて置く。ただし人の可読性とサーバーの安全は手放さない。
 sidebarLabel: "AI のための設計"
@@ -31,7 +31,7 @@ AIP は AI がコードの多くを書き、保守する時代を前提に設計
 - 誤った表現を静的に検出しやすいか?
 - 冗長すぎず、人が理解できるか?
 
-創設者は宣言的な構文を好んでいます。具体的な構文と、それを独立したファイルに書くか JS/TS・Python の中に書くかは `Open` です。
+1.0 は宣言的な `.aip` を使います。TypeScript や Python に埋め込む形式もあります。[定義の構文](/ja/docs/definition-syntax/)を参照してください。
 
 ## 決まった場所を持つ説明 {#metadata}
 

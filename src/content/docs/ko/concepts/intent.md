@@ -1,5 +1,5 @@
 ---
-translatedFrom: bc97b44ce25a
+translatedFrom: a751996214b0
 title: "Intent: 표현과 권한"
 description: AIP에서 호출자는 필요한 것을 표현하고, 실행 여부와 방법은 서버가 결정한다. 호출자가 무엇을 표현할 수 있고 무엇이 항상 서버에 남는지 설명한다.
 sidebarLabel: "Intent"
@@ -9,7 +9,7 @@ sidebarLabel: "Intent"
 
 REST API에서 호출자의 필요는 백엔드 개발자가 그 목적으로 구현한 URL과 HTTP method로 표현된다. AIP에서 중요한 것은 그 목적으로 만들어진 전송 경로가 아니라 애플리케이션이 하려는 일이다.
 
-아래 두 줄은 사고방식의 전환을 보여 줄 뿐이다. 두 번째 줄은 **AIP 문법이 아니다**. AIP 문법은 `Open`이다.
+아래 두 줄은 개념 예시다. 두 번째 줄은 실행할 수 없다. 제품 형식은 [정의 문법](/ko/docs/definition-syntax/)에서 확인한다.
 
 ```text
 POST /api/orders/:id/approve      # a route someone had to implement

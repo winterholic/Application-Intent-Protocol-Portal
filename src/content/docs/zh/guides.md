@@ -1,14 +1,15 @@
 ---
-translatedFrom: 1a9226489337
-title: 指南
-description: 在真实应用中使用 AIP 的方法。
+translatedFrom: "651644827468"
+title: "指南"
+description: "从安装、编写定义到部署服务。"
 ---
 
-> [!IMPORTANT]
-> 本页尚未撰写。待 AIP Core 决定这一领域后，将附上来源补全内容。
+从[安装](/zh/docs/installation/)和[快速入门](/zh/docs/getting-started/)启动第一个服务，然后参阅[定义语法](/zh/docs/definition-syntax/)、[SDK](/zh/docs/sdk/)和[部署](/zh/docs/deployment/)。
 
-## 当前状态 {#current-state}
+## 从这里开始 {#current-state}
 
-分步指南需要确定的定义格式和调用方式，而这两者都仍待决定。
+[查看对应的英文小节](/docs/guides/#current-state)
 
-已决定和仍待决定的内容见[项目状态](/zh/docs/status/)。设计工作在 [AIP Core 仓库](https://github.com/winterholic/Application-Intent-Protocol)中进行。
+## 开发流程 {#path}
+
+[查看对应的英文小节](/docs/guides/#path)

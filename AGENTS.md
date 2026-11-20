@@ -32,7 +32,7 @@
 - AIP Design System(`winterholic-design-system/aip`)을 쓴다. UI를 만들거나 고치기 전에 그 저장소의 `aip/CLAUDE.md`와 `docs/00-decision-guide.md`를 읽는다.
 - 값은 토큰(`var(--aip-…)`)과 컴포넌트 클래스(`.aip-*`)만 쓴다. hex·임의 px·다크 분기를 쓰지 않는다.
 - `public/vendor/aip/`는 복사본이다. 직접 고치지 않고 디자인 시스템을 고친 뒤 `pnpm sync:ds`.
-- AIP 정의 문법이 미정이므로 사이트에 AIP 코드 예시를 싣지 않는다.
+- AIP 정의 예제에는 Core의 제품 문법을 쓰고 `AIP_BIN`을 지정해 `pnpm verify`로 검사한다.
 
 자세한 구조와 규칙: [docs/architecture.md](docs/architecture.md)
 
