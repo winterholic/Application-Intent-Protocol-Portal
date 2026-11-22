@@ -1,5 +1,5 @@
 ---
-translatedFrom: "33dbaf1b9de3"
+translatedFrom: "549fa058fc8c"
 title: "定义语法"
 description: "正式产品使用的 AIP 声明语法。"
 ---

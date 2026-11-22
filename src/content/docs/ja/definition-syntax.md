@@ -1,5 +1,5 @@
 ---
-translatedFrom: "33dbaf1b9de3"
+translatedFrom: "549fa058fc8c"
 title: "定義の構文"
 description: "製品で使う AIP の宣言構文です。"
 ---
