@@ -1,18 +1,18 @@
 ---
-translatedFrom: e22145b82c9a
+translatedFrom: "e2676b7f0695"
 title: "プロジェクトの現状"
 description: "AIP 1.0.0 の公開状況、サポート範囲、今後の判断項目です。"
 ---
 
-AIP 1.0.0 は公開準備中です。CLI と SDK の公開前は[ソースからビルド](/ja/docs/installation/#from-source)できます。
+AIP 1.0.0 はリリース候補として準備中で、安定版ではありません。CLI と SDK の公開前は[ソースからビルド](/ja/docs/installation/#from-source)できます。
 
-## 公開状況 {#release}
+## リリース状況 {#release}
 
-予定のタグは `v1.0.0`、通信プロトコルは `aip-protocol/1.0` です。レジストリ名は暫定です。
+`v1.0.0` タグと GitHub Release はまだなく、npm と PyPI にも公開していません。通信プロトコルは `aip-protocol/1.0`、ライセンスは MIT、対応データベースは PostgreSQL 17 です。レジストリのパッケージ名は、オーナーの承認までは暫定です。このページは AIP Core のコミット `4f44ca87`（2026-11-22）と照合しました。
 
 ## 1.0 の範囲 {#scope}
 
-製品の入口は PostgreSQL 17 に対する `aip service` と、TypeScript・Python SDK です。詳しくは[既知の制限](/ja/docs/known-limitations/)を参照してください。
+PostgreSQL 17 を使う `aip service` と TypeScript・Python SDK が正式な経路です。Core は候補機能 19 個を、対応 11、条件付き 7、対象外 1（テナントの自動分離）と判定しました。機能ごとの条件は[既知の制限](/ja/docs/known-limitations/)と英語版の[判定表](/docs/known-limitations/#scope)にあります。
 
 ## Decided {#decided}
 

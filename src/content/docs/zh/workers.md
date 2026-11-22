@@ -1,5 +1,5 @@
 ---
-translatedFrom: 18e38f31d5db
+translatedFrom: "74483a39eedf"
 title: "扩展和工作进程"
 description: "使用 Node.js 或 Python 执行应用专属逻辑。"
 ---
@@ -13,6 +13,10 @@ description: "使用 Node.js 或 Python 执行应用专属逻辑。"
 ## 编写扩展代码 {#code}
 
 [查看对应的英文小节](/docs/workers/#code)
+
+## 在写入扩展中创建行 {#create}
+
+[查看对应的英文小节](/docs/workers/#create)
 
 ## 配置工作进程 {#configure}
 

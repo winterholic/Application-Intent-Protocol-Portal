@@ -1,5 +1,5 @@
 ---
-translatedFrom: b484e0c2e134
+translatedFrom: "759e02f43da1"
 title: "例"
 description: "AIP 1.0 で動かせるサンプルです。"
 ---
@@ -9,6 +9,14 @@ description: "AIP 1.0 で動かせるサンプルです。"
 ## クイックスタートの例 {#current-state}
 
 [該当する節を英語版で読む](/docs/examples/#current-state)
+
+## 宣言だけで書いた注文と在庫 {#orders}
+
+[該当する節を英語版で読む](/docs/examples/#orders)
+
+## 行を作る拡張 {#extension-create}
+
+[該当する節を英語版で読む](/docs/examples/#extension-create)
 
 ## パッケージ化できるアプリ {#packaged}
 

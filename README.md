@@ -31,6 +31,7 @@ pnpm install
 pnpm dev       # http://localhost:4321
 pnpm verify    # build + 4개 언어 본문·Markdown 판·llms.txt, 번역 동기화, canonical·hreflang·robots·sitemap, 링크·앵커, 토큰 전용 CSS
 pnpm i18n:status  # 영어 원본보다 뒤처진 번역 목록
+node scripts/check-core-drift.mjs --core <AIP Core checkout>   # Core 지원 범위·한계·출시 전 상태와 Portal 비교(읽기 전용)
 pnpm check     # 타입·frontmatter 검사
 pnpm sync:ds   # ../winterholic-design-system 의 aip/ 산출물을 public/ 으로 다시 복사
 ```

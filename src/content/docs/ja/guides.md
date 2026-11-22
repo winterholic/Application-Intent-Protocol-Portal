@@ -1,5 +1,5 @@
 ---
-translatedFrom: "651644827468"
+translatedFrom: "20abad3dfcb6"
 title: "ガイド"
 description: "インストールから定義の作成、サービスの配置までを案内します。"
 ---
@@ -13,3 +13,7 @@ description: "インストールから定義の作成、サービスの配置ま
 ## 開発の流れ {#path}
 
 [該当する節を英語版で読む](/docs/guides/#path)
+
+## 宣言だけでは足りないとき {#beyond}
+
+[該当する節を英語版で読む](/docs/guides/#beyond)

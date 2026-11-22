@@ -1,5 +1,5 @@
 ---
-translatedFrom: 49be86dc8b09
+translatedFrom: "2f97e3fd8a83"
 title: 설치
 description: AIP 1.0.0 명령줄 도구, TypeScript SDK, Python SDK를 설치하는 방법과 지원 플랫폼, 이름이 비슷하지만 설치하면 안 되는 패키지.
 ---
@@ -76,6 +76,8 @@ python -c "import aip_sdk; print(aip_sdk.__version__, aip_sdk.PROTOCOL)"
 ```
 
 두 번째 명령은 `1.0.0 aip-protocol/1.0`을 출력한다. Python 3.9 이상이 필요하고 외부 의존성은 없다.
+
+Python SDK는 가상환경 안에 설치한다. Homebrew나 Debian 계열 Python은 시스템 전체 설치를 막고(PEP 668, `externally-managed-environment`), macOS에는 `pip` 없이 `pip3`만 있을 수 있다. `uv`를 쓰면 `uv venv .venv && uv pip install --python .venv/bin/python <wheel>`이다.
 
 ## 설치하면 안 되는 것 {#do-not-install}
 

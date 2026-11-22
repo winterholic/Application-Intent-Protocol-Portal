@@ -7,7 +7,11 @@ source:
   - product/OPERATIONS.md
   - product/MANAGED-EXECUTION.md
   - product/EXECUTION.md
-checked: 2026-11-21
+  - product/LIMITS.md
+  - product/SDK.md
+  - CHANGELOG.md
+  - product/tests/fixtures/expr-apps/orders/extensions/shopb.mjs
+checked: 2026-11-22
 ---
 
 Logic that the standard capabilities cannot express is written as an extension in JavaScript or Python and runs in a worker process that the server controls. The concept is on [Extensions](/docs/concepts/extensions/). This page is how it works in 1.0.
@@ -74,6 +78,33 @@ export async function confirm(input, ctx) {
 ```
 
 The server derives the actor from the verified token. `ctx.data.apply` can only call the transitions the extension's `access` lists (each must also be exposed with `expose apply`), each under its own policy, and every write, audit row and idempotency result commits in one transaction with the validated output. A rejection, a bad output or a missed deadline rolls all of it back. A write extension marked `internal` is hidden from generated clients and refused at the public HTTP entry points.
+
+## Create rows from a write extension {#create}
+
+A write extension can create rows when its `access` lists `create.<Resource>` and that resource has `expose create`. Inside the extension, `ctx.data.create(resource, values)` runs the caller's public create path, with the same field allowlist, `allow` rule and reference visibility. The new ID can feed later reads, transitions and creates in the same call, and all of it commits in one transaction.
+
+```js
+export async function placeAtomic(input, ctx) {
+  const page = await ctx.data.read({ read: "Product", select: ["id", "price", "stock"], filter: [{ field: "id", op: "eq", value: input.product }] });
+  if (page.rows.length === 0) throw ctx.reject("NO_SUCH_PRODUCT", "no such product");
+  const { price, stock } = page.rows[0];
+  if (stock < input.qty) throw ctx.reject("INSUFFICIENT_STOCK", "not enough stock");
+  const total = input.qty * price;
+  await ctx.data.apply("Product", "take", [input.product], undefined, undefined, undefined, { qty: input.qty });
+  const order = await ctx.data.create("Order", { owner: input.owner, total: 0, placed: false });
+  await ctx.data.create("OrderLine", { order, product: input.product, qty: input.qty, unitPrice: price });
+  await ctx.data.apply("Order", "settle", [order], undefined, { total });
+  return { id: order, total };
+}
+```
+
+- `ctx.data.apply(resource, transition, ids, key, values, expect, input)` takes the transition's `input` as its last optional argument. Leave `key` as `undefined`; the outer request's idempotency key already covers the whole call.
+- `ctx.reject(code, message)` refuses the call for a business reason. The caller receives `WIRE.EXTENSION_REJECTED` with your code and message. A plain exception is `WIRE.EXTENSION_ERROR`.
+- An extension that passes `WIRE.CONFLICT` or `WIRE.ALREADY_EXISTS` through gives the caller that code. The server does not rerun an extension, so the caller resends with the same key.
+- Create on a resource with encrypted fields is `WIRE.UNSUPPORTED`. After a database error inside the call, such as a unique violation, the transaction is aborted and later `ctx` calls cannot continue.
+- The type files for `ctx` (`ctx.d.ts` and `aip_ctx.py`) are in the AIP Core source, not in the SDK packages.
+
+The full definition for this example, with its checked declarations, is on [Examples](/docs/examples/#extension-create).
 
 ## Turn workers on {#configure}
 

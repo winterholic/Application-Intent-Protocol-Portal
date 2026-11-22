@@ -1,5 +1,5 @@
 ---
-translatedFrom: 18e38f31d5db
+translatedFrom: "74483a39eedf"
 title: "확장과 워커"
 description: "Node.js와 Python으로 앱 고유의 작업을 실행한다."
 ---
@@ -13,6 +13,10 @@ description: "Node.js와 Python으로 앱 고유의 작업을 실행한다."
 ## 확장 코드 {#code}
 
 [영어 원문의 절 보기](/docs/workers/#code)
+
+## 쓰기 확장에서 행 만들기 {#create}
+
+[영어 원문의 절 보기](/docs/workers/#create)
 
 ## 워커 설정 {#configure}
 

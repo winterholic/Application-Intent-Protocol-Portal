@@ -6,7 +6,9 @@ status: sourced
 source:
   - plan-docs/sources/founder-integrated-directive-2026-10-03.md
   - docs/PRINCIPLES.md
-checked: 2026-10-06
+  - product/SUPPORT.md
+  - spec/definition-syntax.md
+checked: 2026-11-22
 ---
 
 ## From endpoints to intent {#endpoints-to-intent}
@@ -52,7 +54,6 @@ Forbidding arbitrary queries outside policy is different from forbidding safe co
 
 ## Open questions {#open}
 
-- Whether new fields are hidden from callers until explicitly opened. `Direction`: a safe default is proposed.
-- Whether production accepts read shapes that were not registered in advance. `Direction`: allow them within policy, subject to security, performance and cost validation.
+- New fields and read shapes. In the product definition language nothing is open unless it is declared: a resource without `rows read` has no readable rows, a resource without `expose read` cannot be read, and a field the definition does not expose is rejected with `WIRE.FIELD_NOT_EXPOSED`. Whether production should also accept read shapes that were not declared in advance remains a `Direction`, subject to security, performance and cost validation.
 - Who may write requests directly in the first release: first-party frontends, AI agents, partners or any third party. `Open`
-- How much freedom callers get when combining writes, and where transaction boundaries lie. `Open`
+- How much freedom callers get when combining writes. A bundle holds at most 20 operations, and the final write composition choice remains `Open`.

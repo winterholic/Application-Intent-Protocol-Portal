@@ -1,10 +1,10 @@
 ---
-translatedFrom: cabf3589673d
+translatedFrom: "d13d027815d7"
 title: "发行说明"
 description: "AIP 1.0.0 的内容和兼容性变更。"
 ---
 
-AIP 1.0.0 正作为 `aip` CLI、TypeScript 和 Python SDK 的首个正式版本准备发布。它提供基于 PostgreSQL 17 的定义、身份验证、策略和迁移。验证会拒绝重复的 actor 声明。
+AIP 1.0.0 是 `aip` CLI 与 TypeScript、Python SDK 的发布候选，正在准备中，尚未发布。没有标签、GitHub Release 和注册表软件包，也不是稳定版。它在 PostgreSQL 17 上提供产品定义、认证、策略和迁移。重复的 actor 声明现在会被检查拒绝。对先前创建行的引用、有限算术、Decimal sum 和扩展中的 create 见英文版的[表现力变更](/docs/release-notes/#expressiveness)。
 
 ## 概述 {#summary}
 
@@ -17,6 +17,10 @@ AIP 1.0.0 正作为 `aip` CLI、TypeScript 和 Python SDK 的首个正式版本�
 ## 变更 {#changes}
 
 [查看对应的英文小节](/docs/release-notes/#changes)
+
+## 表现力变更 {#expressiveness}
+
+[查看对应的英文小节](/docs/release-notes/#expressiveness)
 
 ## 安装 {#install}
 

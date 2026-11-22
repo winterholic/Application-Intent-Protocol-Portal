@@ -7,7 +7,8 @@ source:
   - plan-docs/STATUS.md
   - product/MANAGED-EXECUTION.md
   - spec/definition-syntax.md
-checked: 2026-11-21
+  - product/LIMITS.md
+checked: 2026-11-22
 ---
 
 ## A paved road and an official way out {#paved-road}
@@ -38,4 +39,4 @@ Application developers and AI agents write extensions in JS/TS or Python. `Decid
 
 ## In 1.0 {#in-1-0}
 
-1.0 ships working Node.js and Python workers with durable jobs, declared in the definition and run in an operating-system sandbox. See [Extensions and workers](/docs/workers/) for the declarations, configuration and limits.
+1.0 ships working Node.js and Python workers with durable jobs, declared in the definition and run in an operating-system sandbox. A write extension can read, call transitions and create rows under the caller's policies, and refuse a call with a business code. See [Extensions and workers](/docs/workers/) for the declarations, configuration and limits.

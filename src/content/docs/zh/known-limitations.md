@@ -1,10 +1,10 @@
 ---
-translatedFrom: e7dcede5bce3
+translatedFrom: "ab39055abc2a"
 title: "已知限制"
 description: "AIP 1.0 不支持或仅在特定条件下支持的功能。"
 ---
 
-正式产品通过 `aip service` 使用 PostgreSQL 17。自动租户隔离不在支持范围内，组织边界需要在应用策略中明确编写。`.aipoc` 用于概念验证。公开计数、工作进程隔离、安装包和平台的限制见详细文档。
+1.0 的产品路径是 PostgreSQL 17 上的 `aip service`。Core 把 19 个候选功能判定为支持 11 项、有条件支持 7 项、排除 1 项。逐项判定表在英文版的[支持范围](/docs/known-limitations/#scope)，表达力限制 E1 到 E9 及变通办法在[表达力](/docs/known-limitations/#expressiveness)。自动租户隔离不在支持范围内，需要在应用定义中直接写组织边界策略。`.aipoc` 仅用于概念验证。公开 count、工作进程隔离、软件包和平台的条件见各详细页面。
 
 ## 支持范围 {#scope}
 
@@ -29,6 +29,10 @@ description: "AIP 1.0 不支持或仅在特定条件下支持的功能。"
 ## 表达能力 {#expressiveness}
 
 [查看对应的英文小节](/docs/known-limitations/#expressiveness)
+
+## 策略检查 {#policy-checks}
+
+[查看对应的英文小节](/docs/known-limitations/#policy-checks)
 
 ## 扩展与隔离 {#extensions}
 

@@ -10,7 +10,9 @@ source:
   - README.md
   - CHANGELOG.md
   - COMPATIBILITY.md
-checked: 2026-11-21
+  - product/SUPPORT.md
+  - product/LIMITS.md
+checked: 2026-11-22
 ---
 
 AIP Core is preparing version 1.0.0. The public tag and registry packages are pending. Build from source to try the product before publication.
@@ -20,20 +22,21 @@ AIP Core is preparing version 1.0.0. The public tag and registry packages are pe
 
 ## Release state {#release}
 
-| Item | State on 2026-11-21 |
+| Item | State on 2026-11-22 |
 |---|---|
 | Version | 1.0.0 for the engine and both SDKs. Protocol `aip-protocol/1.0` |
-| Tag `v1.0.0` and GitHub Release | Not created |
+| Tag `v1.0.0` and GitHub Release | Not created. 1.0.0 is a release candidate, not a stable release |
 | npm `@aip/sdk` and PyPI `application-intent-protocol-sdk` | Not published. Names are provisional until the owner approves them |
 | Release gate on the final commit | Not recorded yet. AIP Core's `CHANGELOG.md` lists the 1.0.0 entry as a draft |
 | License | MIT |
 | Supported database | PostgreSQL 17 |
+| Compared with AIP Core | Commit `4f44ca87` |
 
 Install commands in [Installation](/docs/installation/) are the ones that apply after the release. Until then the engine is built from source.
 
 ## What 1.0 covers {#scope}
 
-AIP Core's 1.0 release audit of 2026-11-21 sorted 19 candidate features into 11 supported, 7 supported with conditions and 1 excluded (automatic tenant isolation). The product path is `aip service` with the `.aip` definition language; the `.aipoc` language is a proof of concept. The full list, with each condition, is on [Known limitations](/docs/known-limitations/).
+AIP Core's 1.0 release audit of 2026-11-21 sorted 19 candidate features into 11 supported, 7 supported with conditions and 1 excluded (automatic tenant isolation). The product path is `aip service` with the `.aip` definition language; the `.aipoc` language is a proof of concept. The table with each condition and limit is on [Known limitations](/docs/known-limitations/#scope).
 
 ## Decided {#decided}
 
@@ -66,7 +69,7 @@ AIP Core's 1.0 release audit of 2026-11-21 sorted 19 candidate features into 11 
 | Topic | Question |
 |---|---|
 | Syntax compatibility | Whether definitions written for 1.0 keep their meaning when syntax is added later. AIP Core has no grammar version field |
-| Write composition | How much freedom callers get to combine writes. 1.0 has atomic bundles and `compose` within fixed limits; the final choice is not made |
+| Write composition | How much freedom callers get to combine writes. 1.0 has atomic bundles that can use the ID of an earlier create, and `compose`, within fixed limits; the final choice is not made |
 | Language parity | Whether TS and Python have equal features. Both SDKs ship in 1.0 at the same version |
 | Frontend integration | Which official framework integration, if any, follows the framework-independent TypeScript SDK |
 | Extension ecosystem | Initial scope of third-party extension packages |

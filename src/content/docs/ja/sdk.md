@@ -1,5 +1,5 @@
 ---
-translatedFrom: e3bdcb5b87c8
+translatedFrom: "175844643540"
 title: "SDK"
 description: "TypeScript・Python から AIP サービスを呼び出します。"
 ---
@@ -25,6 +25,10 @@ description: "TypeScript・Python から AIP サービスを呼び出します�
 ## バンドルと組み合わせ {#bundle}
 
 [該当する節を英語版で読む](/docs/sdk/#bundle)
+
+## 先に作った行を参照する {#bundle-refs}
+
+[該当する節を英語版で読む](/docs/sdk/#bundle-refs)
 
 ## エラーと再試行 {#errors}
 

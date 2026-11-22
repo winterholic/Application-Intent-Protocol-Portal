@@ -1,18 +1,18 @@
 ---
-translatedFrom: e22145b82c9a
+translatedFrom: "e2676b7f0695"
 title: "프로젝트 상태"
 description: "AIP 1.0.0의 출시 상태와 지원 범위, 남은 결정이다."
 ---
 
-AIP 1.0.0은 출시를 준비 중이다. CLI와 SDK가 공개되기 전에는 [소스에서 빌드](/ko/docs/installation/#from-source)할 수 있다.
+AIP 1.0.0은 출시 후보로 준비 중이며 안정 릴리스가 아니다. CLI와 SDK가 공개되기 전에는 [소스에서 빌드](/ko/docs/installation/#from-source)할 수 있다.
 
 ## 출시 상태 {#release}
 
-예정 태그는 `v1.0.0`이고 통신 프로토콜은 `aip-protocol/1.0`이다. 레지스트리 패키지 이름은 잠정이다.
+`v1.0.0` 태그와 GitHub Release는 아직 없고 npm과 PyPI에도 게시하지 않았다. 통신 프로토콜은 `aip-protocol/1.0`, 라이선스는 MIT, 지원 데이터베이스는 PostgreSQL 17이다. 레지스트리 패키지 이름은 소유자 승인 전까지 잠정이다. 이 페이지는 AIP Core 커밋 `4f44ca87`(2026-11-22)과 대조했다.
 
 ## 1.0 범위 {#scope}
 
-PostgreSQL 17을 쓰는 `aip service`와 TypeScript·Python SDK가 정식 경로다. 지원 범위는 [알려진 한계](/ko/docs/known-limitations/)를 참고한다.
+PostgreSQL 17을 쓰는 `aip service`와 TypeScript·Python SDK가 정식 경로다. Core는 후보 기능 19개를 지원 11, 조건부 7, 제외 1(자동 테넌트 격리)로 판정했다. 기능별 조건은 [알려진 한계](/ko/docs/known-limitations/)와 영어 원문의 [판정표](/docs/known-limitations/#scope)에 있다.
 
 ## Decided {#decided}
 

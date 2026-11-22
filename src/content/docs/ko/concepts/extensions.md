@@ -1,5 +1,5 @@
 ---
-translatedFrom: a8a1e4c2202f
+translatedFrom: "28a85015d02f"
 title: 확장
 description: AIP의 표준 기능으로 표현할 수 없는 로직은 JavaScript/TypeScript나 Python 공식 확장으로 쓴다. 확장도 서버의 계약과 통제 아래에 있다.
 ---
@@ -31,4 +31,4 @@ AIP는 표준 기능과 하나의 명확한 표준 표현으로 최대한 많은
 
 ## 1.0에서 제공하는 것 {#in-1-0}
 
-1.0은 OS 샌드박스에서 워커를 실행한다. 플랫폼별 조건은 [확장과 워커](/ko/docs/workers/)에 있다. Node.js와 Python 워커는 정의에 선언한다. durable job과 플랫폼별 격리는 [확장과 워커](/ko/docs/workers/)를 참고한다.
+1.0은 OS 샌드박스에서 워커를 실행한다. 플랫폼별 조건은 [확장과 워커](/ko/docs/workers/)에 있다. Node.js와 Python 워커는 정의에 선언한다. 쓰기 확장은 호출자의 정책 아래에서 읽고, 전이를 부르고, 행을 만들 수 있으며 업무 코드로 호출을 거절할 수 있다. durable job과 플랫폼별 격리는 [확장과 워커](/ko/docs/workers/)를 참고한다.

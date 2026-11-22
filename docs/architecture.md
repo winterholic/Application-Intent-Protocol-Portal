@@ -33,7 +33,27 @@ src/content/docs/**/*.md  (canonical source, frontmatter: title · description �
 - 콜아웃은 GFM alert 다섯 가지(`NOTE` `TIP` `IMPORTANT` `WARNING` `CAUTION`)만 쓴다.
 - 새 문서는 `src/lib/site.ts`의 `DOC_NAV`에 넣고 네 언어 파일을 모두 만든다. nav에 없는 문서, 없는 nav 항목, 빠진 번역은 빌드 오류다.
 - 항목 상태는 AIP Core 어휘를 쓴다: `Decided`(창시자 결정), `Direction`(방향, 세부 검증 필요), `Open`(미정). 근거는 AIP Core `plan-docs/sources/founder-integrated-directive-2026-10-03.md`의 [FOUNDER]·[DIRECTION]·[OPEN] 표식이다.
-- AIP 코드처럼 보이는 예시는 쓰지 않는다. 사고방식을 보여 주는 예시가 필요하면 `text` 블록에 "AIP 문법이 아님"을 본문에 밝힌다.
+- `aip` 블록은 Core의 제품 문법 정의여야 하고 `AIP_BIN=<aip 실행 파일> pnpm verify`가 `aip service check`로 검사한다. `ts`·`js`·`python` 코드는 `source`에 적은 Core 문서나 fixture에서 가져온다. 사고방식을 보여 주는 가짜 코드는 `text` 블록에 쓰고 "AIP 문법이 아님"을 본문에 밝힌다.
+
+## Core와의 정합성 검사
+
+`scripts/check-core-drift.mjs`가 Core checkout을 읽기만 하며 Portal과 비교한다. 네트워크를 쓰지 않으므로 `pnpm verify`와 따로 돌린다.
+
+```sh
+node scripts/check-core-drift.mjs --core ../aip-core-portal-20261122     # 또는 AIP_CORE_DIR
+```
+
+| 검사 | 기준 |
+|---|---|
+| 기준선 | `src/data/core-baseline.json`의 Core SHA와 문서 해시(SUPPORT, LIMITS, COMPATIBILITY, CHANGELOG, SDK, INSTALL 등). Core 문서가 바뀌면 실패한다 |
+| 지원 범위 표 | `product/SUPPORT.md`의 개수와 기능 19행 판정이 영어 `known-limitations` 표와 같다. 번역은 그 절로 안내한다 |
+| 표현력 한계 | `product/LIMITS.md`의 E1~E9가 영어 `known-limitations` 표에 있다 |
+| 출시 전 상태 | Core에 `v*` 태그가 없는 동안 Portal이 출시 후보로 표시하고 정식 출시로 쓰지 않는다. 태그가 생기면 실패한다 |
+| 이름·버전·protocol | `product/release.config.json`, `Cargo.toml`, `COMPATIBILITY.md`와 같다 |
+| 핵심 표식 | 제한 산술, bundle 결과 참조, Decimal sum, extension create, 알려진 한계의 표식이 Core와 Portal 양쪽에 있다 |
+| source와 코드 | 영어 `source`가 Core에 있고 새 표현력 문법의 코드 블록이 그대로 있다 |
+
+Core 변경을 검토하고 Portal을 맞춘 뒤 `--update-baseline`으로 기준선을 올린다. 기준선을 올리는 것은 검토를 마쳤다는 뜻이다.
 
 ## 문서 상태
 

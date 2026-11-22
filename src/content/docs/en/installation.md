@@ -7,7 +7,7 @@ source:
   - COMPATIBILITY.md
   - product/release.config.json
   - product/RELEASE-NOTES-1.0.0.md
-checked: 2026-11-21
+checked: 2026-11-22
 ---
 
 > [!IMPORTANT]
@@ -82,6 +82,8 @@ python -c "import aip_sdk; print(aip_sdk.__version__, aip_sdk.PROTOCOL)"
 ```
 
 The second command prints `1.0.0 aip-protocol/1.0`. Python 3.9 or newer is required and the SDK has no third-party dependencies.
+
+Install the Python SDK inside a virtual environment. Python from Homebrew or Debian refuses system-wide installs (PEP 668, `externally-managed-environment`), and macOS may have `pip3` but no `pip`. With `uv`, use `uv venv .venv && uv pip install --python .venv/bin/python <wheel>`.
 
 ## Do not install these {#do-not-install}
 

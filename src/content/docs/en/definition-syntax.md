@@ -7,7 +7,9 @@ source:
   - spec/definition-diagnostics.md
   - product/SDK.md
   - README.md
-checked: 2026-11-21
+  - CHANGELOG.md
+  - product/LIMITS.md
+checked: 2026-11-22
 ---
 
 A definition says what an application's data looks like, who may read which rows, which changes are allowed and how large a read may be. The server checks every request against it. This page is a reading guide. The complete reference, generated from the compiler, is [`spec/definition-syntax.md`](https://github.com/winterholic/Application-Intent-Protocol/blob/main/spec/definition-syntax.md) in AIP Core, and it wins wherever the two differ.
@@ -133,10 +135,74 @@ resource Post {
 
 Two alternatives that would change response values, an explicit `release count public` and applying `rows read` to every count, are left to the project owner and are not in 1.0.
 
+## Changing numbers: limited arithmetic {#arithmetic}
+
+A transition can add one term to a number field or subtract one. The term is a positive literal, a value the caller sends in the transition's `input` block, or another field of the same row (`this.g`). The field is Int or Decimal. The `input` block lists the amounts: up to 8 keys, none null, and every declared key required. An Int input needs a range with a lower bound of at least 1, and a Decimal input at or below zero is refused with `WIRE.BAD_VALUE`.
+
+The server computes the result on the locked row in the same `UPDATE`. If the result leaves the field's range or digits, or an operand is NULL, the whole request fails with `WIRE.BAD_VALUE` and rolls back.
+
+```aip
+resource Member { fields { id: Id } }
+actor Member
+
+resource Product {
+  fields { id: Id; sku: Text(1..40); stock: Int(0..1000000) }
+  rows read when actor != null
+  transition take {
+    input { qty: Int(1..1000) }
+    allow actor != null
+    from stock >= input.qty
+    to stock = stock - input.qty
+  }
+  expose read { select id, sku, stock; filter id.eq; sort id; budget { rows 50; depth 1; deadline 1s; cost 100 } }
+  expose apply take { target id; bulk maxRows 1 }
+}
+```
+
+Not available: multiplication or division, two or more terms, combining with `repeat unchanged`, `input` in a transition that `compose` uses, and comparing an `input` value with a field that has a read policy in the same condition. On MySQL, which is outside 1.0, `input` and arithmetic are `WIRE.UNSUPPORTED`.
+
+## Sum over Decimal {#decimal-sum}
+
+`release sum(f)` accepts an Int field, which gives an Int, or a `Decimal(p,s)` field. The Decimal result is `Decimal(p',s)`: the same scale, a precision of at least `p`, and a JSON string such as `"50.70"`. An empty set gives `"0.00"`. Nothing is rounded, and a sum above `p'` fails with `WIRE.OUTPUT_INVALID`. Unlike `count`, `sum` applies the source's `rows read`.
+
+```aip
+resource Member { fields { id: Id } }
+actor Member
+
+resource Payment {
+  fields { id: Id; invoice: Invoice; member: Member; amount: Decimal(10,2) }
+  rows read when member = actor
+}
+
+access visibleInvoices = totalOfVisible(Invoice)
+
+resource Invoice {
+  fields { id: Id; title: Text(1..100) }
+  rows read when actor != null
+  aggregate paid: Decimal(12,2) {
+    source Payment
+    sourceAccess visibleInvoices
+    groupKey invoice
+    where member = actor
+    callerFilter none
+    rowOutput none
+    release sum(amount)
+  }
+  expose read {
+    select id, title, paid
+    filter id.eq
+    sort id
+    budget { rows 50; depth 1; deadline 1s; cost 100 }
+  }
+}
+```
+
+`avg` is still `DEF.UNSUPPORTED`, `min` and `max` take Int fields only, and aggregating an encrypted field is `DEF.UNSUPPORTED`. On MySQL, which is outside 1.0, a Decimal `sum` is `WIRE.UNSUPPORTED`.
+
 ## Easy mistakes {#separators}
 
 - In a `transition`, assignments inside `to` are separated by commas: `to done = true, views = views + 1`. Semicolons separate items such as `from`, `to` and `allow`. Inside an effect block such as `update Member where id = author { ... }` the separator is a semicolon.
-- Numbers change only as `f = f + 1`. Adding a value from another field, or incrementing a related row, is not expressible; use an [extension](/docs/workers/).
+- Numbers change by one term: `f = f + 1`, `f = f - input.qty` or `f = f + this.g`. See [Changing numbers](#arithmetic). Multiplying, using two terms, or incrementing a related row is not expressible; use an [extension](/docs/workers/).
 - `Decimal(p,s)` literals are quoted strings: `to total = "0.00"`. A bare `0.00` is `DEF.BAD_VALUE`.
 - `Int(lo..hi)` includes both ends and accepts negative bounds.
 - A primary key is `id: Id` (numeric, the default) or `id: Uuid`. Write references as the resource name (`owner: Member`); `X.Id` is only for inputs and operation types.
@@ -145,12 +211,12 @@ Two alternatives that would change response values, an explicit `release count p
 
 These were checked against 1.0 and are rejected by `aip service check`, so they are not hidden surprises:
 
-- `avg` aggregates, and `sum` over a `Decimal` field
+- `avg` aggregates
 - sorting or filtering through a relation path such as `sort author.name`
 - grouping an aggregate by more than one reference
-- increments of a related row's fields or computed from another field
+- multiplication, such as the sum of quantity times price, and increments of a related row's fields
 
-Such needs go through an extension. See [Known limitations](/docs/known-limitations/).
+Such needs go through an extension. See [Known limitations](/docs/known-limitations/#expressiveness).
 
 ## Diagnostics {#diagnostics}
 

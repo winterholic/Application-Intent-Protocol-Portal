@@ -6,7 +6,10 @@ source:
   - COMPATIBILITY.md
   - product/INSTALL.md
   - product/OPERATIONS.md
-checked: 2026-11-21
+  - CHANGELOG.md
+  - product/RELEASE-NOTES-1.0.0.md
+  - product/SUPPORT.md
+checked: 2026-11-22
 ---
 
 ## Versions that belong together {#versions}
@@ -15,7 +18,7 @@ The engine (`aip`), the TypeScript SDK and the Python SDK share one version numb
 
 | Engine and SDKs | Protocol | Core IR | App manifest | Package format | Note |
 |---|---|---|---|---|---|
-| 1.0.0 | `aip-protocol/1.0` | `aip-core/0.11` | `app-manifest-v1.json` | 1 | First stable release. Draft until the owner approves it |
+| 1.0.0 | `aip-protocol/1.0` | `aip-core/0.11` | `app-manifest-v1.json` | 1 | Release candidate. Not released; a draft until the owner approves it |
 | 0.1.0 | `aip-protocol/0.1` | `aip-core/0.11` | `app-manifest-v1.json` | 1 | Pre-release, never published |
 
 ## The compatibility boundary {#boundary}
@@ -27,12 +30,34 @@ The engine (`aip`), the TypeScript SDK and the Python SDK share one version numb
 
 The protocol string is not an input to the contract fingerprint, so a deployment made before 1.0 keeps its fingerprint.
 
+## Contract header errors {#header-errors}
+
+What a caller gets when the `x-aip-contract` header is missing or wrong depends on the route. Code that calls HTTP directly can handle `WIRE.CONTRACT_REQUIRED` and `WIRE.CONTRACT_MISMATCH` the same way: read the server's fingerprint and send it, or regenerate the binding. The generated bindings and the SDKs send the header themselves.
+
+| Request | Code |
+|---|---|
+| `/read`, `/apply` (transitions, bundles, compose) or `/status`, no header | `WIRE.CONTRACT_REQUIRED` |
+| The same routes, a value that is not 64 lowercase hexadecimal digits (uppercase is refused) | `WIRE.BAD_REQUEST` |
+| The same routes, a well-formed fingerprint that differs from the server's | `WIRE.CONTRACT_MISMATCH` |
+| Object API, RAG API, managed `/jobs/*`, `/files/*`, `/events/*` and `/messages/*`, no header | `WIRE.CONTRACT_MISMATCH`, not `CONTRACT_REQUIRED` |
+| `/apply` of a write extension, no header | `WIRE.CONTRACT_MISMATCH`, read in the code and not run |
+
 ## What 1.0 does not promise {#not-promised}
 
 - **Old clients next to new ones.** After a definition change, a client holding the old fingerprint gets `WIRE.CONTRACT_MISMATCH`, and a server still running the old definition refuses work with `WIRE.DEPLOYMENT_CHANGED`. There is no protocol for serving both.
 - **Definition-syntax stability.** AIP Core found no grammar version field or compatibility guard beyond its generated golden file. Treat added syntax in a later release as possibly affecting how existing definitions are read until the project says otherwise.
-- **A runtime protocol check in the SDK.** The SDK compares the contract fingerprint only. A check of the server's protocol major version is not in 1.0; it is a 1.0.x candidate.
+- **A blocking protocol check in the SDK.** The SDKs only warn. The server reports its protocol in `/capabilities`, and the Python SDK raises `AipProtocolWarning` when the major version differs or the value is malformed. The TypeScript client has no automatic warning; it exposes `protocolWarning(serverProtocol)`. Neither blocks a call, and compatibility is still decided by the contract fingerprint.
 - **Extension interface stability.** The extension ABI is `Open`.
+
+## Newer syntax and older servers {#expressiveness}
+
+The expressiveness additions are new optional request keys, so they stay inside the 1.0 rule that only optional fields are added.
+
+- An older server rejects the keys `refs`, `target.created`, `input` and a `compose` inside a bundle with `WIRE.UNKNOWN_KEY`. A new SDK that uses them needs a server from the same release.
+- The fingerprint changes only for a new definition that declares a transition `input` or uses Decimal `sum`. A definition that uses neither keeps its fingerprint, generated binding and execution digest.
+- A bundle response gains an `ops` list only when the bundle holds a `compose`. Other responses, and replayed stored results, are unchanged.
+- On MySQL, which is outside 1.0, writes refuse `input` and arithmetic with `WIRE.UNSUPPORTED`, and reads refuse Decimal `sum`.
+- `aip service check` rejects more than one `actor` (`DEF.MULTIPLE_ACTORS`) and some hidden-field routes, and reports new advisories. Check existing definitions with the new binary first. See [Known limitations](/docs/known-limitations/#policy-checks).
 
 ## SDK and engine versions together {#sdk-versions}
 

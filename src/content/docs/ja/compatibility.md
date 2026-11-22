@@ -1,5 +1,5 @@
 ---
-translatedFrom: b057a26a8ee0
+translatedFrom: "14e6970c8a26"
 title: "互換性"
 description: "CLI、SDK、契約フィンガープリントの関係を確認します。"
 ---
@@ -14,9 +14,17 @@ CLI と両 SDK のバージョンは 1.0.0、HTTP プロトコルは `aip-protoc
 
 [該当する節を英語版で読む](/docs/compatibility/#boundary)
 
+## 契約ヘッダーのエラー {#header-errors}
+
+[該当する節を英語版で読む](/docs/compatibility/#header-errors)
+
 ## 保証の対象外 {#not-promised}
 
 [該当する節を英語版で読む](/docs/compatibility/#not-promised)
+
+## 新しい構文と古いサーバー {#expressiveness}
+
+[該当する節を英語版で読む](/docs/compatibility/#expressiveness)
 
 ## SDK とエンジン {#sdk-versions}
 

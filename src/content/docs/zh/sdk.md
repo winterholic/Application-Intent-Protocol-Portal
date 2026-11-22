@@ -1,5 +1,5 @@
 ---
-translatedFrom: e3bdcb5b87c8
+translatedFrom: "175844643540"
 title: "SDK"
 description: "在 TypeScript 和 Python 中调用 AIP 服务。"
 ---
@@ -25,6 +25,10 @@ description: "在 TypeScript 和 Python 中调用 AIP 服务。"
 ## 批量与组合 {#bundle}
 
 [查看对应的英文小节](/docs/sdk/#bundle)
+
+## 引用先前创建的行 {#bundle-refs}
+
+[查看对应的英文小节](/docs/sdk/#bundle-refs)
 
 ## 错误与重试 {#errors}
 

@@ -7,7 +7,9 @@ source:
   - product/INSTALL.md
   - COMPATIBILITY.md
   - product/MANAGED-EXECUTION.md
-checked: 2026-11-21
+  - product/LIMITS.md
+  - CHANGELOG.md
+checked: 2026-11-22
 ---
 
 AIP ships two SDKs for callers: `@aip/sdk` for TypeScript and `application-intent-protocol-sdk` (import name `aip_sdk`) for Python. They use the same version as the engine, 1.0.0. The SDKs call a service from a frontend, a Node.js or Python backend, a batch job or an AI agent. They are separate from the Node.js and Python code that runs inside the server as [extensions](/docs/workers/). Installation is on [Installation](/docs/installation/).
@@ -70,7 +72,26 @@ const done = await client.bundle({ atomic: [
 ] }, { key: "close-10" });
 ```
 
-This needs a definition that exposes `create` and the transition. Values cannot be passed between operations except inside `compose`, and `create` does not accept `Url` or `Time` fields.
+This needs a definition that exposes `create` and the transition. `create` does not accept `Url` or `Time` fields. A `compose` operation can also sit inside a bundle; a bundle that holds one returns an `ops` list with the range of results of each operation.
+
+## Use a row created earlier {#bundle-refs}
+
+A later operation can use the ID of a row that an earlier `create` made, so a parent and its children are created in one request. If any operation fails, nothing is stored. With the TypeScript builder, `b.create` returns a handle that keeps the created resource's type:
+
+```ts
+await client.bundle((b) => {
+  const order = b.create("Order", { owner: memberId, total: 700, placed: true });
+  b.create("OrderLine", { product: productId, qty: 3, unitPrice: 200 }, { order });
+  b.apply({ apply: "Product.take", target: { ids: [productId] }, input: { qty: 3 } });
+}, { key: "order-1" });
+```
+
+- Without the builder, a `create` takes `refs: { order: { created: 0 } }` and a transition takes `target: { created: 0 }`. The number is the zero-based position of the operation in the request, not an index into the result's `created` list.
+- In Python, `from aip_sdk import created` and put `created(0)` in the same places.
+- The server checks operation order, types, row visibility and each create's `allow` before the transaction starts. A referenced row must be one the caller can read; an invisible row is `WIRE.MISSING_TARGET`, the same as a missing one.
+- Only an earlier `create` can be referenced. A `compose` operation cannot, and the same key replayed returns the IDs from the first run.
+- Order the operations so that those fighting for the same row come first. The order of operations is the order of locks.
+- An older server refuses these request keys with `WIRE.UNKNOWN_KEY`, so use the SDK and the server from the same release.
 
 ## Errors and retry guidance {#errors}
 

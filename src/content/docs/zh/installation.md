@@ -1,5 +1,5 @@
 ---
-translatedFrom: 49be86dc8b09
+translatedFrom: "2f97e3fd8a83"
 title: "安装"
 description: "安装 AIP 1.0.0 CLI、TypeScript SDK 和 Python SDK。"
 ---
@@ -50,6 +50,8 @@ npm install --offline ./aip-sdk-1.0.0.tgz
 pip install application-intent-protocol-sdk
 python -c "import aip_sdk; print(aip_sdk.__version__, aip_sdk.PROTOCOL)"
 ```
+
+请在虚拟环境中安装 Python SDK。Homebrew 或 Debian 系的 Python 会拒绝系统级安装（PEP 668，`externally-managed-environment`），macOS 上可能只有 `pip3` 而没有 `pip`。使用 `uv` 时，运行 `uv venv .venv && uv pip install --python .venv/bin/python <wheel>`。
 
 ## 易混淆的包名 {#do-not-install}
 

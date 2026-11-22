@@ -1,5 +1,5 @@
 ---
-translatedFrom: b484e0c2e134
+translatedFrom: "759e02f43da1"
 title: "示例"
 description: "AIP 1.0 中可运行的示例。"
 ---
@@ -9,6 +9,14 @@ description: "AIP 1.0 中可运行的示例。"
 ## 快速入门示例 {#current-state}
 
 [查看对应的英文小节](/docs/examples/#current-state)
+
+## 只用声明写成的订单与库存 {#orders}
+
+[查看对应的英文小节](/docs/examples/#orders)
+
+## 创建行的扩展 {#extension-create}
+
+[查看对应的英文小节](/docs/examples/#extension-create)
 
 ## 可打包应用 {#packaged}
 

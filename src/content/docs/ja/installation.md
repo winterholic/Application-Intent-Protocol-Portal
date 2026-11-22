@@ -1,5 +1,5 @@
 ---
-translatedFrom: 49be86dc8b09
+translatedFrom: "2f97e3fd8a83"
 title: "インストール"
 description: "AIP 1.0.0 の CLI と TypeScript・Python SDK をインストールする手順です。"
 ---
@@ -50,6 +50,8 @@ Python 3.9 以降が必要です。配布名と import 名は異なります。�
 pip install application-intent-protocol-sdk
 python -c "import aip_sdk; print(aip_sdk.__version__, aip_sdk.PROTOCOL)"
 ```
+
+Python SDK は仮想環境の中にインストールします。Homebrew や Debian 系の Python はシステム全体へのインストールを拒否し（PEP 668、`externally-managed-environment`）、macOS には `pip` がなく `pip3` だけの場合があります。`uv` を使うなら `uv venv .venv && uv pip install --python .venv/bin/python <wheel>` です。
 
 ## 間違えやすい配布名 {#do-not-install}
 

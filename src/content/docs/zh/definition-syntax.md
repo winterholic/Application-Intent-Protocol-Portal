@@ -1,5 +1,5 @@
 ---
-translatedFrom: 90ce40d1fa51
+translatedFrom: "33dbaf1b9de3"
 title: "定义语法"
 description: "正式产品使用的 AIP 声明语法。"
 ---
@@ -29,6 +29,14 @@ description: "正式产品使用的 AIP 声明语法。"
 ## 公开计数 {#public-count}
 
 [查看对应的英文小节](/docs/definition-syntax/#public-count)
+
+## 修改数字：有限算术 {#arithmetic}
+
+[查看对应的英文小节](/docs/definition-syntax/#arithmetic)
+
+## Decimal 求和 {#decimal-sum}
+
+[查看对应的英文小节](/docs/definition-syntax/#decimal-sum)
 
 ## 常见语法错误 {#separators}
 

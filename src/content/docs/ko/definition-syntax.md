@@ -1,5 +1,5 @@
 ---
-translatedFrom: 90ce40d1fa51
+translatedFrom: "33dbaf1b9de3"
 title: 정의 문법
 description: AIP 1.0에서 `aip service`가 읽는 정의 언어. 가정하지 않는 것, 블록과 키, 검사를 거친 예제 두 개, 처음 쓰는 사람이 자주 틀리는 규칙을 다룬다.
 ---
@@ -125,10 +125,74 @@ resource Post {
 
 응답 값이 바뀌는 대안 두 가지, 명시적인 `release count public`과 모든 count에 `rows read`를 거는 방식은 프로젝트 소유자의 결정으로 남아 있고 1.0에는 없다.
 
+## 숫자 바꾸기: 제한 산술 {#arithmetic}
+
+전이는 숫자 필드에 항 하나를 더하거나 뺄 수 있다. 항은 양수 리터럴, 전이의 `input` 블록으로 호출자가 보내는 값, 같은 행의 다른 필드(`this.g`) 중 하나다. 필드는 Int 또는 Decimal이다. `input` 블록은 호출자가 보내는 양을 나열한다. 키는 8개 이하이고 null은 안 되며 선언한 키는 모두 필수다. Int 입력은 하한이 1 이상인 range가 필요하고, 0 이하의 Decimal 입력은 `WIRE.BAD_VALUE`로 거절된다.
+
+서버는 잠근 행에서 같은 `UPDATE`로 결과를 계산한다. 결과가 필드의 범위나 자릿수를 벗어나거나 피연산자가 NULL이면 요청 전체가 `WIRE.BAD_VALUE`로 실패하고 롤백된다.
+
+```aip
+resource Member { fields { id: Id } }
+actor Member
+
+resource Product {
+  fields { id: Id; sku: Text(1..40); stock: Int(0..1000000) }
+  rows read when actor != null
+  transition take {
+    input { qty: Int(1..1000) }
+    allow actor != null
+    from stock >= input.qty
+    to stock = stock - input.qty
+  }
+  expose read { select id, sku, stock; filter id.eq; sort id; budget { rows 50; depth 1; deadline 1s; cost 100 } }
+  expose apply take { target id; bulk maxRows 1 }
+}
+```
+
+쓸 수 없는 것: 곱셈과 나눗셈, 두 항 이상, `repeat unchanged`와의 조합, `compose`가 쓰는 전이의 `input`, 읽기 정책이 있는 필드와 `input` 값을 같은 조건에서 견주는 것. 1.0 범위 밖인 MySQL에서는 `input`과 산술이 `WIRE.UNSUPPORTED`다.
+
+## Decimal 합계 {#decimal-sum}
+
+`release sum(f)`는 Int 필드(결과는 Int)나 `Decimal(p,s)` 필드를 받는다. Decimal 결과는 `Decimal(p',s)`다. scale은 같고 precision은 `p` 이상이며 `"50.70"` 같은 JSON 문자열이다. 빈 집합은 `"0.00"`이다. 반올림은 없고 합이 `p'`를 넘으면 `WIRE.OUTPUT_INVALID`로 실패한다. `count`와 달리 `sum`은 원본의 `rows read`를 적용한다.
+
+```aip
+resource Member { fields { id: Id } }
+actor Member
+
+resource Payment {
+  fields { id: Id; invoice: Invoice; member: Member; amount: Decimal(10,2) }
+  rows read when member = actor
+}
+
+access visibleInvoices = totalOfVisible(Invoice)
+
+resource Invoice {
+  fields { id: Id; title: Text(1..100) }
+  rows read when actor != null
+  aggregate paid: Decimal(12,2) {
+    source Payment
+    sourceAccess visibleInvoices
+    groupKey invoice
+    where member = actor
+    callerFilter none
+    rowOutput none
+    release sum(amount)
+  }
+  expose read {
+    select id, title, paid
+    filter id.eq
+    sort id
+    budget { rows 50; depth 1; deadline 1s; cost 100 }
+  }
+}
+```
+
+`avg`는 여전히 `DEF.UNSUPPORTED`이고, `min`과 `max`는 Int 필드만 받으며, 암호화 필드의 집계는 `DEF.UNSUPPORTED`다. 1.0 범위 밖인 MySQL에서 Decimal `sum`은 `WIRE.UNSUPPORTED`다.
+
 ## 자주 틀리는 것 {#separators}
 
 - `transition`의 `to` 안에서 대입은 쉼표로 구분한다: `to done = true, views = views + 1`. 세미콜론은 `from`, `to`, `allow` 같은 항목 사이에 쓴다. `update Member where id = author { ... }` 같은 효과 블록 안의 구분자는 세미콜론이다.
-- 숫자는 `f = f + 1`로만 바꾼다. 다른 필드 값을 더하거나 관련 행을 증감하는 것은 표현할 수 없으므로 [확장](/ko/docs/workers/)을 쓴다.
+- 숫자는 항 하나로 바꾼다: `f = f + 1`, `f = f - input.qty`, `f = f + this.g`. [숫자 바꾸기](#arithmetic)를 본다. 곱셈, 두 항, 관련 행의 증감은 표현할 수 없으므로 [확장](/ko/docs/workers/)을 쓴다.
 - `Decimal(p,s)` 리터럴은 따옴표 문자열이다: `to total = "0.00"`. 따옴표 없는 `0.00`은 `DEF.BAD_VALUE`다.
 - `Int(lo..hi)`는 양 끝을 포함하며 음수 경계도 쓸 수 있다.
 - 기본 키는 `id: Id`(숫자, 기본) 또는 `id: Uuid`다. 참조는 resource 이름으로 쓴다(`owner: Member`). `X.Id`는 입력과 operation 타입에서만 쓴다.
@@ -137,12 +201,12 @@ resource Post {
 
 1.0에서 확인했고 `aip service check`가 거부하므로 숨은 함정이 아니다.
 
-- `avg` 집계, `Decimal` 필드의 `sum`
+- `avg` 집계
 - `sort author.name`처럼 관계 경로를 통한 정렬이나 필터
 - 참조 둘 이상으로 집계를 묶는 것
-- 관련 행의 필드 증감, 다른 필드 값으로 계산하는 증감
+- 수량×단가의 합 같은 곱셈, 관련 행의 필드 증감
 
-이런 요구는 확장으로 처리한다. [알려진 한계](/ko/docs/known-limitations/)를 본다.
+이런 요구는 확장으로 처리한다. [알려진 한계](/ko/docs/known-limitations/#expressiveness)를 본다.
 
 ## 진단 코드 {#diagnostics}
 

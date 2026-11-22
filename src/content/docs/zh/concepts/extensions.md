@@ -1,5 +1,5 @@
 ---
-translatedFrom: a8a1e4c2202f
+translatedFrom: "28a85015d02f"
 title: 扩展
 description: AIP 标准能力无法表达的逻辑，以 JavaScript/TypeScript 或 Python 官方扩展编写，并始终处于服务器的契约与控制之下。
 ---
@@ -31,4 +31,4 @@ AIP 力求用标准能力和一种明确的标准表达覆盖尽可能多的场�
 
 ## 1.0 中的扩展 {#in-1-0}
 
-1.0 在操作系统沙箱中运行工作进程。各平台的要求见[扩展和工作进程](/zh/docs/workers/)。 在定义中声明 Node.js 和 Python 工作进程。持久任务和不同平台的隔离要求见[扩展和工作进程](/zh/docs/workers/)。
+1.0 在操作系统沙箱中运行工作进程。各平台的要求见[扩展和工作进程](/zh/docs/workers/)。在定义中声明 Node.js 和 Python 工作进程。写入扩展可以在调用方的策略下读取、调用转换和创建行，并能用业务码拒绝调用。持久任务和不同平台的隔离要求见[扩展和工作进程](/zh/docs/workers/)。

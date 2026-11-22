@@ -1,5 +1,5 @@
 ---
-translatedFrom: b057a26a8ee0
+translatedFrom: "14e6970c8a26"
 title: "호환성"
 description: "CLI·SDK 버전과 계약 지문의 관계를 확인한다."
 ---
@@ -14,9 +14,17 @@ CLI와 두 SDK는 1.0.0이고 HTTP 프로토콜은 `aip-protocol/1.0`이다. 정
 
 [영어 원문의 절 보기](/docs/compatibility/#boundary)
 
+## 계약 헤더 오류 {#header-errors}
+
+[영어 원문의 절 보기](/docs/compatibility/#header-errors)
+
 ## 보장 범위 밖 {#not-promised}
 
 [영어 원문의 절 보기](/docs/compatibility/#not-promised)
+
+## 새 문법과 구서버 {#expressiveness}
+
+[영어 원문의 절 보기](/docs/compatibility/#expressiveness)
 
 ## SDK와 엔진 {#sdk-versions}
 

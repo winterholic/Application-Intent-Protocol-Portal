@@ -1,0 +1,19 @@
+{
+  "coreSha": "4f44ca871505998763d6e551b97440e23baaac62",
+  "checkedAt": "2026-11-22",
+  "watched": {
+    "README.md": "14fa4257cd19af9e2d2c44fadbfcdd4ffc55511dd7d7e784da510f6f90f92359",
+    "COMPATIBILITY.md": "efc4052b99bfa5b21b17a889af4a5834b8d1a075a9490d4bc974de1d871e25b6",
+    "CHANGELOG.md": "d60bfc7aa12168102196fb473d2ab4ff7cb3b328fbc128848b5256a53185cad3",
+    "SECURITY.md": "37c7f18484786c938d53e4ae7cbd7d3f3dfb9ae1fe72c7cc08eb78af65b9ef40",
+    "product/SUPPORT.md": "754dff24dd19d8f5b67601d4647389c8703c387df0b18acb126254807295c3af",
+    "product/LIMITS.md": "42cdc9d57e0019eaf2452ccb4f6e4e651a3e893e95332d01cfd553b73619c7e7",
+    "product/GETTING-STARTED.md": "36df12ea0d3267c52d0178d3af488c4de21b06350675d8acb59c36534a817d0b",
+    "product/INSTALL.md": "70c51904d0d9a82c0b3506d548e9e2b37a1394b403f29707d2304dde1fe5c682",
+    "product/SDK.md": "b91ed2e0061d25e3feb1879f2040857711f96dacc0badcd7e1fadb7ffdb2865c",
+    "product/release.config.json": "a04f1c1d7f48f0967bc2f40847760e1141cf550d2045652a69fb6c3257b8f707",
+    "product/RELEASE-NOTES-1.0.0.md": "6f5507c9fd1c8d93441335e5d733f67f6a88d4bc1f0993e83c7649dbe3df3d9f",
+    "spec/definition-syntax.md": "61ad14182722d1521d25b2c01c305a3fafbd1d35a2692bede27ab11899d8bcf3",
+    "product/tests/fixtures/expr-apps/orders/orders.target.aip": "e0a4769d0a02f657af0cfe6dc6af530412ec84d1fed163838c9872c1c9cc2a42"
+  }
+}

@@ -1,5 +1,5 @@
 ---
-translatedFrom: 90ce40d1fa51
+translatedFrom: "33dbaf1b9de3"
 title: "定義の構文"
 description: "製品で使う AIP の宣言構文です。"
 ---
@@ -29,6 +29,14 @@ description: "製品で使う AIP の宣言構文です。"
 ## 公開カウント {#public-count}
 
 [該当する節を英語版で読む](/docs/definition-syntax/#public-count)
+
+## 数値の変更: 制限付き算術 {#arithmetic}
+
+[該当する節を英語版で読む](/docs/definition-syntax/#arithmetic)
+
+## Decimal の合計 {#decimal-sum}
+
+[該当する節を英語版で読む](/docs/definition-syntax/#decimal-sum)
 
 ## よくある構文の誤り {#separators}
 

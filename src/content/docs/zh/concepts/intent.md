@@ -1,5 +1,5 @@
 ---
-translatedFrom: a751996214b0
+translatedFrom: "de8d58b10557"
 title: "Intent：表达与权限"
 description: 在 AIP 中，调用方表达所需，是否执行以及如何执行由服务器决定。本页说明调用方可以表达什么，以及什么始终留在服务器上。
 sidebarLabel: "Intent"
@@ -48,7 +48,6 @@ approve(order)                    # the intent the application actually has
 
 ## 待解决的问题 {#open}
 
-- 新字段在被明确开放之前是否对调用方隐藏。`Direction`：作为安全的默认值被提出。
-- 生产环境是否接受未预先注册的读取形态。`Direction`：在安全、性能和成本验证的前提下，于策略范围内允许。
+- 新字段与读取形态。在产品的定义语言中，未声明的内容不会开放：没有 `rows read` 的 resource 没有可读的行，没有 `expose read` 的 resource 不能读取，定义未开放的字段会被 `WIRE.FIELD_NOT_EXPOSED` 拒绝。生产环境是否也接受未预先声明的读取形态，仍是以安全、性能和成本验证为前提的 `Direction`。
 - 首个版本中谁可以直接编写请求：自有前端、AI 智能体、合作伙伴或任意第三方。`Open`
-- 调用方组合写入的自由程度以及事务边界。`Open`
+- 调用方组合写入的自由程度。一个 bundle 最多 20 个操作，最终的写入组合选择仍为 `Open`。

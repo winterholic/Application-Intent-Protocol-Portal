@@ -1,5 +1,5 @@
 ---
-translatedFrom: 18e38f31d5db
+translatedFrom: "74483a39eedf"
 title: "拡張とワーカー"
 description: "Node.js・Python でアプリ固有の処理を実行します。"
 ---
@@ -13,6 +13,10 @@ description: "Node.js・Python でアプリ固有の処理を実行します。"
 ## 拡張コード {#code}
 
 [該当する節を英語版で読む](/docs/workers/#code)
+
+## 書き込み拡張から行を作る {#create}
+
+[該当する節を英語版で読む](/docs/workers/#create)
 
 ## ワーカーの設定 {#configure}
 

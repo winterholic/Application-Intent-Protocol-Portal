@@ -1,5 +1,5 @@
 ---
-translatedFrom: b057a26a8ee0
+translatedFrom: "14e6970c8a26"
 title: "兼容性"
 description: "了解 CLI、SDK 版本与契约指纹的关系。"
 ---
@@ -14,9 +14,17 @@ CLI 和两个 SDK 的版本均为 1.0.0，HTTP 协议为 `aip-protocol/1.0`。�
 
 [查看对应的英文小节](/docs/compatibility/#boundary)
 
+## 契约头错误 {#header-errors}
+
+[查看对应的英文小节](/docs/compatibility/#header-errors)
+
 ## 保证范围之外 {#not-promised}
 
 [查看对应的英文小节](/docs/compatibility/#not-promised)
+
+## 新语法与旧服务器 {#expressiveness}
+
+[查看对应的英文小节](/docs/compatibility/#expressiveness)
 
 ## SDK 与引擎 {#sdk-versions}
 

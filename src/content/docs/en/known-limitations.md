@@ -11,20 +11,39 @@ source:
   - product/RELEASE-NOTES-1.0.0.md
   - product/OPERATIONS.md
   - spec/definition-syntax.md
-checked: 2026-11-21
+  - product/SDK.md
+checked: 2026-11-22
 ---
 
-This page lists what AIP 1.0 does not do or does only under conditions. The support scope below follows the AIP Core 1.0 release audit of 2026-11-21 ([audit document](https://github.com/winterholic/Application-Intent-Protocol/blob/release/1.0-audit-20261121/plan-docs/reviews/2026-11-21-1.0-release-audit.md), on the branch `release/1.0-audit-20261121`, not yet on `main`). It is a draft until the project owner approves the release. If something here is missing from the product, take it as not supported.
+This page lists what AIP 1.0 does not do or does only under conditions. The support scope below follows [AIP Core's 1.0 support scope](https://github.com/winterholic/Application-Intent-Protocol/blob/main/product/SUPPORT.md), which rests on the [release audit](https://github.com/winterholic/Application-Intent-Protocol/blob/main/plan-docs/reviews/2026-11-21-1.0-release-audit.md) of 2026-11-21. It is a draft until the project owner approves the release. If something here is missing from the product, take it as not supported.
 
 ## Support scope {#scope}
 
-The audit judged 19 candidate features. A feature counts as supported when the product path (`aip service`) has a test that runs a real PostgreSQL and HTTP or the installed SDK, and the known counterexamples are within documented limits.
+Core judged 19 candidate features: 11 supported, 7 conditional, 1 excluded. A feature counts as supported when the product path (`aip service`) has a test that runs a real PostgreSQL and HTTP or the installed SDK, and the known counterexamples are within documented limits. Every database judgement was made on PostgreSQL 17.
 
-| Judgement | Features |
-|---|---|
-| Supported (11) | Definition check, schema and types, declarative reads and standard writes, partial update, contract HTTP, generated bindings (TypeScript and Python), JWT and principal, server validation, transactions, idempotency and `COMMIT_UNKNOWN`, fingerprint |
-| Conditional (7) | Resources, relations and constraints; row and field policy (counts are not covered by `rows read`); init and migration; Node.js and Python extensions; durable jobs; diagnostics and observability; installed SDK and packages |
-| Excluded (1) | Automatic tenant isolation |
+| # | Feature | Verdict | Condition and limit |
+|---|---|---|---|
+| 1 | Definition check (`aip service check`) | Supported | Five authoring forms: `.aip`, `.e.ts`, `.e.py`, `.h.ts`, `.h.py`. The optional development advice `--dev-checks` is conditional |
+| 2 | Schema and types | Supported | Int, Text, Bool, Id/Uuid, Decimal(p,s), Time, Date, Email, Url, enum, Json. There is no Float |
+| 3 | Resources, relations, constraints | Conditional | Only relation reads have product HTTP tests. Real-database evidence for foreign-key rejection, unique, limit and invariant is engine unit tests |
+| 4 | Declarative reads and standard writes | Supported | Filter allowlist, sort, cursor and offset pages, to-one and to-many relations, `count`/`sum`/`min`/`max`. On PostgreSQL, `sum` accepts a single Decimal field: the result keeps the source scale and its precision is at least the source precision. `avg`, sorting or filtering on related fields and multiple `groupKey` cannot be declared |
+| 5 | Partial update (null versus omitted) | Supported | `patch` and `expect`. Only declared fields can be changed |
+| 6 | Contract HTTP | Supported | `/read`, `/apply`, `/status`, `/capabilities`, with error codes from `spec/wire-errors.md` |
+| 7 | Generated bindings (TypeScript, Python) | Supported | `aip service gen`. Python generated types centre on public apply inputs and helpers |
+| 8 | JWT and principal | Supported | RS256 `at+jwt` profile only. Connecting a real external identity provider account is conditional and the operator verifies it |
+| 9 | Row and field policy | Conditional | `rows read`, `field … read` and transition `allow`. `count` does not inherit `rows read` (`sum`, `min` and `max` do) |
+| 10 | Server validation | Supported | The server checks input types, ranges and filter allowlists on every request |
+| 11 | Transactions | Supported | PostgreSQL. Writes that depend on absence run SERIALIZABLE. Declarative SQL transactions owned by the server retry serialization failures and deadlocks up to 3 times when that is safe. For a synchronous write extension the caller resends with the same key |
+| 12 | Idempotency and `COMMIT_UNKNOWN` | Supported | Single database transaction only. External effects such as mail or payment calls are not made idempotent |
+| 13 | Automatic tenant isolation | Excluded | Not implemented in the product path. Write the organisation boundary in the definition, such as `rows read when org = actor.org`, and repeat it in every policy |
+| 14 | Contract fingerprint | Supported | A different fingerprint gives `WIRE.CONTRACT_MISMATCH`. Older clients are not supported alongside a new deployment |
+| 15 | Init and migration | Conditional | PostgreSQL only. Rollback is restoring a backup; there is no reverse migration. Zero-downtime changes to large tables are out of scope |
+| 16 | Node and Python extensions | Conditional | The extension ABI is not final (decision OI-X2). Linux Bubblewrap isolation has CI. macOS Seatbelt isolation is verified by hand, without CI. PostgreSQL write extensions support `ctx.data.read`, `ctx.data.apply` and `ctx.data.create` within an allowlist. Extension create on encrypted resources is excluded |
+| 17 | Durable jobs | Conditional | PostgreSQL job store only. The MySQL job store is not in the release bundle |
+| 18 | Diagnostics and observability | Conditional | OTLP, audit records and traces are verified up to engine tests. There are no dashboards or SLOs |
+| 19 | Installable SDK and packages | Conditional | Versions derive from one Cargo workspace version, so the CLI and both SDKs match (`1.0.0`). Names follow `product/release.config.json`. Windows is not supported |
+
+Supported: 1, 2, 4, 5, 6, 7, 8, 10, 11, 12, 14. Conditional: 3, 9, 15, 16, 17, 18, 19. Excluded: 13.
 
 ## No automatic tenant isolation {#tenants}
 
@@ -49,7 +68,26 @@ The `.aipoc` language (`entity`, `command`, `query`) and the commands that read 
 
 ## Expressiveness {#expressiveness}
 
-Reads support filter allow-lists, sorting, cursors, to-one and to-many traversal, and `count`, `sum`, `min` and `max`. They do not support `avg`, `sum` over `Decimal`, sorting or filtering through a relation path, or grouping by several references. A to-many traversal sorts by one field. Writes support state transitions, partial updates with optimistic locking and atomic bundles. They do not support incrementing a related row or adding another field's value. Needs like these belong in an [extension](/docs/workers/). There is also no value passing between the operations of a bundle, other than `compose`.
+Reads support filter allow-lists, sorting, cursors, to-one and to-many traversal, and `count`, `sum` (Int, and Decimal on PostgreSQL), `min` and `max`. They do not support `avg`, sorting or filtering through a relation path, or grouping by several references. A to-many traversal sorts by one field. Writes support state transitions, partial updates with optimistic locking, atomic bundles that can use the ID of a row created earlier in the bundle, and `compose`. A transition can add or subtract one term from a number, not multiply or combine two terms. Needs beyond that belong in an [extension](/docs/workers/). The newer syntax is PostgreSQL only.
+
+| # | Limit | Workaround |
+|---|---|---|
+| E1 | Atomic create of parent and children | One bundle passing the earlier create's ID with `refs` |
+| E2 | Variable-amount increments | A positive `input` term added to or subtracted from the locked row in a transition |
+| E3 | Computed aggregates such as the sum of quantity times price | An extension computes it and stores it in a denormalized field |
+| E4 | A reference create needs a target row the caller can read | Make the directory readable and hide only the sensitive fields with field policies |
+| E5 | Cursor paging cannot be combined with a nullable sort | Offset paging |
+| E6 | A transition's `from` is required | `from true` |
+| E7 | Atomic create inside a PostgreSQL write extension | `access create.<Resource>` and `ctx.data.create` |
+| E8 | Extension inputs have no array type | Take `Json` and validate its shape in the extension, or create each row in a bundle |
+| E9 | The operation order in a bundle is the lock order | Put operations that update the same row first |
+
+## Policy checks {#policy-checks}
+
+- A definition that lets a value hidden by `field … read when` reach the caller by another route is rejected with `DEF.POLICY_FIELD_NOT_USABLE_IN_TRANSITION`. A definition written before this rule can be rejected after the upgrade.
+- More than one `actor` is `DEF.MULTIPLE_ACTORS`. Earlier builds let the last declaration win silently.
+- Three advisories help with tenant boundaries: `DEF.ADVISORY_TENANT_UNSCOPED_READ`, `DEF.ADVISORY_PUBLIC_READ_TENANT_FIELD` and `DEF.ADVISORY_WRITE_WIDER_THAN_READ`. They compare structure only, so they can miss a case, such as an `exists` policy or a tenant field with another name, and can raise a false alarm. They never reject a definition.
+- Run `aip service check` with the new binary before you deploy a definition written for an earlier build.
 
 ## Extensions and isolation {#extensions}
 

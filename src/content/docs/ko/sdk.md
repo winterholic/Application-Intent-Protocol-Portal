@@ -1,5 +1,5 @@
 ---
-translatedFrom: e3bdcb5b87c8
+translatedFrom: "175844643540"
 title: "SDK"
 description: "TypeScript와 Python에서 AIP 서비스를 호출한다."
 ---
@@ -25,6 +25,10 @@ description: "TypeScript와 Python에서 AIP 서비스를 호출한다."
 ## 묶음과 조합 {#bundle}
 
 [영어 원문의 절 보기](/docs/sdk/#bundle)
+
+## 앞서 만든 행 참조 {#bundle-refs}
+
+[영어 원문의 절 보기](/docs/sdk/#bundle-refs)
 
 ## 오류와 재시도 {#errors}
 

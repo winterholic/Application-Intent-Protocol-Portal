@@ -1,5 +1,5 @@
 ---
-translatedFrom: a751996214b0
+translatedFrom: "de8d58b10557"
 title: "Intent: 표현과 권한"
 description: AIP에서 호출자는 필요한 것을 표현하고, 실행 여부와 방법은 서버가 결정한다. 호출자가 무엇을 표현할 수 있고 무엇이 항상 서버에 남는지 설명한다.
 sidebarLabel: "Intent"
@@ -48,7 +48,6 @@ approve(order)                    # the intent the application actually has
 
 ## 열린 질문 {#open}
 
-- 새 필드를 명시적으로 열기 전까지 호출자에게 숨길지. `Direction`: 안전한 기본값으로 제안됨.
-- 운영 환경에서 미리 등록하지 않은 읽기 형태를 받을지. `Direction`: 보안·성능·비용 검증을 전제로 정책 안에서 허용.
+- 새 필드와 읽기 형태. 제품 정의 언어에서는 선언하지 않은 것이 열리지 않는다. `rows read`가 없는 resource는 읽을 수 있는 행이 없고, `expose read`가 없는 resource는 읽을 수 없으며, 정의가 열지 않은 필드는 `WIRE.FIELD_NOT_EXPOSED`로 거부된다. 운영 환경이 미리 선언하지 않은 읽기 형태도 받을지는 보안·성능·비용 검증을 전제로 한 `Direction`으로 남아 있다.
 - 첫 출시에서 누가 요청을 직접 작성할 수 있는지: 자사 프론트엔드, AI 에이전트, 파트너, 불특정 서드파티. `Open`
-- 호출자가 쓰기를 조합할 자유의 범위와 트랜잭션 경계. `Open`
+- 호출자가 쓰기를 조합할 자유의 범위. 묶음은 연산 20개까지이고, 최종 쓰기 조합 선택은 `Open`으로 남아 있다.

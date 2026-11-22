@@ -1,5 +1,5 @@
 ---
-translatedFrom: "651644827468"
+translatedFrom: "20abad3dfcb6"
 title: "指南"
 description: "从安装、编写定义到部署服务。"
 ---
@@ -13,3 +13,7 @@ description: "从安装、编写定义到部署服务。"
 ## 开发流程 {#path}
 
 [查看对应的英文小节](/docs/guides/#path)
+
+## 仅靠声明不够时 {#beyond}
+
+[查看对应的英文小节](/docs/guides/#beyond)

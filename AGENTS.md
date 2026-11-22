@@ -26,13 +26,15 @@
 - SSG가 기본이다. 본문이 브라우저 JavaScript 실행 이후에만 나타나는 구조를 만들지 않는다.
 - URL과 anchor는 안정적으로 유지한다. heading 위계를 건너뛰지 않는다.
 - 정확성, 구조 일관성, 검색 가능성, 링크 안정성, 코드 예제 품질, Specification 동기화를 우선한다.
+- 1.0 정식 출시라고 쓰지 않는다. AIP Core에 `v*` 태그와 Release가 생기기 전까지 1.0.0은 출시 후보(pre-release)이고, 패키지 이름은 Core가 소유자 승인을 마치기 전까지 잠정이다.
+- 지원 범위(지원·조건부·제외 표, 한계 목록, 패키지 이름, 버전)는 Core의 `product/SUPPORT.md`·`product/LIMITS.md`·`COMPATIBILITY.md`를 따른다. Core 문서가 바뀌면 영어 `known-limitations`·`status`부터 고치고 drift 검사의 기준선을 올린다. 번역은 영어 절로 안내하는 것으로 시작해도 되지만 영어 문서보다 앞서가지 않는다.
 
 ## UI 원칙
 
 - AIP Design System(`winterholic-design-system/aip`)을 쓴다. UI를 만들거나 고치기 전에 그 저장소의 `aip/CLAUDE.md`와 `docs/00-decision-guide.md`를 읽는다.
 - 값은 토큰(`var(--aip-…)`)과 컴포넌트 클래스(`.aip-*`)만 쓴다. hex·임의 px·다크 분기를 쓰지 않는다.
 - `public/vendor/aip/`는 복사본이다. 직접 고치지 않고 디자인 시스템을 고친 뒤 `pnpm sync:ds`.
-- AIP 정의 예제에는 Core의 제품 문법을 쓰고 `AIP_BIN`을 지정해 `pnpm verify`로 검사한다.
+- AIP 정의 예제에는 Core의 제품 문법을 쓰고 `AIP_BIN`을 지정해 `pnpm verify`로 검사한다. 코드 예시는 Core 문서나 fixture에 있는 것을 가져오고, 직접 지어낸 예시는 쓰지 않는다. 이후 문법 추가가 기존 정의를 깨지 않는다는 보장을 Core가 확인하지 못했다는 점을 밝힌다.
 
 자세한 구조와 규칙: [docs/architecture.md](docs/architecture.md)
 
@@ -42,6 +44,7 @@
 pnpm install
 pnpm verify
 pnpm check
+node scripts/check-core-drift.mjs --core <AIP Core checkout>   # pnpm check:core -- --core <경로>
 ```
 
-문서를 추가하거나 옮기면 `pnpm verify`가 통과해야 한다.
+문서를 추가하거나 옮기면 `pnpm verify`가 통과해야 한다. 지원 범위나 한계를 다루는 문서를 고치면 Core checkout으로 drift 검사도 통과시킨다. Core 저장소는 읽기만 하고 수정하지 않는다.
