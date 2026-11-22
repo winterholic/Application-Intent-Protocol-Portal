@@ -1,10 +1,10 @@
 ---
-translatedFrom: "ab39055abc2a"
+translatedFrom: "28c60136718d"
 title: "알려진 한계"
 description: "AIP 1.0에서 지원하지 않거나 조건이 붙는 기능이다."
 ---
 
-1.0 제품 경로는 PostgreSQL 17의 `aip service`다. Core는 후보 기능 19개를 지원 11, 조건부 7, 제외 1로 판정했다. 기능별 판정표는 영어 원문의 [지원 범위](/docs/known-limitations/#scope), 표현력 한계 E1~E9와 우회는 [표현력](/docs/known-limitations/#expressiveness)에 있다. 자동 테넌트 격리는 지원 범위 밖이며, 앱 정의에 조직 경계 정책을 직접 쓴다. `.aipoc`는 개념 검증용이다. 공개 count, 작업자 격리, 패키지, 플랫폼의 조건은 세부 문서에 있다.
+1.0 제품 경로는 PostgreSQL 17의 `aip service`다. Core는 후보 기능 19개를 지원 11, 조건부 7, 제외 1로 판정했다. 기능별 판정표는 영어 원문의 [지원 범위](/docs/known-limitations/#scope), 표현력 한계 E1~E11과 우회는 [표현력](/docs/known-limitations/#expressiveness)에 있다. 자동 테넌트 격리는 지원 범위 밖이며, 앱 정의에 조직 경계 정책을 직접 쓴다. `.aipoc`는 개념 검증용이다. 공개 count, 작업자 격리, 패키지, 플랫폼의 조건은 세부 문서에 있다.
 
 ## 지원 범위 {#scope}
 

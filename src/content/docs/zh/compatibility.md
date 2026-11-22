@@ -1,10 +1,11 @@
 ---
-translatedFrom: "14e6970c8a26"
+translatedFrom: "8508299e3ac7"
 title: "兼容性"
 description: "了解 CLI、SDK 版本与契约指纹的关系。"
 ---
 
 CLI 和两个 SDK 的版本均为 1.0.0，HTTP 协议为 `aip-protocol/1.0`。定义变更导致契约指纹变更时，请重新生成绑定。回滚需要数据库备份。
+诊断、批量操作锁、SDK 重试和扩展的新增契约请参阅[英文版](/docs/compatibility/#expressiveness)。
 
 ## 配套版本 {#versions}
 

@@ -90,7 +90,7 @@ await client.bundle((b) => {
 - In Python, `from aip_sdk import created` and put `created(0)` in the same places.
 - The server checks operation order, types, row visibility and each create's `allow` before the transaction starts. A referenced row must be one the caller can read; an invisible row is `WIRE.MISSING_TARGET`, the same as a missing one.
 - Only an earlier `create` can be referenced. A `compose` operation cannot, and the same key replayed returns the IDs from the first run.
-- Order the operations so that those fighting for the same row come first. The order of operations is the order of locks.
+- For named `target.ids` and compose rows, the service pre-locks multiple targets by `(resource, id)` when the bundle starts. The operation execution and result order stays the same. `target.where`, rows created earlier in the bundle, and rows locked by effects are not pre-locked; use a consistent operation order when those paths can reach the same row. See [the remaining lock limits](/docs/known-limitations/#expressiveness).
 - An older server refuses these request keys with `WIRE.UNKNOWN_KEY`, so use the SDK and the server from the same release.
 
 ## Errors and retry guidance {#errors}
@@ -105,6 +105,8 @@ Failure bodies carry `requestId` (equal to the `x-request-id` response header) a
 | `reauthenticate` | Get a valid token and call again |
 
 Look up any `WIRE.*` code with `aip explain-code`. Codes the SDKs raise themselves are `CLIENT.*`.
+
+After a response is lost, a retry may receive a rejection that happened before the idempotency record was written, including `WIRE.RATE_LIMITED`, `WIRE.SERVER_BUSY`, `WIRE.CIRCUIT_OPEN`, `WIRE.DEPLOYMENT_CHANGED` or `WIRE.SCHEMA_MISMATCH`. The SDK keeps that write unsettled instead of treating the rejection as a final result. In Python, calling again without a key after `WriteUnsettled` reuses the pending key, as TypeScript does. Resolve an unsettled write with the same request and key; do not start it under a new key.
 
 ## Operations, jobs, files and events {#managed}
 

@@ -228,3 +228,7 @@ aip diagnostics --area def
 ```
 
 The first prints the meaning, the fix and, for wire codes, the retry guidance. The second lists every definition code.
+
+Definition diagnostics expose machine fields separately from explanatory text. Each entry has `code`, `severity`, `line` and `column`; a located diagnostic also has `located: true` and an `anchor` such as `line:4:col:2`, while a definition-wide diagnostic has `located: false` and coordinates `0:0`. `scopePath` is the declaration path as an array. `message`, `help`, `scope` and `explain` are for people and are not stable matching keys. Non-definition failures such as `SOURCE_IO` and `INPUT_TOO_LARGE` include a `reason`.
+
+The JSON diagnostic-code registry (`aip diagnostics --json`) includes `severity` and `status`; `since` and `replacedBy` appear when known. Published codes remain in the registry after retirement. Match on the code and use the descriptive fields for display.

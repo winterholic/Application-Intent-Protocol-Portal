@@ -1,10 +1,11 @@
 ---
-translatedFrom: "175844643540"
+translatedFrom: "86f3c7483b20"
 title: "SDK"
 description: "在 TypeScript 和 Python 中调用 AIP 服务。"
 ---
 
 使用 `aip service gen` 生成与契约匹配的绑定。通过 SDK 进行读写，写入结果不确定时用相同的请求和幂等键确认。
+特定拒绝后的未确定写入处理和批量操作锁顺序请参阅[英文版](/docs/sdk/#errors)及[兼容性说明](/docs/compatibility/#expressiveness)。
 
 ## 生成绑定 {#binding}
 

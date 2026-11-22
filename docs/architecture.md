@@ -47,13 +47,13 @@ node scripts/check-core-drift.mjs --core ../aip-core-portal-20261122     # 또�
 |---|---|
 | 기준선 | `src/data/core-baseline.json`의 Core SHA와 문서 해시(SUPPORT, LIMITS, COMPATIBILITY, CHANGELOG, SDK, INSTALL 등). Core 문서가 바뀌면 실패한다 |
 | 지원 범위 표 | `product/SUPPORT.md`의 개수와 기능 19행 판정이 영어 `known-limitations` 표와 같다. 번역은 그 절로 안내한다 |
-| 표현력 한계 | `product/LIMITS.md`의 E1~E9가 영어 `known-limitations` 표에 있다 |
+| 표현력 한계 | `product/LIMITS.md`의 표에 있는 E1~E9가 영어 표와 맞고, 별도 절의 E10·E11은 영어 본문에 설명돼 있다 |
 | 출시 전 상태 | Core에 `v*` 태그가 없는 동안 Portal이 출시 후보로 표시하고 정식 출시로 쓰지 않는다. 태그가 생기면 실패한다 |
 | 이름·버전·protocol | `product/release.config.json`, `Cargo.toml`, `COMPATIBILITY.md`와 같다 |
 | 핵심 표식 | 제한 산술, bundle 결과 참조, Decimal sum, extension create, 알려진 한계의 표식이 Core와 Portal 양쪽에 있다 |
 | source와 코드 | 영어 `source`가 Core에 있고 새 표현력 문법의 코드 블록이 그대로 있다 |
 
-Core 변경을 검토하고 Portal을 맞춘 뒤 `--update-baseline`으로 기준선을 올린다. 기준선을 올리는 것은 검토를 마쳤다는 뜻이다.
+Core 후보를 검토하고 Portal을 맞춘 뒤 `--update-baseline`으로 후보 기준선을 올릴 수 있다. 후보 기준선과 그 커밋은 Core의 최종 SHA가 아니다. 통합된 최종 Core SHA가 정해지면 감시 문서 diff, 지원 범위·한계, 진단·SDK·확장 계약, 버전·태그 상태를 다시 검토하고 drift 및 문서 검사를 실행한 뒤에만 기준선을 최종 SHA로 바꾼다. 이번 후보의 SHA와 검증 결과, 최종 Core에서 재검토할 범위는 [후보 검토 기록](core-candidate-c781dbf7.md)에 남긴다.
 
 ## 문서 상태
 

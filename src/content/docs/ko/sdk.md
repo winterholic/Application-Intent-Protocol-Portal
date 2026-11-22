@@ -1,10 +1,11 @@
 ---
-translatedFrom: "175844643540"
+translatedFrom: "86f3c7483b20"
 title: "SDK"
 description: "TypeScript와 Python에서 AIP 서비스를 호출한다."
 ---
 
 `aip service gen`으로 계약에 맞는 바인딩을 생성한다. SDK로 읽기와 쓰기를 호출하고, 쓰기의 결과가 불확정이면 같은 요청과 멱등 키로 결과를 확인한다.
+선택된 거절 뒤의 미확정 쓰기 처리와 묶음 잠금 순서는 [영어 원문](/docs/sdk/#errors)과 [호환성](/docs/compatibility/#expressiveness)을 본다.
 
 ## 바인딩 생성 {#binding}
 

@@ -27,7 +27,7 @@ There are four kinds. Each declares its input, output, deadline and implementati
 |---|---|
 | `operation read` | A call with no resource, such as a computation |
 | `operation job` | A durable job with no resource |
-| `extension read`, `extension write`, `extension job` | Inside a resource. A write extension lists the transitions it may call in `access` and declares `effect db` |
+| `extension read`, `extension write`, `extension job` | Inside a resource. A read extension may list readable resources in `access`; a write extension lists callable transitions and declares `effect db` |
 
 The release archive's `example.aip` declares them all. This trimmed version keeps a read operation and a write extension; `implementation "module.function"` names the code:
 
@@ -78,6 +78,8 @@ export async function confirm(input, ctx) {
 ```
 
 The server derives the actor from the verified token. `ctx.data.apply` can only call the transitions the extension's `access` lists (each must also be exposed with `expose apply`), each under its own policy, and every write, audit row and idempotency result commits in one transaction with the validated output. A rejection, a bad output or a missed deadline rolls all of it back. A write extension marked `internal` is hidden from generated clients and refused at the public HTTP entry points.
+
+For a read extension, `access read.<Resource>` may declare which resources `ctx.data.read` can access. If this declaration is present, a read outside that list fails with `WIRE.ACCESS_NOT_DECLARED`. The declaration is optional; an extension without it keeps the earlier behavior. This read allowlist does not make the extension ABI stable.
 
 ## Create rows from a write extension {#create}
 

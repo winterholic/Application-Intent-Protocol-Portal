@@ -38,7 +38,7 @@ Core judged 19 candidate features: 11 supported, 7 conditional, 1 excluded. A fe
 | 13 | Automatic tenant isolation | Excluded | Not implemented in the product path. Write the organisation boundary in the definition, such as `rows read when org = actor.org`, and repeat it in every policy |
 | 14 | Contract fingerprint | Supported | A different fingerprint gives `WIRE.CONTRACT_MISMATCH`. Older clients are not supported alongside a new deployment |
 | 15 | Init and migration | Conditional | PostgreSQL only. Rollback is restoring a backup; there is no reverse migration. Zero-downtime changes to large tables are out of scope |
-| 16 | Node and Python extensions | Conditional | The extension ABI is not final (decision OI-X2). Linux Bubblewrap isolation has CI. macOS Seatbelt isolation is verified by hand, without CI. PostgreSQL write extensions support `ctx.data.read`, `ctx.data.apply` and `ctx.data.create` within an allowlist. Extension create on encrypted resources is excluded |
+| 16 | Node and Python extensions | Conditional | The extension ABI is not final (decision OI-X2). Linux Bubblewrap isolation has CI. macOS Seatbelt isolation is verified by hand, without CI. PostgreSQL write extensions support `ctx.data.read`, `ctx.data.apply` and `ctx.data.create` within an allowlist; read extensions may opt into an `access read.<Resource>` allowlist. Extension create on encrypted resources is excluded |
 | 17 | Durable jobs | Conditional | PostgreSQL job store only. The MySQL job store is not in the release bundle |
 | 18 | Diagnostics and observability | Conditional | OTLP, audit records and traces are verified up to engine tests. There are no dashboards or SLOs |
 | 19 | Installable SDK and packages | Conditional | Versions derive from one Cargo workspace version, so the CLI and both SDKs match (`1.0.0`). Names follow `product/release.config.json`. Windows is not supported |
@@ -80,18 +80,30 @@ Reads support filter allow-lists, sorting, cursors, to-one and to-many traversal
 | E6 | A transition's `from` is required | `from true` |
 | E7 | Atomic create inside a PostgreSQL write extension | `access create.<Resource>` and `ctx.data.create` |
 | E8 | Extension inputs have no array type | Take `Json` and validate its shape in the extension, or create each row in a bundle |
-| E9 | The operation order in a bundle is the lock order | Put operations that update the same row first |
+| E9 | Rows selected by `target.where` or locked by effects follow operation order; named `target.ids` and compose targets are pre-locked by `(resource, id)` | Keep the same order across callers for rows selected at execution time or locked by effects |
+
+For E9, a bundle pre-locks multiple rows named by `target.ids` or `compose` in `(resource, id)` order when the bundle starts. This changes when those locks are acquired, not operation execution, policy checks, error order or results. It only pre-locks rows the caller can read; missing or invisible targets are reported as `WIRE.MISSING_TARGET` when their operation runs. A single named row needs no pre-lock. The measured PostgreSQL 17 case used bundles that decremented several rows in one resource: with 2–12 concurrent requests and 2–8 target rows, it saw zero deadlocks and 100% success. That measurement is not a general deadlock guarantee.
+
+Rows selected at execution time by `target.where`, rows created by an earlier operation, and rows locked by effects are not known during planning and are not pre-locked. Bundles that reach the same row through these paths can still deadlock, so callers should use a consistent operation order for those rows. Named target locks are held through the bundle, and may make other calls wait earlier; a bundle can wait for a later operation's target before an earlier operation fails. Other bundle shapes have not been shown to converge.
+
+For E10, `expose aggregate` has no per-definition deadline setting. A standalone aggregate is stopped after 2 seconds with `WIRE.DEADLINE_EXCEEDED`; grouped aggregates or an extension are alternatives when the source is too large.
+
+For E11, the service stores an unbounded `Int` as int64, but the TypeScript SDK rejects values outside ±(2^53−1) with `CLIENT.PROTOCOL_ERROR` and cannot write them exactly. Python preserves the exact integer. Use an `Int(lo..hi)` range within JavaScript's safe-integer range or `Text` when both SDKs need the value.
 
 ## Policy checks {#policy-checks}
 
 - A definition that lets a value hidden by `field … read when` reach the caller by another route is rejected with `DEF.POLICY_FIELD_NOT_USABLE_IN_TRANSITION`. A definition written before this rule can be rejected after the upgrade.
 - More than one `actor` is `DEF.MULTIPLE_ACTORS`. Earlier builds let the last declaration win silently.
-- Three advisories help with tenant boundaries: `DEF.ADVISORY_TENANT_UNSCOPED_READ`, `DEF.ADVISORY_PUBLIC_READ_TENANT_FIELD` and `DEF.ADVISORY_WRITE_WIDER_THAN_READ`. They compare structure only, so they can miss a case, such as an `exists` policy or a tenant field with another name, and can raise a false alarm. They never reject a definition.
+- Advisories cover unscoped reads and writes, public counts, and counts whose caller input can vary. They are `DEF.ADVISORY_TENANT_UNSCOPED_READ`, `DEF.ADVISORY_PUBLIC_READ_TENANT_FIELD`, `DEF.ADVISORY_WRITE_WIDER_THAN_READ`, `DEF.ADVISORY_PUBLIC_COUNT`, `DEF.ADVISORY_PUBLIC_COUNT_INPUT` and `DEF.ADVISORY_TENANT_UNSCOPED_COUNT`. They compare structure only, so they can miss a case, such as an `exists` policy or a tenant field with another name, and can raise a false alarm. They never reject a definition and do not change its response or contract fingerprint.
+- `DEF.ADVISORY_PUBLIC_COUNT_INPUT` applies when a count's `where` uses caller input without implying the source's `rows read` policy, unless a `sourceAccess` guard also receives that input. `DEF.ADVISORY_TENANT_UNSCOPED_COUNT` applies when an exposed standalone count over a resource with a tenant field does not bind that field to the actor in a `where` without input. These advisories do not change the response or contract fingerprint.
+- `DEF.ACCESS_TARGET_NOT_EXPOSED` identifies a write extension or job that names a transition not exposed with `expose apply`. Earlier builds reported `DEF.UNKNOWN_SYMBOL` for this case; consumers matching that code should account for the new code.
+- Definition diagnostics include machine fields (`code`, `severity`, `line`, `column`, and where applicable `located`, `anchor` and `scopePath`) separately from explanatory fields. The JSON code registry includes `severity` and `status`; see [Diagnostics](/docs/definition-syntax/#diagnostics).
 - Run `aip service check` with the new binary before you deploy a definition written for an earlier build.
 
 ## Extensions and isolation {#extensions}
 
 - The extension interface (ABI) is not final.
+- `access read.<Resource>` is an optional declaration for read extensions. When present, `ctx.data.read` outside the declared resource list is refused with `WIRE.ACCESS_NOT_DECLARED`; omitting it preserves the earlier behavior.
 - Linux worker isolation (Bubblewrap) is covered by CI, but at the audit date the current code had not run through that job. macOS Seatbelt isolation has no CI and is a manually verified level of support.
 - Extension modules and their installed dependencies are not hashed beyond the top-level files; the deployer must pin them.
 - Outside providers are not part of the database transaction. The service does not claim exactly-once effects with them.

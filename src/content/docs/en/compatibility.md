@@ -40,7 +40,7 @@ What a caller gets when the `x-aip-contract` header is missing or wrong depends 
 | The same routes, a value that is not 64 lowercase hexadecimal digits (uppercase is refused) | `WIRE.BAD_REQUEST` |
 | The same routes, a well-formed fingerprint that differs from the server's | `WIRE.CONTRACT_MISMATCH` |
 | Object API, RAG API, managed `/jobs/*`, `/files/*`, `/events/*` and `/messages/*`, no header | `WIRE.CONTRACT_MISMATCH`, not `CONTRACT_REQUIRED` |
-| `/apply` of a write extension, no header | `WIRE.CONTRACT_MISMATCH`, read in the code and not run |
+| `/apply` of a write extension, no header | `WIRE.CONTRACT_MISMATCH` (not `CONTRACT_REQUIRED`; a wrong supplied fingerprint uses the same "contract fingerprint required" message) |
 
 ## What 1.0 does not promise {#not-promised}
 
@@ -58,6 +58,10 @@ The expressiveness additions are new optional request keys, so they stay inside 
 - A bundle response gains an `ops` list only when the bundle holds a `compose`. Other responses, and replayed stored results, are unchanged.
 - On MySQL, which is outside 1.0, writes refuse `input` and arithmetic with `WIRE.UNSUPPORTED`, and reads refuse Decimal `sum`.
 - `aip service check` rejects more than one `actor` (`DEF.MULTIPLE_ACTORS`) and some hidden-field routes, and reports new advisories. Check existing definitions with the new binary first. See [Known limitations](/docs/known-limitations/#policy-checks).
+- The definition-check JSON diagnostics add location and explanation fields while keeping the existing fields. The JSON code registry exposes `severity` and `status`; match on diagnostic `code`, not message text. For write extensions and jobs, an unexposed transition now reports `DEF.ACCESS_TARGET_NOT_EXPOSED` where earlier builds reported `DEF.UNKNOWN_SYMBOL`.
+- `access read.<Resource>` is an optional read-extension allowlist. When declared, undeclared `ctx.data.read` calls fail with `WIRE.ACCESS_NOT_DECLARED`; extensions without the declaration keep the earlier behavior. The extension ABI remains open.
+- A bundle pre-locks multiple named `target.ids` and compose rows in `(resource, id)` order. This changes lock acquisition timing, not operation order or response shape. Dynamic `target.where` targets, earlier creates and effect locks are not covered; see [Known limitations](/docs/known-limitations/#expressiveness).
+- After a lost write response, SDK retries that receive selected pre-idempotency rejections (`WIRE.RATE_LIMITED`, `WIRE.SERVER_BUSY`, `WIRE.CIRCUIT_OPEN`, `WIRE.DEPLOYMENT_CHANGED`, `WIRE.SCHEMA_MISMATCH`) remain unsettled. Python also reuses the pending idempotency key when the caller retries without supplying one. TypeScript rejects duplicate or missing `refs` fields, duplicate `select` fields and non-reference `refs` keys at compile time; a compose result for a Uuid resource is no longer treated as malformed.
 
 ## SDK and engine versions together {#sdk-versions}
 

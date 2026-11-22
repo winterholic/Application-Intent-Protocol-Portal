@@ -1,10 +1,10 @@
 ---
-translatedFrom: "ab39055abc2a"
+translatedFrom: "28c60136718d"
 title: "既知の制限"
 description: "AIP 1.0 で対象外の機能や条件付きの機能です。"
 ---
 
-1.0 の製品パスは PostgreSQL 17 の `aip service` です。Core は候補機能 19 個を、対応 11、条件付き 7、対象外 1 と判定しました。機能ごとの判定表は英語版の[対応範囲](/docs/known-limitations/#scope)、表現力の制限 E1〜E9 と回避策は[表現力](/docs/known-limitations/#expressiveness)にあります。テナントの自動分離は対象外で、アプリの定義に組織の境界ポリシーを直接書きます。`.aipoc` は概念実証用です。公開 count、ワーカーの分離、パッケージ、プラットフォームの条件は各詳細ページにあります。
+1.0 の製品パスは PostgreSQL 17 の `aip service` です。Core は候補機能 19 個を、対応 11、条件付き 7、対象外 1 と判定しました。機能ごとの判定表は英語版の[対応範囲](/docs/known-limitations/#scope)、表現力の制限 E1〜E11 と回避策は[表現力](/docs/known-limitations/#expressiveness)にあります。テナントの自動分離は対象外で、アプリの定義に組織の境界ポリシーを直接書きます。`.aipoc` は概念実証用です。公開 count、ワーカーの分離、パッケージ、プラットフォームの条件は各詳細ページにあります。
 
 ## サポート範囲 {#scope}
 

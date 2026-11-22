@@ -60,9 +60,12 @@ Writes and reads that needed an extension before can now be declared. All of it 
 - **`compose` inside a bundle**, with an `ops` list in the response.
 - **`ctx.data.create` in write extensions**, and a transition `input` for `ctx.data.apply`.
 - **Decimal `sum`.** The result is `Decimal(p',s)` as a JSON string.
-- **Three policy advisories** that never reject a definition, and a fixed JSON shape for `aip service check` output.
+- **Policy advisories and structured diagnostics.** The checks include advisories for public counts with caller input and tenant-unscoped counts. Diagnostic entries distinguish machine fields from explanatory text; the code registry includes severity and status metadata.
 - **Replay without a worker slot.** A repeated key for a write extension replays the stored result, so a busy worker no longer answers `WIRE.WORKER_BUSY`.
-- **Row locks.** Transitions that leave key columns alone use `FOR NO KEY UPDATE`, which removes a deadlock between a bundle that creates lines first and one that decrements stock.
+- **Bundle lock ordering.** Multiple rows named by `target.ids` or compose are pre-locked in `(resource, id)` order. This avoids deadlocks in the tested named-target case without changing operation order. Targets selected by `target.where`, earlier creates and effects remain outside that pre-locking behavior; see [Known limitations](/docs/known-limitations/#expressiveness).
+- **SDK write recovery.** After a lost response, selected pre-idempotency rejections remain unsettled for retry. Python reuses the pending key when a retry omits it. TypeScript also accepts Uuid compose results and rejects several invalid `refs`/`select` shapes at compile time.
+- **Extension access.** Read extensions may declare `access read.<Resource>`; with the declaration present, reads outside the list fail with `WIRE.ACCESS_NOT_DECLARED`. The ABI remains open.
+- **Definition diagnostics.** JSON diagnostics add location, scope-path and explanation fields, and the diagnostic-code registry exposes severity and status. An unexposed transition referenced by an extension or job has the dedicated code `DEF.ACCESS_TARGET_NOT_EXPOSED`.
 
 ## Install {#install}
 

@@ -1,5 +1,5 @@
 ---
-translatedFrom: "33dbaf1b9de3"
+translatedFrom: "549fa058fc8c"
 title: 정의 문법
 description: AIP 1.0에서 `aip service`가 읽는 정의 언어. 가정하지 않는 것, 블록과 키, 검사를 거친 예제 두 개, 처음 쓰는 사람이 자주 틀리는 규칙을 다룬다.
 ---
@@ -218,3 +218,5 @@ aip diagnostics --area def
 ```
 
 첫 명령은 의미와 고치는 방법을 보여 주고, wire 코드에는 재시도 지침도 보여 준다. 둘째 명령은 정의 코드를 모두 나열한다.
+
+진단 JSON의 기계 판독 필드와 코드 레지스트리 형식은 [영어 원문](/docs/definition-syntax/#diagnostics)을 본다.
