@@ -23,7 +23,7 @@ Core judged 19 candidate features: 11 supported, 7 conditional, 1 excluded. A fe
 
 | # | Feature | Verdict | Condition and limit |
 |---|---|---|---|
-| 1 | Definition check (`aip service check`) | Supported | Five authoring forms: `.aip`, `.e.ts`, `.e.py`, `.h.ts`, `.h.py`. The optional development advice `--dev-checks` is conditional |
+| 1 | Definition check (`aip service check`) | Supported | Five authoring forms: `.aip`, `.e.ts`, `.e.py`, `.h.ts`, `.h.py`. The default check validates the definition and does not choose an init target; `--for-postgres-init` checks PostgreSQL managed-init compatibility without a database connection, and external PostgreSQL adoption and MySQL are checked on their own target paths. The optional development advice `--dev-checks` is conditional |
 | 2 | Schema and types | Supported | Int, Text, Bool, Id/Uuid, Decimal(p,s), Time, Date, Email, Url, enum, Json. There is no Float |
 | 3 | Resources, relations, constraints | Conditional | Only relation reads have product HTTP tests. Real-database evidence for foreign-key rejection, unique, limit and invariant is engine unit tests |
 | 4 | Declarative reads and standard writes | Supported | Filter allowlist, sort, cursor and offset pages, to-one and to-many relations, `count`/`sum`/`min`/`max`. On PostgreSQL, `sum` accepts a single Decimal field: the result keeps the source scale and its precision is at least the source precision. `avg`, sorting or filtering on related fields and multiple `groupKey` cannot be declared |

@@ -1,5 +1,5 @@
 ---
-translatedFrom: 60f32ffa07f5
+translatedFrom: "879c457e33e8"
 title: "部署和迁移"
 description: "部署服务并应用定义变更。"
 ---

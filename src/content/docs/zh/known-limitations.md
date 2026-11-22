@@ -1,5 +1,5 @@
 ---
-translatedFrom: "f62a893f25fb"
+translatedFrom: "f0349994a6c9"
 title: "已知限制"
 description: "AIP 1.0 不支持或仅在特定条件下支持的功能。"
 ---

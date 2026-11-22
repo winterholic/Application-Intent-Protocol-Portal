@@ -1,5 +1,5 @@
 ---
-translatedFrom: 60f32ffa07f5
+translatedFrom: "879c457e33e8"
 title: "デプロイと移行"
 description: "サービスを配置し、定義の変更を反映します。"
 ---

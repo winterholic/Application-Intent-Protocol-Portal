@@ -1,12 +1,12 @@
 {
-  "coreSha": "c781dbf7bc7f2c00da6e4728fbb5ffc42cd943d4",
+  "coreSha": "720b9b259034ac0b1e6176c378b2c7e2b81d6aea",
   "checkedAt": "2026-11-22",
   "watched": {
-    "README.md": "14fa4257cd19af9e2d2c44fadbfcdd4ffc55511dd7d7e784da510f6f90f92359",
+    "README.md": "07f7eb22e7a3efe62fd3eff581a294120af8a7a67fdfd697c636dfd32ac3c10a",
     "COMPATIBILITY.md": "c5ff0fa90a14eae92af6432cbbea54ff6eb1c8311391fb3633a358c409ce6743",
-    "CHANGELOG.md": "b6c03318e25aff19dd659ff4b16357fc87895535dbf0282e83410451d6a6b746",
+    "CHANGELOG.md": "ad21df3982a517b432e424f8100c55cf8638683c08ba7fe1bb5954857057c7ca",
     "SECURITY.md": "37c7f18484786c938d53e4ae7cbd7d3f3dfb9ae1fe72c7cc08eb78af65b9ef40",
-    "product/SUPPORT.md": "ef4e412786299d7a46a27ff45eea23550ec2e1850a9744805526681fa681009b",
+    "product/SUPPORT.md": "856fd10428bbcfe45dce1a8eb92424a65d4773b8803f34730e2a6fbc2f345d78",
     "product/LIMITS.md": "9fe1fb42dfb6a1a4168c1dc7de6b22b13fbd5346e618a9696dbec3389d39cd32",
     "product/GETTING-STARTED.md": "36df12ea0d3267c52d0178d3af488c4de21b06350675d8acb59c36534a817d0b",
     "product/INSTALL.md": "70c51904d0d9a82c0b3506d548e9e2b37a1394b403f29707d2304dde1fe5c682",

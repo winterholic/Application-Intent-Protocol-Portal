@@ -1,5 +1,5 @@
 ---
-translatedFrom: 60f32ffa07f5
+translatedFrom: "879c457e33e8"
 title: "배포와 마이그레이션"
 description: "서비스를 배포하고 정의 변경을 적용한다."
 ---

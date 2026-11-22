@@ -1,5 +1,5 @@
 ---
-translatedFrom: "f62a893f25fb"
+translatedFrom: "f0349994a6c9"
 title: "알려진 한계"
 description: "AIP 1.0에서 지원하지 않거나 조건이 붙는 기능이다."
 ---

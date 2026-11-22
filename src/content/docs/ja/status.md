@@ -1,5 +1,5 @@
 ---
-translatedFrom: "bab1f359c236"
+translatedFrom: "5066a975a4e8"
 title: "プロジェクトの現状"
 description: "AIP 1.0.0 の公開状況、サポート範囲、今後の判断項目です。"
 ---
@@ -8,7 +8,7 @@ AIP 1.0.0 はリリース候補として準備中で、安定版ではありま�
 
 ## リリース状況 {#release}
 
-`v1.0.0` タグと GitHub Release はまだなく、npm と PyPI にも公開していません。通信プロトコルは `aip-protocol/1.0`、ライセンスは MIT、対応データベースは PostgreSQL 17 です。レジストリのパッケージ名は、オーナーの承認までは暫定です。このページは AIP Core のコミット `c781dbf7`（2026-11-22）と照合しました。
+`v1.0.0` タグと GitHub Release はまだなく、npm と PyPI にも公開していません。通信プロトコルは `aip-protocol/1.0`、ライセンスは MIT、対応データベースは PostgreSQL 17 です。レジストリのパッケージ名は、オーナーの承認までは暫定です。このページは AIP Core のコミット `720b9b25`（2026-11-22）と照合しました。
 
 ## 1.0 の範囲 {#scope}
 

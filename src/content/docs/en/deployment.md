@@ -22,6 +22,8 @@ aip service gen app.aip --wire decimal --out app.binding.ts
 aip service serve app.aip --config service.json
 ```
 
+`check` validates the definition and does not choose an init target. To check ahead of time that `init` can generate the PostgreSQL schema, run `aip service check app.aip --for-postgres-init`. It does not connect to a database, and it rejects a `default database` declaration (`EXTERNAL_DEFAULT_REQUIRED`) because an external PostgreSQL schema is checked against the real database defaults on the `adopt-external` path. It is not a MySQL init check.
+
 `init` runs once on an empty schema and refuses one that exists. The actor row must exist before you `bind` a subject to it. The listener is loopback HTTP; put a TLS reverse proxy in front. Use separate database roles for migrating and serving: add `migrate_database_url_env` to the configuration, create the infrastructure tables ahead of time with `aip service provision`, and give the server role only the privileges described in AIP Core's `product/DATABASE-ROLES.md`. With a single role, that role owns the application schema.
 
 ## Health checks {#probes}
