@@ -30,7 +30,7 @@ AIP Core is preparing version 1.0.0. The public tag and registry packages are pe
 | Release gate on the final commit | Not recorded yet. AIP Core's `CHANGELOG.md` lists the 1.0.0 entry as a draft |
 | License | MIT |
 | Supported database | PostgreSQL 17 |
-| Compared with AIP Core | Commit `720b9b25` |
+| Compared with AIP Core | Commit `d3acc393` |
 
 Install commands in [Installation](/docs/installation/) are the ones that apply after the release. Until then the engine is built from source.
 

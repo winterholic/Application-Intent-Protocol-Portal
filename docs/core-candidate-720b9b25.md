@@ -14,3 +14,7 @@ Of the watched documents, `README.md`, `CHANGELOG.md` and `product/SUPPORT.md` c
 | SDK CI, Track B CI wiring, expr-apps fixtures | CI and tests only. The one watched fixture `orders.target.aip` is unchanged |
 
 Translated pages stay English pointers; their `translatedFrom` hashes and the `status` SHA were refreshed.
+
+## Update to final Core main d3acc393 (2026-11-22)
+
+Core `main` fast-forwarded to `d3acc39376cdd5277df8a7ea241cb3bfb23f05f6`. Two commits follow `720b9b25`: `5c19468e` (quote only PostgreSQL reserved words so the DDL digest stays stable; pin job-state wire values) and `d3acc393` (accept Json null on the SafeNumber and DecimalString wires). They change code, tests and `plan-docs/` only. No watched document changed, so every watched hash is the same as at `720b9b25`, and no Portal page names these behaviors. The baseline SHA and the `status` page SHA move to `d3acc393`; no other documentation edit.
