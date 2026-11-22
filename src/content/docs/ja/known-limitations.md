@@ -1,5 +1,5 @@
 ---
-translatedFrom: "28c60136718d"
+translatedFrom: "f62a893f25fb"
 title: "既知の制限"
 description: "AIP 1.0 で対象外の機能や条件付きの機能です。"
 ---

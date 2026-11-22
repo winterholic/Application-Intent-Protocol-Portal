@@ -1,5 +1,5 @@
 ---
-translatedFrom: "18f3eefb2863"
+translatedFrom: "8c51d826d3c0"
 title: "릴리스 노트"
 description: "AIP 1.0.0에서 제공하는 것과 호환 변경이다."
 ---

@@ -1,5 +1,5 @@
 ---
-translatedFrom: "18f3eefb2863"
+translatedFrom: "8c51d826d3c0"
 title: "リリースノート"
 description: "AIP 1.0.0 の内容と互換性の変更点です。"
 ---

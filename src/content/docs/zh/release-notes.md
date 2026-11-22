@@ -1,5 +1,5 @@
 ---
-translatedFrom: "18f3eefb2863"
+translatedFrom: "8c51d826d3c0"
 title: "发行说明"
 description: "AIP 1.0.0 的内容和兼容性变更。"
 ---

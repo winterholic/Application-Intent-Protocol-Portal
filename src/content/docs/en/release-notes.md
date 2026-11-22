@@ -31,7 +31,7 @@ AIP 1.0.0 is a release candidate, not yet released, of an engine (`aip`) that se
 - `aip service`: `check`, `gen`, `init`, `adopt`, `migrate`, `serve` and `principal`, plus `provision`, `jobs`, `audit` and `idp-readiness`. RS256 JWT authentication with a public JWKS, PostgreSQL 17 reads and writes, Node.js and Python extension workers, and installable SDKs.
 - General migrations with a reviewed plan, structured backfill and convert, a DDL transaction and a deployment journal, and adoption of existing data.
 - Application packages and a Docker or native service path.
-- Linux worker isolation (Bubblewrap, optional cgroup v2 limits) and macOS Seatbelt isolation (manually verified).
+- Linux worker isolation (Bubblewrap, optional cgroup v2 limits) and a macOS Seatbelt CI workflow. Run `44985825145` passed on remote main SHA `c86d69021284d19ebf769d8f53ad41e2d2f89bb3`; this does not verify candidate `c781dbf7` or the final Core SHA. The 2026-11-21 audit's unexecuted status is retained as a historical snapshot.
 - A release-gate script: a clean-clone full regression, bundle smoke tests, and upgrade and rollback drills.
 - A FlaskBB port covering `Topic.move`, `Post.unhide` and the `PostOrder` contract.
 
