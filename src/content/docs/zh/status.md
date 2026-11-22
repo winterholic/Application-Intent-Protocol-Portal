@@ -1,5 +1,5 @@
 ---
-translatedFrom: "e2676b7f0695"
+translatedFrom: "bab1f359c236"
 title: "项目状态"
 description: "AIP 1.0.0 的发布状态、支持范围和待定事项。"
 ---
@@ -8,7 +8,7 @@ AIP 1.0.0 是正在准备的发布候选，不是稳定版。在 CLI 和 SDK 公
 
 ## 发布状态 {#release}
 
-`v1.0.0` 标签和 GitHub Release 目前都没有，也没有发布到 npm 或 PyPI。通信协议是 `aip-protocol/1.0`，许可证是 MIT，支持的数据库是 PostgreSQL 17。注册表的包名在所有者批准之前是暂定的。本页已与 AIP Core 提交 `4f44ca87`（2026-11-22）对照。
+`v1.0.0` 标签和 GitHub Release 目前都没有，也没有发布到 npm 或 PyPI。通信协议是 `aip-protocol/1.0`，许可证是 MIT，支持的数据库是 PostgreSQL 17。注册表的包名在所有者批准之前是暂定的。本页已与 AIP Core 提交 `c781dbf7`（2026-11-22）对照。
 
 ## 1.0 范围 {#scope}
 

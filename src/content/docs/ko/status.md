@@ -1,5 +1,5 @@
 ---
-translatedFrom: "e2676b7f0695"
+translatedFrom: "bab1f359c236"
 title: "프로젝트 상태"
 description: "AIP 1.0.0의 출시 상태와 지원 범위, 남은 결정이다."
 ---
@@ -8,7 +8,7 @@ AIP 1.0.0은 출시 후보로 준비 중이며 안정 릴리스가 아니다. CL
 
 ## 출시 상태 {#release}
 
-`v1.0.0` 태그와 GitHub Release는 아직 없고 npm과 PyPI에도 게시하지 않았다. 통신 프로토콜은 `aip-protocol/1.0`, 라이선스는 MIT, 지원 데이터베이스는 PostgreSQL 17이다. 레지스트리 패키지 이름은 소유자 승인 전까지 잠정이다. 이 페이지는 AIP Core 커밋 `4f44ca87`(2026-11-22)과 대조했다.
+`v1.0.0` 태그와 GitHub Release는 아직 없고 npm과 PyPI에도 게시하지 않았다. 통신 프로토콜은 `aip-protocol/1.0`, 라이선스는 MIT, 지원 데이터베이스는 PostgreSQL 17이다. 레지스트리 패키지 이름은 소유자 승인 전까지 잠정이다. 이 페이지는 AIP Core 커밋 `c781dbf7`(2026-11-22)과 대조했다.
 
 ## 1.0 범위 {#scope}
 
